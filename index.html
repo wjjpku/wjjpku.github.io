@@ -96,6 +96,27 @@
         .note-actions a:hover {
             color: #1565c0;
         }
+        .note-block {
+            background: #f8fafd;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(33,150,243,0.08);
+            padding: 20px 24px 16px 24px;
+            margin-bottom: 22px;
+            text-align: left;
+            transition: box-shadow 0.2s;
+        }
+        .note-block:hover {
+            box-shadow: 0 4px 18px rgba(33,150,243,0.18);
+        }
+        .note-block h3 {
+            margin: 0 0 8px 0;
+            color: #1976d2;
+        }
+        .note-block p {
+            margin: 0 0 8px 0;
+            color: #333;
+            font-size: 1em;
+        }
         /* PDF 预览弹窗 */
         .modal {
             display: none;
@@ -217,8 +238,11 @@
         <h2>我的项目</h2>
         <div class="project-block">
             <h3>Godot游戏制作</h3>
-            <p>这款游戏名为《信仰之烛》，在北京大学“全球视野下的犹太文明”课中被提交为创意作业。游戏由Godot引擎开发，是一款主题为犹太文明的2D横版动作游戏。整体结构简单，操作难度较小。</p>
-            <a href= "https://github.com/wjj1234321/godot_game" target="_blank" class="project-link">查看仓库</a>
+            <p>这款游戏名为《信仰之烛》，在北京大学“全球视野下的犹太文明”课中被提交为创意作业。游戏由Godot引擎开发，是一款主题为犹太文明的2D横版动作游戏。整体结构简单，操作难度较小。（仓库还在加工中……）</p>
+            <div style="display: flex; gap: 24px;">
+                <a href= "https://github.com/wjj1234321/godot_game" target="_blank" class="project-link">查看仓库</a>
+                <a href="https://www.bilibili.com/video/BV15WLyzzE3h/?vd_source=170ff8df8fc89b72af2bbbc5668b3272#reply262986533137" target="_blank" class="project-link">B站演示</a>
+            </div>
         </div>
         <div class="project-block">
             <h3>Avalon对战平台</h3>
@@ -240,8 +264,18 @@
     // ------------------ 配置区：可根据实际情况修改 ------------------
     // 笔记列表，file为PDF路径，title为显示名
     const notes = [
-        { title: "数学分析笔记", file: "pdfs/sxfx.pdf" },
-        { title: "抽象代数笔记", file: "pdfs/cxds.pdf" }
+        {
+            title: "数学分析(II)",
+            file: "pdfs/sxfx.pdf",
+            desc: "大一下选修，前期定积分的笔记较为认真，后期多为应试和做题中总结的重点",
+            feeling: "李伟固"
+        },
+        {
+            title: "抽象代数",
+            file: "pdfs/cxds.pdf",
+            desc: "大一上选修，群论略去了部分作者熟悉的内容，保留了一些作业内容。在幂零群和域扩张上最后总结了很多xmz老师常考点",
+            feeling: "徐茂智"
+        }
         // 可继续添加
     ];
     // ------------------ 交互逻辑 ------------------
@@ -267,15 +301,23 @@
     // 动态渲染笔记列表
     const noteList = document.getElementById('note-list');
     notes.forEach((note, idx) => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-            <span>${note.title}</span>
-            <span class="note-actions">
+        const div = document.createElement('div');
+        div.className = 'note-block';
+        div.innerHTML = `
+            <h3>${note.title}</h3>
+            <p>${note.desc}</p>
+            <p style="color:#888;font-size:0.98em;">Professor：${note.feeling}</p>
+            <div class="note-actions">
                 <a href="#" data-idx="${idx}" class="preview-link">预览</a>
                 <a href="${note.file}" download>下载</a>
-            </span>
+            </div>
+            <div class="comment-section" data-idx="${idx}">
+                <input type="text" placeholder="写下你的评论..." class="comment-input">
+                <button class="add-comment-btn">评论</button>
+                <ul class="comment-list"></ul>
+            </div>
         `;
-        noteList.appendChild(li);
+        noteList.appendChild(div);
     });
 
     // PDF 预览弹窗逻辑
