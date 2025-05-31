@@ -40,4 +40,13 @@
         <p>&copy; 2024 我的个人主页 | 托管于 <a href="https://pages.github.com/">GitHub Pages</a></p>
     </footer>
 </body>
+<script>
+    let count = 0;
+    const btn = document.getElementById('countBtn');
+    const num = document.getElementById('countNum');
+    btn.addEventListener('click', function() {
+        count++;
+        num.textContent = count;
+    });
+</script>
 </html>
