@@ -5,49 +5,265 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的个人主页</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 背景图片和整体布局 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', '微软雅黑', Arial, sans-serif;
+            background: url('your-bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
+        /* 顶部导航栏 */
+        .navbar {
+            width: 100%;
+            background: rgba(30, 30, 30, 0.85);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 18px 32px;
+            font-size: 1.1em;
+            transition: background 0.2s;
+        }
+        .navbar a:hover, .navbar a.active {
+            background: #2196f3;
+        }
+        /* 欢迎语居中 */
+        .welcome {
+            margin-top: 120px;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 2px 8px #000;
+            font-size: 2.2em;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        /* 主内容卡片样式 */
+        .content-card {
+            background: rgba(255,255,255,0.96);
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            max-width: 700px;
+            margin: 40px auto 0 auto;
+            padding: 36px 32px 28px 32px;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .content-card.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        /* 头像样式 */
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #2196f3;
+            margin-bottom: 18px;
+        }
+        /* 列表样式 */
+        .info-list, .course-list, .project-list, .note-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 18px 0;
+        }
+        .info-list li, .course-list li, .project-list li, .note-list li {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+        .note-actions a {
+            margin-right: 16px;
+            color: #2196f3;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .note-actions a:hover {
+            color: #1565c0;
+        }
+        /* PDF 预览弹窗 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: #fff;
+            border-radius: 10px;
+            padding: 18px;
+            max-width: 90vw;
+            max-height: 90vh;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .modal-content embed {
+            width: 60vw;
+            height: 70vh;
+        }
+        .close-btn {
+            position: absolute;
+            top: 8px; right: 16px;
+            font-size: 1.5em;
+            color: #2196f3;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        /* 响应式 */
+        @media (max-width: 800px) {
+            .modal-content embed { width: 90vw; height: 60vh;}
+            .content-card { padding: 18px 8px;}
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>欢迎来到我的主页！</h1>
-        <nav>
-            <a href="#about">关于我</a> |
-            <a href="#projects">项目</a> |
-            <a href="#contact">联系</a>
-        </nav>
-    </header>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+        <a href="#" class="active" id="nav-author">作者</a>
+        <a href="#" id="nav-notes">笔记</a>
+        <a href="#" id="nav-projects">项目</a>
+    </nav>
 
-    <main>
-        <section id="about">
-            <h2>关于我</h2>
-            <p>我是 [你的名字]，一名 [职业/兴趣]。</p>
-        </section>
+    <!-- 欢迎语 -->
+    <div class="welcome" id="welcome">
+        欢迎来到我的个人主页！
+    </div>
 
-        <section id="projects">
-            <h2>我的项目</h2>
-            <ul>
-                <li><a href="https://github.com/你的用户名/项目1">项目 1</a></li>
-                <li><a href="https://github.com/你的用户名/项目2">项目 2</a></li>
-            </ul>
-        </section>
+    <!-- 作者信息卡片 -->
+    <div class="content-card active" id="author-card">
+        <div style="text-align:center;">
+            <img src="my-photo.jpg" alt="个人照片" class="profile-photo">
+        </div>
+        <h2 style="text-align:center;">[你的名字]</h2>
+        <ul class="info-list">
+            <li><strong>个人经历：</strong> [简要介绍你的成长、学习或工作经历]</li>
+            <li><strong>选修课程：</strong>
+                <ul class="course-list">
+                    <li>高等数学</li>
+                    <li>线性代数</li>
+                    <li>数据结构与算法</li>
+                    <!-- 可继续添加 -->
+                </ul>
+            </li>
+            <li><strong>目前研究：</strong> [你的研究方向或兴趣]</li>
+        </ul>
+    </div>
 
-        <section id="contact">
-            <h2>联系我</h2>
-            <p>邮箱：<a href="mailto:你的邮箱@example.com">你的邮箱@example.com</a></p>
-        </section>
-    </main>
+    <!-- 笔记卡片 -->
+    <div class="content-card" id="notes-card">
+        <h2>课程笔记</h2>
+        <ul class="note-list" id="note-list">
+            <!-- JS 动态插入笔记 -->
+        </ul>
+    </div>
 
-    <footer>
-        <p>&copy; 2024 我的个人主页 | 托管于 <a href="https://pages.github.com/">GitHub Pages</a></p>
-    </footer>
+    <!-- 项目卡片 -->
+    <div class="content-card" id="projects-card">
+        <h2>我的项目</h2>
+        <ul class="project-list">
+            <li>
+                <a href="https://github.com/你的用户名/项目1" target="_blank">项目1：项目简介</a>
+            </li>
+            <li>
+                <a href="https://github.com/你的用户名/项目2" target="_blank">项目2：项目简介</a>
+            </li>
+            <!-- 可继续添加 -->
+        </ul>
+    </div>
 
-<script>
-    let count = 0;
-    const btn = document.getElementById('countBtn');
-    const num = document.getElementById('countNum');
-    btn.addEventListener('click', function() {
-        count++;
-        num.textContent = count;
+    <!-- PDF 预览弹窗 -->
+    <div class="modal" id="pdf-modal">
+        <div class="modal-content">
+            <button class="close-btn" id="close-modal">&times;</button>
+            <embed id="pdf-embed" src="" type="application/pdf">
+        </div>
+    </div>
+
+    <script>
+    // ------------------ 配置区：可根据实际情况修改 ------------------
+    // 笔记列表，file为PDF路径，title为显示名
+    const notes = [
+        { title: "高等数学笔记", file: "pdfs/gaodengshuxue.pdf" },
+        { title: "线性代数笔记", file: "pdfs/xianxingdaishu.pdf" }
+        // 可继续添加
+    ];
+    // ------------------ 交互逻辑 ------------------
+
+    // 顶部导航栏切换
+    const navs = [
+        { btn: document.getElementById('nav-author'), card: document.getElementById('author-card') },
+        { btn: document.getElementById('nav-notes'), card: document.getElementById('notes-card') },
+        { btn: document.getElementById('nav-projects'), card: document.getElementById('projects-card') }
+    ];
+    navs.forEach((nav, idx) => {
+        nav.btn.onclick = function(e) {
+            e.preventDefault();
+            navs.forEach((n, i) => {
+                n.card.classList.toggle('active', i === idx);
+                n.btn.classList.toggle('active', i === idx);
+            });
+            // 欢迎语只在首页显示
+            document.getElementById('welcome').style.display = idx === 0 ? 'block' : 'none';
+        }
     });
-</script>
+
+    // 动态渲染笔记列表
+    const noteList = document.getElementById('note-list');
+    notes.forEach((note, idx) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <span>${note.title}</span>
+            <span class="note-actions">
+                <a href="#" data-idx="${idx}" class="preview-link">预览</a>
+                <a href="${note.file}" download>下载</a>
+            </span>
+        `;
+        noteList.appendChild(li);
+    });
+
+    // PDF 预览弹窗逻辑
+    const modal = document.getElementById('pdf-modal');
+    const pdfEmbed = document.getElementById('pdf-embed');
+    document.querySelectorAll('.preview-link').forEach(link => {
+        link.onclick = function(e) {
+            e.preventDefault();
+            const idx = this.getAttribute('data-idx');
+            pdfEmbed.src = notes[idx].file;
+            modal.classList.add('active');
+        }
+    });
+    document.getElementById('close-modal').onclick = function() {
+        modal.classList.remove('active');
+        pdfEmbed.src = '';
+    };
+    // 点击遮罩关闭
+    modal.onclick = function(e) {
+        if(e.target === modal) {
+            modal.classList.remove('active');
+            pdfEmbed.src = '';
+        }
+    };
+    </script>
 </body>
 </html>
