@@ -51,7 +51,7 @@
         }
         /* 主内容卡片样式 */
         .content-card {
-            background: rgba(255,255,255,0.96);
+            background: rgba(255,255,255,0.9);
             border-radius: 16px;
             box-shadow: 0 4px 24px rgba(0,0,0,0.15);
             max-width: 700px;
@@ -183,6 +183,124 @@
         .project-link:hover {
             color: #1565c0;
         }
+        /* 工作 */
+        .job-activity-block {
+            background: #f8fafd;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(153,0,0,0.08);
+            padding: 20px 24px 16px 24px;
+            margin-bottom: 22px;
+            text-align: left;
+            transition: box-shadow 0.2s;
+        }
+        .job-activity-block:hover {
+            box-shadow: 0 4px 18px rgba(153,0,0,0.18);
+        }
+        .job-activity-title {
+            margin: 0 0 8px 0;
+            color: #990000;
+        }
+        .job-activity-desc {
+            margin: 0 0 12px 0;
+            color: #333;
+            font-size: 1em;
+        }
+        .job-carousel {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        .job-carousel img {
+            width: 220px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid #eee;
+            transition: border 0.2s;
+        }
+        .job-carousel img:hover {
+            border: 2px solid #990000;
+        }
+        .carousel-btn {
+            background: #990000;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 39px;           /* 圆圈直径 */
+            height: 30px;
+            font-size: 1em;        /* 箭头大小 */
+            display: flex;
+            align-items: center;   /* 垂直居中 */
+            justify-content: center; /* 水平居中 */
+            padding: 0;            /* 去除默认内边距 */
+            line-height: 1;        /* 避免箭头上下偏移 */
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(153,0,0,0.15);
+            transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+            margin: 0 12px;
+            outline: none;
+        }
+        .carousel-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .job-carousel {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            height: 220px;
+        }
+        .job-carousel-img-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 700px;
+            height: 220px;
+            overflow: hidden;
+        }
+        .job-carousel-img {
+            position: absolute;
+            top: 50%;
+            border-radius: 8px;
+            transition:
+                left 0.5s, width 0.5s, height 0.5s, filter 0.5s, z-index 0.5s, box-shadow 0.5s;
+            box-shadow: 0 2px 10px rgba(153,0,0,0.08);
+            cursor: pointer;
+            border: 2px solid #eee;
+            transform: translate(-50%, -50%);
+        }
+        .job-carousel-img.center {
+            left: 50%;
+            width: 320px;
+            height: 200px;
+            z-index: 3;
+            filter: brightness(1) scale(1);
+            box-shadow: 0 4px 18px rgba(153,0,0,0.18);
+        }
+        .job-carousel-img.left {
+            left: 20%;
+            width: 180px;
+            height:110px;
+            z-index: 2;
+            filter: brightness(0.6) scale(0.85);
+            box-shadow: none;
+            
+        }
+        .job-carousel-img.right {
+            left: 80%;
+            width: 180px;
+            height: 110px;
+            z-index: 2;
+            filter: brightness(0.6) scale(0.85);
+            box-shadow: none;
+            
+        }
+        
         /* 响应式 */
         @media (max-width: 800px) {
             .modal-content embed { width: 90vw; height: 60vh;}
@@ -196,6 +314,7 @@
         <a href="#" class="active" id="nav-author">作者</a>
         <a href="#" id="nav-notes">笔记</a>
         <a href="#" id="nav-projects">项目</a>
+        <a href="#" id="nav-jobs">工作</a>
     </nav>
 
     <!-- 欢迎语 -->
@@ -252,6 +371,12 @@
         <!-- 可继续添加更多项目块 -->
     </div>
 
+    <div class="content-card" id="jobs-card">
+        <h2>工作</h2>
+        <p style="text-align:center;">现任北京大学数学科学学院学生会XXX职务，主要负责组织策划各类学生活动。</p>
+        <div id="job-activities"></div>
+    </div>
+
     <!-- PDF 预览弹窗 -->
     <div class="modal" id="pdf-modal">
         <div class="modal-content">
@@ -260,6 +385,7 @@
         </div>
     </div>
 
+    
     <script>
     // ------------------ 配置区：可根据实际情况修改 ------------------
     // 笔记列表，file为PDF路径，title为显示名
@@ -284,7 +410,9 @@
     const navs = [
         { btn: document.getElementById('nav-author'), card: document.getElementById('author-card') },
         { btn: document.getElementById('nav-notes'), card: document.getElementById('notes-card') },
-        { btn: document.getElementById('nav-projects'), card: document.getElementById('projects-card') }
+        { btn: document.getElementById('nav-projects'), card: document.getElementById('projects-card') },
+        { btn: document.getElementById('nav-jobs'), card: document.getElementById('jobs-card') }
+
     ];
     navs.forEach((nav, idx) => {
         nav.btn.onclick = function(e) {
@@ -342,6 +470,85 @@
             pdfEmbed.src = '';
         }
     };
+
+    // 工作活动数据
+    const jobActivities = [
+        {
+            title: "迎新晚会",
+            desc: "策划并主持2024年迎新晚会，组织节目、场地布置与流程安排。",
+            images: ["jobs/yx1.jpg", "jobs/yx2.jpg", "jobs/yx3.jpg"]
+        },
+        {
+            title: "学术讲座",
+            desc: "邀请知名校友举办学术讲座，负责宣传与现场协调。",
+            images: ["jobs/lecture1.jpg", "jobs/lecture2.jpg"]
+        }
+        // 可继续添加更多活动
+    ];
+
+    const jobActivitiesDiv = document.getElementById('job-activities');
+    if (jobActivitiesDiv) {
+        jobActivities.forEach((activity, idx) => {
+            const block = document.createElement('div');
+            block.className = 'job-activity-block';
+            block.innerHTML = `
+                <h3 class="job-activity-title">${activity.title}</h3>
+                <p class="job-activity-desc">${activity.desc}</p>
+                <div class="job-carousel" id="carousel-${idx}">
+                    <button class="carousel-btn" id="prev-${idx}">&#8592;</button>
+                    <div class="job-carousel-img-wrapper" id="img-wrapper-${idx}"></div>
+                    <button class="carousel-btn" id="next-${idx}">&#8594;</button>
+                </div>
+            `;
+            jobActivitiesDiv.appendChild(block);
+    
+            // 轮播逻辑
+            let current = 0;
+            const imgWrapper = block.querySelector(`#img-wrapper-${idx}`);
+            const prevBtn = block.querySelector(`#prev-${idx}`);
+            const nextBtn = block.querySelector(`#next-${idx}`);
+            function renderImages() {
+                const total = activity.images.length;
+                const prevIdx = (current - 1 + total) % total;
+                const nextIdx = (current + 1) % total;
+            
+                imgWrapper.innerHTML = '';
+            
+                // 左侧
+                const imgLeft = document.createElement('img');
+                imgLeft.src = activity.images[prevIdx];
+                imgLeft.className = 'job-carousel-img left';
+                imgLeft.style.pointerEvents = 'none';
+                imgWrapper.appendChild(imgLeft);
+            
+                // 中间
+                const imgCenter = document.createElement('img');
+                imgCenter.src = activity.images[current];
+                imgCenter.className = 'job-carousel-img center';
+                imgCenter.onclick = () => {
+                    window.open(activity.images[current], '_blank');
+                };
+                imgWrapper.appendChild(imgCenter);
+            
+                // 右侧
+                const imgRight = document.createElement('img');
+                imgRight.src = activity.images[nextIdx];
+                imgRight.className = 'job-carousel-img right';
+                imgRight.style.pointerEvents = 'none';
+                imgWrapper.appendChild(imgRight);
+            }
+            /* 按钮事件控制 */
+            prevBtn.onclick = () => {
+                current = (current - 1 + activity.images.length) % activity.images.length;
+                renderImages(-1);
+            };
+            nextBtn.onclick = () => {
+                current = (current + 1) % activity.images.length;
+                renderImages(1);
+            };
+            renderImages();
+        });
+    }
     </script>
 </body>
 </html>
