@@ -252,7 +252,7 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 8px;
-            height: 220px;
+            height: 290px;
         }
         .job-carousel-img-wrapper {
             display: flex;
@@ -260,7 +260,7 @@
             justify-content: center;
             position: relative;
             width: 700px;
-            height: 220px;
+            height: 300px;
             overflow: hidden;
         }
         .job-carousel-img {
@@ -277,7 +277,7 @@
         .job-carousel-img.center {
             left: 50%;
             width: 320px;
-            height: 200px;
+            height: 250px;
             z-index: 3;
             filter: brightness(1) scale(1);
             box-shadow: 0 4px 18px rgba(153,0,0,0.18);
@@ -285,7 +285,7 @@
         .job-carousel-img.left {
             left: 20%;
             width: 180px;
-            height:110px;
+            height:140px;
             z-index: 2;
             filter: brightness(0.6) scale(0.85);
             box-shadow: none;
@@ -294,7 +294,7 @@
         .job-carousel-img.right {
             left: 80%;
             width: 180px;
-            height: 110px;
+            height: 140px;
             z-index: 2;
             filter: brightness(0.6) scale(0.85);
             box-shadow: none;
@@ -372,9 +372,13 @@
     </div>
 
     <div class="content-card" id="jobs-card">
-        <h2>工作</h2>
-        <p style="text-align:center;">现任北京大学数学科学学院学生会XXX职务，主要负责组织策划各类学生活动。</p>
+        <h2>学生会工作</h2>
+        <p style="text-align:center;">现任北京大学数学科学学院学生会学术文化部负责人，主要负责组织策划各类学术活动。</p>
         <div id="job-activities"></div>
+        <div id="job-summary" style="margin-top:32px; padding:20px; background:#fbeeea; border-radius:10px; color:#990000; font-size:0.9em;">
+            <strong>NOTE: </strong>
+            <span>除以上活动外，学术组还举办了双学位讲座、四推模拟面试、模拟期中考试、赴饭空间等活动。也欢迎其他同学加入<strong>学术文化部学术组！</strong></span>
+        </div>
     </div>
 
     <!-- PDF 预览弹窗 -->
@@ -474,14 +478,22 @@
     // 工作活动数据
     const jobActivities = [
         {
-            title: "迎新晚会",
-            desc: "策划并主持2024年迎新晚会，组织节目、场地布置与流程安排。",
-            images: ["jobs/yx1.jpg", "jobs/yx2.jpg", "jobs/yx3.jpg"]
+            title: "学术PIZZA沙龙",
+            desc: "邀请各个方向的知名教授与学生进行深入交流，旨在增进本科生对该学科前沿的理解，创造教授与优秀本科生接触的机会。",
+            images: ["jobs/pizza1.jpg", "jobs/pizza2.jpg", "jobs/pizza3.jpg"],
+            link: "https://mp.weixin.qq.com/s/iOXUw8gkEC_21nQI1v9mNw"
         },
         {
-            title: "学术讲座",
-            desc: "邀请知名校友举办学术讲座，负责宣传与现场协调。",
-            images: ["jobs/lecture1.jpg", "jobs/lecture2.jpg"]
+            title: "分系讲座&手册",
+            desc: "邀请学长学姐分享分系心得，编撰分系手册并举办讲座，旨在帮助同学们明晰分系的方向。",
+            images: ["jobs/fx1.png", "jobs/fx2.png", "jobs/fx3.png", "jobs/fx4.png"],
+            link: "https://mp.weixin.qq.com/s/9Hzq6mEnws0g_nM5ga_dyA"
+        },
+        {
+            title: "数学一小时",
+            desc: "邀请著名教授讲授一小时左右的前沿内容，旨在帮助有志于学术的同学们增长见识，拓宽视野。",
+            images: ["jobs/sx1.jpg", "jobs/sx2.jpg", "jobs/sx3.jpg"],
+            link: "https://mp.weixin.qq.com/s/knU5n7UCmgGGTyo3CiXoaA"
         }
         // 可继续添加更多活动
     ];
@@ -494,6 +506,9 @@
             block.innerHTML = `
                 <h3 class="job-activity-title">${activity.title}</h3>
                 <p class="job-activity-desc">${activity.desc}</p>
+                <div style="margin-bottom:8px;">
+                    <a href="${activity.link}" target="_blank" class="project-link">查看推送</a>
+                </div>
                 <div class="job-carousel" id="carousel-${idx}">
                     <button class="carousel-btn" id="prev-${idx}">&#8592;</button>
                     <div class="job-carousel-img-wrapper" id="img-wrapper-${idx}"></div>
