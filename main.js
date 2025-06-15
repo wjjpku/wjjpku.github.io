@@ -5,13 +5,15 @@ const notes = [
         title: "数学分析(II)",
         file: "pdfs/sxfx.pdf",
         desc: "大一下选修，前期定积分的笔记较为认真，后期多为应试和做题中总结的重点",
-        feeling: "李伟固"
+        feeling: "李伟固",
+        time: "2025年春"
     },
     {
         title: "抽象代数",
         file: "pdfs/cxds.pdf",
         desc: "大一上选修，群论略去了部分作者熟悉的内容，保留了一些作业内容。在幂零群和域扩张上最后总结了很多xmz老师常考点",
-        feeling: "徐茂智"
+        feeling: "徐茂智",
+        time: "2024年秋"
     }
     // 可继续添加
 ];
@@ -50,11 +52,7 @@ notes.forEach((note, idx) => {
             <a href="#" data-idx="${idx}" class="preview-link">预览</a>
             <a href="${note.file}" download>下载</a>
         </div>
-        <div class="comment-section" data-idx="${idx}">
-            <input type="text" placeholder="写下你的评论..." class="comment-input">
-            <button class="add-comment-btn">评论</button>
-            <ul class="comment-list"></ul>
-        </div>
+        <span class="note-time">${note.time || ''}</span>
     `;
     noteList.appendChild(div);
 });

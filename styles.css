@@ -91,16 +91,28 @@ body {
     color: #1565c0;
 }
 .note-block {
+    position: relative;
     background: #f8fafd;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(33,150,243,0.08);
-    padding: 20px 24px 16px 24px;
+    padding: 20px 24px 32px 24px;
     margin-bottom: 22px;
     text-align: left;
     transition: box-shadow 0.2s;
 }
 .note-block:hover {
     box-shadow: 0 4px 18px rgba(33,150,243,0.18);
+}
+.note-time {
+    position: absolute;
+    right: 16px;
+    bottom: 12px;
+    color: #888;
+    font-size: 0.95em;
+    background: #fff8;
+    padding: 2px 8px;
+    border-radius: 8px;
+    pointer-events: none;
 }
 .note-block h3 {
     margin: 0 0 8px 0;
