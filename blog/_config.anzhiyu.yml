@@ -79,6 +79,7 @@ author_status:
   statusImg: "/img/headelephant.jpg"  #头像左下角放的照片
   skills:
      - 嘻嘻
+     - 不嘻嘻
 
 #  -------------------------------------- search (搜索)-----------------------------------
 # see https://blog.anheyu.com/posts/c27d.html#搜索系统
@@ -171,7 +172,7 @@ error_img:
 # A simple 404 page
 error_404:
   enable: true
-  subtitle: "请尝试站内搜索寻找文章"
+  subtitle: "出错啦！"
   background: https://bu.dusays.com/2023/05/08/645907596997d.gif
 
 post_meta:
@@ -428,15 +429,15 @@ crisp:
   website_id:
 
 # Footer Settings
-# --------------------------------------
+# --------------------------------------尾注-----------------------------
 footer:
   owner:
     enable: true
     since: 2020
   custom_text:
   runtime:
-    enable: false
-    launch_time: 04/01/2021 00:00:00 # 网站上线时间
+    enable: true
+    launch_time: 07/01/2025 00:00:00 # 网站上线时间
     work_img: https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg
     work_description: 距离月入25k也就还差一个大佬带我~
     offduty_img: https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg
@@ -444,7 +445,7 @@ footer:
   # 徽标部分配置项 https://shields.io/
   # https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&logo=jsDelivr
   bdageitem:
-    enable: false
+    enable: true
     list:
       - link: https://hexo.io/ #徽标指向网站链接
         shields: https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg #徽标API
@@ -651,7 +652,7 @@ sidebar:
 h2Divider: false
 
 # 表格隔行变色
-table_interlaced_discoloration: false
+table_interlaced_discoloration: true
 
 # 首页双栏显示
 article_double_row: true
@@ -690,7 +691,7 @@ canvas_ribbon:
 
 # Fluttering Ribbon (动态彩带)
 canvas_fluttering_ribbon:
-  enable: false
+  enable: true
   mobile: false
 
 # canvas_nest
@@ -708,13 +709,13 @@ canvas_nest:
 activate_power_mode:
   enable: false
   colorful: true # open particle animation (冒光特效)
-  shake: false #  open shake (抖动特效)
+  shake: true #  open shake (抖动特效)
   mobile: false
 
 # Mouse click effects: fireworks (鼠标点击效果: 烟火特效)
 fireworks:
-  enable: false
-  zIndex: 9999 # -1 or 9999
+  enable: true
+  zIndex: 10 # -1 or 9999
   mobile: false
 
 # Mouse click effects: Heart symbol (鼠标点击效果: 爱心)
@@ -735,7 +736,7 @@ ClickShowText:
 
 # Default display mode (网站默认的显示模式)
 # light (default) / dark
-display_mode: light
+display_mode: dark
 
 # Beautify (美化页面显示)
 beautify:
@@ -796,7 +797,7 @@ preloader:
   source: 3
   # pace theme (see https://codebyzach.github.io/pace/)
   pace_css_url:
-  avatar: https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg # 自定加载动画义头像
+  avatar: /img/headelephant.jpg# 自定加载动画义头像
 
 # aside (侧边栏)
 # --------------------------------------
@@ -922,7 +923,7 @@ centerConsole:
 
 # dark mode
 darkmode:
-  enable: true
+  enable: false
   # Toggle Button to switch dark/light mode
   button: true
   # Switch dark/light mode automatically (自动切换 dark mode和 light mode)
@@ -1055,22 +1056,22 @@ css_prefix: true
 home_top:
   enable: true # 开关
   timemode: date #date/updated
-  title: 生活明朗
-  subTitle: 万物可爱。
-  siteText: anheyu.com
+  title: 欢迎肥来！
+  subTitle: Welcome！
+  siteText: wjjpku.github.io
   category:
-    - name: 前端
-      path: /categories/前端开发/
+    - name: 笔记
+      path: /notes/
       shadow: var(--anzhiyu-shadow-blue)
       class: blue
       icon: anzhiyu-icon-dove
-    - name: 大学
-      path: /categories/大学生涯/
+    - name: 工作
+      path: /student-council/
       shadow: var(--anzhiyu-shadow-red)
       class: red
       icon: anzhiyu-icon-fire
     - name: 生活
-      path: /categories/生活日常/
+      path: /photos/
       shadow: var(--anzhiyu-shadow-green)
       class: green
       icon: anzhiyu-icon-book
@@ -1229,14 +1230,14 @@ rightClickMenu:
 
 # 首页随便逛逛people模式 而非技能点模式，关闭后为技能点模式需要配置creativity.yml
 peoplecanvas:
-  enable: true
+  enable: false
   # img 是随便逛逛的背景
-  img: https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png
+  img: /img/headelephant.jpg
 
 # 动效
 dynamicEffect:
   postTopWave: true # 文章顶部波浪效果
-  postTopRollZoomInfo: false # 文章顶部滚动时缩放
+  postTopRollZoomInfo: true # 文章顶部滚动时缩放
   pageCommentsRollZoom: false # 非文章页面评论滚动时缩放显示（仅仅Twikoo生效）
 
 # Inject

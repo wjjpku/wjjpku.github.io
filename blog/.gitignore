@@ -6,3 +6,4 @@ public/
 node_modules/
 .deploy*/add 
 _multiconfig.yml
+.deploy_git/
