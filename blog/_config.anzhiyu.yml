@@ -1,3 +1,7 @@
+
+
+# --------------------------------------------菜单-----------------------------------------------
+
 menu: # 主页最上面的
    文章:
      隧道: https://generals.io || anzhiyu-icon-box-archive
@@ -76,7 +80,7 @@ author_status:
   skills:
      - 嘻嘻
 
-#             --------------------------- search (搜索)-------------------------------
+#  -------------------------------------- search (搜索)-----------------------------------
 # see https://blog.anheyu.com/posts/c27d.html#搜索系统
 # --------------------------------------
 
@@ -125,7 +129,10 @@ katex:
   hide_scrollbar: true
 
 
+
 # --------------------------------------图片设置----------------------------------------
+
+
 
 # Favicon（网站图标）
 favicon: /favicon.ico
@@ -211,8 +218,10 @@ index_post_content:
 # when you scroll in post, the URL will update according to header id.
 anchor: false
 
-# Post
-# --------------------------------------
+
+# --------------------------------------发布----------------------------------------------
+
+
 
 # toc (目录)
 toc:
@@ -234,7 +243,7 @@ post_copyright:
   copyright_author_img_front:
   copyright_author_link: /
 
-# Sponsor/reward
+# 收赞助款
 reward:
   enable: true
   QR_code:
@@ -300,13 +309,17 @@ addtoany:
   enable: false
   item: facebook,twitter,wechat,sina_weibo,email,copy_link
 
-# Comments System
-# --------------------------------------
+
+
+# --------------------------------------评论系统----------------------------------------
+
+
+
 
 comments:
   # Up to two comments system, the first will be shown as default
   # Choose: Valine/Waline/Twikoo/Artalk
-  use: # Twikoo/Waline
+  use: valine
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
   # If you set it to true, the comment count will be invalid
