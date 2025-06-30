@@ -120,29 +120,40 @@ layout: page
 
 <div class="notes-grid">
   <div class="note-card">
-    <div class="note-title">线性代数笔记</div>
-    <div class="note-desc">包含矩阵、特征值、空间变换等内容</div>
+    <div class="note-title">数学分析2</div>
+    <div class="note-desc">大一下选修李伟固老师的数分2，包含认真听课和临时突击的混合笔记</div>
     <div class="note-actions">
-      <button onclick="openPdfPreview('/pdfs/暑校.pdf')">在线预览</button>
-      <a href="/pdfs/暑校.pdf" download>下载 PDF</a>
+      <button onclick="openPdfPreview('/pdfs/sxfx2.pdf')">查看文件</button>
     </div>
   </div>
 
   <div class="note-card">
-    <div class="note-title">傅里叶分析笔记</div>
-    <div class="note-desc">周期函数展开、频域理解、应用基础</div>
+    <div class="note-title">高等代数2</div>
+    <div class="note-desc">大一下选修李文威老师的高代2，主要依靠看讲义自学，故笔记多为一家之言</div>
     <div class="note-actions">
-      <button onclick="openPdfPreview('/pdfs/fourier.pdf')">在线预览</button>
-      <a href="/pdfs/fourier.pdf" download>下载 PDF</a>
+      <button onclick="openPdfPreview('/pdfs/gdds2.pdf')">课程笔记</button>
+      <button onclick="openPdfPreview('/pdfs/gdds2b.pdf')">课程讲义</button>
     </div>
   </div>
 
   <div class="note-card">
-    <div class="note-title">Python 编程笔记</div>
-    <div class="note-desc">语法入门、面向对象、常用模块</div>
+    <div class="note-title">抽象代数</div>
+    <div class="note-desc">大一上选修徐茂智老师的抽代，之前自学过多次，笔记着重整理了自己认为较为困难的内容，带有个人的理解，主笔记还有部分作业</div>
     <div class="note-actions">
-      <button onclick="openPdfPreview('/pdfs/python.pdf')">在线预览</button>
-      <a href="/pdfs/python.pdf" download>下载 PDF</a>
+      <button onclick="openPdfPreview('/pdfs/cxds_main.pdf')">主笔记</button>
+      <button onclick="openPdfPreview('/pdfs/cxds_sylow.pdf')">Sylow定理</button>
+      <button onclick="openPdfPreview('/pdfs/cxds+_group.pdf')">群的结构</button>
+      <button onclick="openPdfPreview('/pdfs/cxds_ideal.pdf')">极大理想与素理想</button>
+    </div>
+  </div>
+
+  <div class="note-card">
+    <div class="note-title">数学分析3</div>
+    <div class="note-desc">竞赛时的自学笔记，为了加深记忆和理解进行的抄书</div>
+    <div class="note-actions">
+      <button onclick="openPdfPreview('/pdfs/sxfx3a.pdf')">多元函数微分</button>
+      <button onclick="openPdfPreview('/pdfs/sxfx3b.pdf')">含参变元积分</button>
+      <button onclick="openPdfPreview('/pdfs/sxfx3c.pdf')">曲线曲面积分</button>
     </div>
   </div>
 </div>

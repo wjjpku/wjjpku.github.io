@@ -3,26 +3,26 @@
 # --------------------------------------------菜单-----------------------------------------------
 
 menu: # 主页最上面的
-   文章:
-     隧道: https://generals.io || anzhiyu-icon-box-archive
-     分类: /categories/ || anzhiyu-icon-shapes
-     标签: /tags/ || anzhiyu-icon-tags
+  #  文章:
+  #    隧道: https://generals.io || anzhiyu-icon-box-archive
+  #    分类: /categories/ || anzhiyu-icon-shapes
+  #    标签: /tags/ || anzhiyu-icon-tags
 
-   友链:
-     友人帐: /link/ || anzhiyu-icon-link
-     朋友圈: /fcircle/ || anzhiyu-icon-artstation
-     留言板: /comments/ || anzhiyu-icon-envelope
+  #  友链:
+  #    友人帐: /link/ || anzhiyu-icon-link
+  #    朋友圈: /fcircle/ || anzhiyu-icon-artstation
+  #    留言板: /comments/ || anzhiyu-icon-envelope
 
-   我的:
-     音乐馆: /music/ || anzhiyu-icon-music
-     追番页: /bangumis/ || anzhiyu-icon-bilibili
-     相册集: /album/ || anzhiyu-icon-images
-     小空调: /air-conditioner/ || anzhiyu-icon-fan
+  #  我的:
+  #    音乐馆: /music/ || anzhiyu-icon-music
+  #    追番页: /bangumis/ || anzhiyu-icon-bilibili
+  #    相册集: /album/ || anzhiyu-icon-images
+  #    小空调: /air-conditioner/ || anzhiyu-icon-fan
 
-   关于:
-     关于本人: /about/ || anzhiyu-icon-paper-plane
-     闲言碎语: /essay/ || anzhiyu-icon-lightbulb
-     随便逛逛: javascript:toRandomPost() || anzhiyu-icon-shoe-prints1
+  #  关于:
+  #    关于本人: /about/ || anzhiyu-icon-paper-plane
+  #    闲言碎语: /essay/ || anzhiyu-icon-lightbulb
+  #    随便逛逛: javascript:toRandomPost() || anzhiyu-icon-shoe-prints1
 
 # nav相关配置
 nav:
@@ -246,7 +246,7 @@ post_copyright:
 
 # 收赞助款
 reward:
-  enable: true
+  enable: false
   QR_code:
     - img: https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png
       link:
@@ -821,7 +821,7 @@ aside:
     enable: false
     content: 欢迎来看我的博客鸭~
   card_weixin:
-    enable: true
+    enable: false
     face: https://bu.dusays.com/2023/01/13/63c02edf44033.png
     backFace: https://bu.dusays.com/2023/05/13/645fa415e8694.png
   card_recent_post:
@@ -1066,7 +1066,7 @@ home_top:
       class: blue
       icon: anzhiyu-icon-dove
     - name: 工作
-      path: /student-council/
+      path: /work/
       shadow: var(--anzhiyu-shadow-red)
       class: red
       icon: anzhiyu-icon-fire
