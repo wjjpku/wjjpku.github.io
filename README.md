@@ -1,10 +1,11 @@
 # wjjpku.github.io
 
-This repository contains the Hexo source for `wjjpku.github.io`.
+This repository separates the Hexo source from the generated GitHub Pages site.
 
 ## Branches
 
 - `main`: editable Hexo source. Work here.
+- `newhexo`: generated static site published by Hexo. Do not edit by hand.
 - `backup/before-cleanup-20260620`: local backup of the pre-cleanup state.
 
 ## Workflow
@@ -13,9 +14,10 @@ This repository contains the Hexo source for `wjjpku.github.io`.
 cd blog
 npm install
 npm run build
+npm run deploy
 ```
 
-Push changes to `main` to deploy. GitHub Actions builds the Hexo site and publishes `blog/public` to GitHub Pages.
+`npm run deploy` runs a clean Hexo build and publishes the generated files to the `newhexo` branch.
 
 For local preview:
 
