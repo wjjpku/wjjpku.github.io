@@ -1,10 +1,10 @@
 # wjjpku.github.io
 
-This repository now separates the Hexo source from the generated GitHub Pages site.
+This repository separates the Hexo source from the generated GitHub Pages site.
 
 ## Branches
 
-- `source`: editable Hexo source. Work here.
+- `main`: editable Hexo source. Work here.
 - `newhexo`: generated static site published by Hexo. Do not edit by hand.
 - `backup/before-cleanup-20260620`: local backup of the pre-cleanup state.
 
@@ -21,6 +21,6 @@ npm run deploy
 
 ## Notes
 
-- Root-level generated files are intentionally not tracked on `source`.
+- Root-level generated files are intentionally not tracked on `main`.
 - `blog/public`, `blog/.deploy_git`, `blog/node_modules`, and `blog/db.json` are ignored build/cache directories.
 - The AnZhiYu theme is vendored under `blog/themes/anzhiyu` so a fresh clone can rebuild the site without a broken submodule.
