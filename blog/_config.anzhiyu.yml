@@ -1264,6 +1264,7 @@ inject:
   head:
     # 自定义css
     # - <link rel="stylesheet" href="/css/xxx.css">
+    - <link rel="stylesheet" href="/css/friends.css">
 
   bottom:
     # 自定义js
