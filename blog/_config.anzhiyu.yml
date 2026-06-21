@@ -1252,7 +1252,7 @@ dynamicEffect:
 inject:
   head:
     # 自定义css
-    - <link rel="stylesheet" href="/css/academic.css">
+    # - <link rel="stylesheet" href="/css/xxx.css">
 
   bottom:
     # 自定义js
