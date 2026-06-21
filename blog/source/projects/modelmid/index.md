@@ -4,17 +4,18 @@ date: 2026-06-21 01:12:00
 layout: page
 description: 数学推导文本溯源分类器，研究人类与大模型数学解答的风格差异。
 comments: false
+aside: false
 ---
 
-{% image https://opengraph.githubassets.com/wjjpku-modelmid/wjjpku/Modelmid, alt=Modelmid 仓库预览, width=100% %}
+> Modelmid 研究数学解答文本的来源识别：人类、DeepSeek、Kimi、GLM、Qwen 等不同来源在公式密度、逻辑连接、段落形态和证明语气上会留下可学习的风格痕迹。
+
+{% link Modelmid 代码仓库, GitHub / wjjpku, https://github.com/wjjpku/Modelmid, https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png %}
 
 ## 项目概览
 
 Modelmid 研究“数学解答是谁写的”。项目以 Human、DeepSeek、Kimi、GLM、Qwen 等来源为主线，提取数学推导文本中的词频、结构、LaTeX、逻辑连接和段落风格等特征，训练分类器判断文本来源。
 
 它不是简单地做通用文本分类，而是把数学文本的独特写作痕迹纳入特征：公式数量、行内数学密度、证明语气、逻辑词分布、段落长度等都会影响模型判断。
-
-{% btn https://github.com/wjjpku/Modelmid, 打开代码仓库, anzhiyufont anzhiyu-icon-github, block center %}
 
 ## 工作流
 
@@ -41,10 +42,12 @@ Modelmid 研究“数学解答是谁写的”。项目以 Human、DeepSeek、Kim
 
 {% image https://raw.githubusercontent.com/wjjpku/Modelmid/main/docs/figures/gpt_augmented/feature_importances.png, alt=文本来源识别中的特征重要性, width=100% %}
 
-## 我觉得有价值的点
+{% folding green, 我觉得有价值的点 %}
 
 - 数学文本不是普通自然语言，公式和推导结构本身就是风格信号。
 - 对抗实验能反过来提示：哪些“模型味”最容易被检测出来。
 - 这个方向适合继续扩展到更多模型、更多学科和更细粒度的写作习惯分析。
+
+{% endfolding %}
 
 {% btn https://github.com/wjjpku/Modelmid, 查看完整 README 与代码, anzhiyufont anzhiyu-icon-arrow-right, block center %}
