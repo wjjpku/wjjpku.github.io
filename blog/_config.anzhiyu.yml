@@ -37,10 +37,10 @@ nav:
           icon: /img/favicon.ico
     - title: 项目
       item:
-        - name: 项目档案
+        - name: 学术工作
           link: /projects/
           icon: /img/favicon.ico
-        - name: GitHub
+        - name: 代码主页
           link: https://github.com/wjjpku
           icon: /img/favicon.ico
 
@@ -1059,11 +1059,11 @@ css_prefix: true
 home_top:
   enable: true # 开关
   timemode: date #date/updated
-  title: Academic Work
-  subTitle: Projects & Notes
-  siteText: Math · ML · Tools · Student Union
+  title: 学术工作
+  subTitle: 项目与实验
+  siteText: 机器学习 · 数学文本 · 交互作品
   random:
-    text: 项目档案
+    text: 学术工作
     link: /projects/
   category:
     - name: 笔记
@@ -1087,10 +1087,10 @@ home_top:
     swiper_css: https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css #swiper css依赖
     swiper_js: https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.js #swiper js依赖
   banner:
-    tips: GitHub projects, academic resources, and interests
-    title: Academic Work & Projects
+    tips: 北大数院学生会学术组网站
+    title: PKUSMS
     image: /photos/all.jpg
-    link: /projects/
+    link: https://pkusms.com
 
 # 朋友圈配置
 friends_vue:
