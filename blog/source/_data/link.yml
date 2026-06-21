@@ -1,0 +1,22 @@
+- class_name: 相关链接
+  class_desc: 一些和本站、项目与长期写作有关的入口。
+  flink_style: anzhiyu
+  link_list:
+    - name: PKUSMS
+      link: https://pkusms.com
+      avatar: /photos/all.jpg
+      descr: 北大数院学生会学术组网站。
+      recommend: true
+    - name: wjjpku GitHub
+      link: https://github.com/wjjpku
+      avatar: https://github.com/wjjpku.png
+      descr: 我的公开代码主页。
+      recommend: true
+    - name: AnZhiYu
+      link: https://github.com/anzhiyu-c/hexo-theme-anzhiyu
+      avatar: /img/favicon.ico
+      descr: 本站正在使用的 Hexo 主题。
+    - name: Hexo
+      link: https://hexo.io
+      avatar: https://hexo.io/icon/favicon-196x196.png
+      descr: 快速、简洁且高效的静态博客框架。

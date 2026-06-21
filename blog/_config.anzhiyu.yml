@@ -3,6 +3,9 @@
 # --------------------------------------------菜单-----------------------------------------------
 
 menu: # 主页最上面的
+  首页: / || anzhiyu-icon-house-chimney
+  学术工作: /projects/ || anzhiyu-icon-book-open
+  友情链接: /link/ || anzhiyu-icon-link
   #  文章:
   #    隧道: https://generals.io || anzhiyu-icon-box-archive
   #    分类: /categories/ || anzhiyu-icon-shapes
@@ -39,6 +42,9 @@ nav:
       item:
         - name: 学术工作
           link: /projects/
+          icon: /img/favicon.ico
+        - name: 友情链接
+          link: /link/
           icon: /img/favicon.ico
         - name: 代码主页
           link: https://github.com/wjjpku
@@ -1081,6 +1087,11 @@ home_top:
       shadow: var(--anzhiyu-shadow-green)
       class: green
       icon: anzhiyu-icon-book
+    - name: 友链
+      path: /link/
+      shadow: var(--anzhiyu-shadow-blue)
+      class: blue
+      icon: anzhiyu-icon-link
   default_descr: 再怎么看我也不知道怎么描述它的啦！
   swiper:
     enable: false
@@ -1218,7 +1229,7 @@ accesskey:
 # 友情链接顶部相关配置
 linkPageTop:
   enable: false
-  title: 与数百名博主无限进步
+  title: 相关链接与友人帐
   # 添加博主友链的评论自定义格式
   addFriendPlaceholder: "昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"
 
