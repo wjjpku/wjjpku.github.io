@@ -1,5 +1,6 @@
-- class_name: 相关链接
-  class_desc: 一些和本站、项目与长期写作有关的入口。
+# Add friend links here with: name, link, avatar, descr.
+- class_name: Resources
+  class_desc: Useful links related to this site and its projects. Friend links will be added here once their site information is provided.
   flink_style: anzhiyu
   link_list:
     - name: PKUSMS

@@ -3,9 +3,9 @@
 # --------------------------------------------菜单-----------------------------------------------
 
 menu: # 主页最上面的
-  首页: / || anzhiyu-icon-house-chimney
-  学术工作: /projects/ || anzhiyu-icon-book-open
-  友情链接: /link/ || anzhiyu-icon-link
+  Home: / || anzhiyu-icon-house-chimney
+  Academic Works: /projects/ || anzhiyu-icon-book-open
+  Friends: /link/ || anzhiyu-icon-link
   #  文章:
   #    隧道: https://generals.io || anzhiyu-icon-box-archive
   #    分类: /categories/ || anzhiyu-icon-shapes
@@ -33,20 +33,20 @@ nav:
   travelling: false
   clock: false
   menu:
-    - title: 网页
+    - title: Site
       item:
-        - name: 博客
+        - name: Blog
           link: /
           icon: /img/favicon.ico
-    - title: 项目
+    - title: Projects
       item:
-        - name: 学术工作
+        - name: Academic Works
           link: /projects/
           icon: /img/favicon.ico
-        - name: 友情链接
+        - name: Friends
           link: /link/
           icon: /img/favicon.ico
-        - name: 代码主页
+        - name: GitHub
           link: https://github.com/wjjpku
           icon: /img/favicon.ico
 
@@ -1069,25 +1069,25 @@ home_top:
   subTitle: 项目与实验
   siteText: 机器学习 · 数学文本 · 交互作品
   random:
-    text: 学术工作
+    text: Academic Works
     link: /projects/
   category:
-    - name: 笔记
+    - name: Notes
       path: /notes/
       shadow: var(--anzhiyu-shadow-blue)
       class: blue
       icon: anzhiyu-icon-dove
-    - name: 工作
+    - name: Work
       path: /work/
       shadow: var(--anzhiyu-shadow-red)
       class: red
       icon: anzhiyu-icon-fire
-    - name: 生活
+    - name: Life
       path: /photos/
       shadow: var(--anzhiyu-shadow-green)
       class: green
       icon: anzhiyu-icon-book
-    - name: 友链
+    - name: Friends
       path: /link/
       shadow: var(--anzhiyu-shadow-blue)
       class: blue
