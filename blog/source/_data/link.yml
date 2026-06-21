@@ -1,23 +1,22 @@
-# Add friend links here with: name, link, avatar, descr.
-- class_name: Resources
-  class_desc: Useful links related to this site and its projects. Friend links will be added here once their site information is provided.
+- class_name: Cyber Friends
+  class_desc: 临时赛博友链，等真实朋友站点信息补齐后可以直接替换。
   flink_style: anzhiyu
   link_list:
-    - name: PKUSMS
-      link: https://pkusms.com
-      avatar: /photos/all.jpg
-      descr: 北大数院学生会学术组网站。
-      recommend: true
-    - name: wjjpku GitHub
-      link: https://github.com/wjjpku
-      avatar: https://github.com/wjjpku.png
-      descr: 我的公开代码主页。
-      recommend: true
-    - name: AnZhiYu
-      link: https://github.com/anzhiyu-c/hexo-theme-anzhiyu
-      avatar: /img/favicon.ico
-      descr: 本站正在使用的 Hexo 主题。
-    - name: Hexo
-      link: https://hexo.io
-      avatar: https://hexo.io/icon/favicon-196x196.png
-      descr: 快速、简洁且高效的静态博客框架。
+    - name: 马斯克
+      link: https://wjjpku.github.io
+      avatar: /img/headelephant.jpg
+      descr: 赛博火星邻居，临时停靠在本站。
+      tag: Cyber
+      color: speed
+    - name: 黄仁勋
+      link: https://wjjpku.github.io
+      avatar: /img/headelephant.jpg
+      descr: 赛博 GPU 朋友，临时共享这条友链。
+      tag: Cyber
+      color: speed
+    - name: 梁文锋
+      link: https://wjjpku.github.io
+      avatar: /img/headelephant.jpg
+      descr: 赛博开源同路人，临时指向本站首页。
+      tag: Cyber
+      color: speed
