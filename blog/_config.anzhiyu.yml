@@ -1260,6 +1260,7 @@ inject:
     # - <link rel="stylesheet" href="/css/xxx.css">
     - <link rel="stylesheet" href="/css/friends.css">
     - <link rel="stylesheet" href="/css/nav.css">
+    - <link rel="stylesheet" href="/css/projects.css">
 
   bottom:
     # 自定义js

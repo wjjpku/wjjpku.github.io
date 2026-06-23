@@ -1,0 +1,23 @@
+/* Page-level tuning for the native AnZhiYu equipment cards on Academic Works. */
+body[data-type="equipment"] #equipment .equipment-item-content-item {
+  width: calc(50% - 12px);
+}
+
+body[data-type="equipment"] #equipment .equipment-item-content-item-cover {
+  height: 240px;
+}
+
+body[data-type="equipment"] #equipment .equipment-item-content-item-image {
+  width: 320px;
+  max-width: 82%;
+}
+
+@media (max-width: 768px) {
+  body[data-type="equipment"] #equipment .equipment-item-content-item {
+    width: 100%;
+  }
+
+  body[data-type="equipment"] #equipment .equipment-item-content-item-cover {
+    height: 210px;
+  }
+}
