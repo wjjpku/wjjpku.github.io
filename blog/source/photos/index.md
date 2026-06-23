@@ -95,16 +95,6 @@ layout: page
   const leftCol = document.getElementById('left-column');
   const rightCol = document.getElementById('right-column');
 
-  function escapeHtml(value) {
-    return String(value || '').replace(/[&<>"']/g, char => ({
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#39;'
-    }[char]));
-  }
-
   function renderPhotos(photos) {
     leftCol.innerHTML = '';
     rightCol.innerHTML = '';
@@ -113,17 +103,38 @@ layout: page
       .forEach((photo, index) => {
         const box = document.createElement('div');
         box.className = 'photo-box';
-        const title = photo.title ? `<div class="photo-caption">${escapeHtml(photo.title)}</div>` : '';
-        const date = photo.date ? `<div class="photo-date">${escapeHtml(photo.date)}</div>` : '';
-        box.innerHTML = `
-          <a data-fancybox="gallery" href="${escapeHtml(photo.src)}">
-            <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt || photo.title || '生活照片')}" loading="${index < 2 ? 'eager' : 'lazy'}" decoding="async" fetchpriority="${index < 2 ? 'high' : 'low'}">
-          </a>
-          ${title}
-          ${date}
-        `;
+
+        const link = document.createElement('a');
+        link.dataset.fancybox = 'gallery';
+        link.href = photo.src;
+
+        const image = document.createElement('img');
+        image.src = photo.src;
+        image.alt = photo.alt || photo.title || '生活照片';
+        image.loading = index < 2 ? 'eager' : 'lazy';
+        image.decoding = 'async';
+        image.fetchPriority = index < 2 ? 'high' : 'low';
+        link.appendChild(image);
+        box.appendChild(link);
+
+        if (photo.title) {
+          const title = document.createElement('div');
+          title.className = 'photo-caption';
+          title.textContent = photo.title;
+          box.appendChild(title);
+        }
+        if (photo.date) {
+          const date = document.createElement('div');
+          date.className = 'photo-date';
+          date.textContent = photo.date;
+          box.appendChild(date);
+        }
+
         (index % 2 === 0 ? leftCol : rightCol).appendChild(box);
       });
+    if (window.Fancybox && Fancybox.bind) {
+      Fancybox.bind('[data-fancybox="gallery"]');
+    }
   }
 
   fetch('/photos/photos.json', { cache: 'no-store' })
