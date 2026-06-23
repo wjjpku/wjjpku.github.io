@@ -9,7 +9,7 @@ aside: false
 
 > Modelmid 研究“数学解答是谁写的”。它不是普通主题分类，而是从 LaTeX 习惯、公式密度、段落结构、逻辑连接和证明语气中识别人类与大模型的写作指纹。
 
-{% link Modelmid 代码仓库, GitHub / wjjpku, https://github.com/wjjpku/Modelmid, https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png %}
+{% link Modelmid 代码仓库, GitHub / wjjpku, https://github.com/wjjpku/Modelmid %}
 
 ## 项目概览
 
@@ -18,6 +18,13 @@ aside: false
 它最有意思的地方在于：数学文本不是普通自然语言。公式、换行、证明组织方式、LaTeX 环境、逻辑词和段落节奏，本身就是模型风格的一部分。
 
 {% image https://raw.githubusercontent.com/wjjpku/Modelmid/main/docs/figures/gpt_augmented/pca_clusters_2d.png, alt=不同来源数学解答在特征空间中的 PCA 聚类, width=100% %}
+
+{% mermaid %}
+flowchart LR
+  A["同题多来源解答"] --> B["结构与 LaTeX 特征"]
+  B --> C["传统 ML 与端到端模型"]
+  C --> D["跨分布与对抗评估"]
+{% endmermaid %}
 
 ## 工作流
 
@@ -101,4 +108,4 @@ GPT-4.1-mini 迭代对抗实验中，数据驱动 prompt 优化在第 5 轮达�
 - 对抗实验：`iterative_adversarial_experiment/`
 - 主要脚本：`scripts/model_training/`, `scripts/visualization/`
 
-{% btn https://github.com/wjjpku/Modelmid, 查看 README 与代码, anzhiyufont anzhiyu-icon-arrow-right, block center %}
+{% link 查看 README 与代码, GitHub / Modelmid, https://github.com/wjjpku/Modelmid %}

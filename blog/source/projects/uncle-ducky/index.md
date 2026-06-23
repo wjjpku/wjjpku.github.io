@@ -9,13 +9,21 @@ aside: false
 
 > 鸭腿叔叔是一个聊天式经营小游戏。玩家不是在传统面板里点按钮，而是在微信群、供应商私聊、家人提醒、平台通知和舆论截图之间回复消息；每一次回复都会改变收益、风险和流量。
 
-{% link 鸭腿叔叔代码仓库, GitHub / wjjpku, https://github.com/wjjpku/UncleDucky, https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png %}
+{% link 鸭腿叔叔代码仓库, GitHub / wjjpku, https://github.com/wjjpku/UncleDucky %}
 
 ## 项目概览
 
 这个项目把微信聊天框当作游戏机制本身。玩家以“鸭腿叔叔”的身份经营校园烤腿生意，面对不断冒出的红点：供应商催你选货，群聊催你解释，家人提醒你别越线，平台和监管又把前面的选择串起来。
 
 {% image https://raw.githubusercontent.com/wjjpku/UncleDucky/main/assets/duck-leg-uncle-avatar.png, alt=鸭腿叔叔玩家头像, width=260px %}
+
+{% mermaid %}
+flowchart LR
+  A["聊天消息"] --> B["玩家选择"]
+  B --> C["经营状态更新"]
+  C --> D["群聊、平台与家人反馈"]
+  D --> A
+{% endmermaid %}
 
 ## 交互机制
 
@@ -80,4 +88,4 @@ aside: false
 - `applyOverduePressure` / `applyContinuousPressure`：处理未读红点和时间压力。
 - `renderBanners` / `renderConversation` / `renderEnding`：渲染聊天列表、对话和结局。
 
-{% btn https://github.com/wjjpku/UncleDucky, 查看 README 与代码, anzhiyufont anzhiyu-icon-arrow-right, block center %}
+{% link 查看 README 与代码, GitHub / UncleDucky, https://github.com/wjjpku/UncleDucky %}

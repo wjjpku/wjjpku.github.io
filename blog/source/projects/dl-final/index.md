@@ -5,11 +5,12 @@ layout: page
 description: 从 cosine loss curve 中识别可迁移学习率响应，并迁移到 WSD-family 学习率计划。
 comments: false
 aside: false
+mathjax: true
 ---
 
 > DLfinal 的核心问题是：如果只知道 source cosine 训练损失曲线和 target WSD-family 学习率计划，能不能在不读取 target WSD loss 的情况下，预测 WSD 曲线相对 MPL baseline 的系统性偏移？
 
-{% link DLfinal 代码仓库, GitHub / wjjpku, https://github.com/wjjpku/DL-final, https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png %}
+{% link DLfinal 代码仓库, GitHub / wjjpku, https://github.com/wjjpku/DL-final %}
 
 ## 项目概览
 
@@ -28,11 +29,19 @@ MPL 已经能很好地拟合公开训练损失曲线，但在 WSD 学习率计�
 
 部署时使用的预测器非常低容量：
 
-```text
-L_hat_s(t) = L_MPL,s(t) + kappa_hat_s * phi_{lambda_s,s}(t)
-```
+$$
+\hat L_s(t)=L_{\mathrm{MPL},s}(t)+\hat\kappa_s\phi_{\lambda_s,s}(t)
+$$
 
 其中 `kappa_hat_s` 只从 source cosine residual 中估计；`phi` 只由 target learning-rate schedule 构造；target WSD loss 只用于最后评估和 oracle 诊断。
+
+{% mermaid %}
+flowchart LR
+  A["source cosine residual"] --> B["投影去除 MPL-LD 漂移"]
+  B --> C["估计 kappa"]
+  C --> D["迁移到 target WSD schedule"]
+  D --> E["离线评估 MAE 与 oracle 相关性"]
+{% endmermaid %}
 
 {% tabs dlfinal, 1 %}
 <!-- tab 识别步骤 -->
@@ -86,4 +95,4 @@ L_hat_s(t) = L_MPL,s(t) + kappa_hat_s * phi_{lambda_s,s}(t)
 - 复现说明：`REPRODUCIBILITY.md`
 - 数据边界：`DATA_MANIFEST.md`
 
-{% btn https://github.com/wjjpku/DL-final, 查看 README 与代码, anzhiyufont anzhiyu-icon-arrow-right, block center %}
+{% link 查看 README 与代码, GitHub / DL-final, https://github.com/wjjpku/DL-final %}

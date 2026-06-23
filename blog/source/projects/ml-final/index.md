@@ -5,21 +5,29 @@ layout: page
 description: 在小型算法数据集上复现和扩展 grokking，比较模型架构、训练比例与优化设置。
 comments: false
 aside: false
+mathjax: true
 ---
 
 > MLfinal 围绕 grokking 现象展开：模型先把训练集拟合到很高准确率，验证集却长期不动；继续训练很多步后，验证准确率突然上升。项目把模运算、S5 群运算和 K 元求和写成短序列预测任务，观察模型是否真的学到了代数结构。
 
-{% link MLfinal 代码仓库, GitHub / wjjpku, https://github.com/wjjpku/ML-final, https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png %}
+{% link MLfinal 代码仓库, GitHub / wjjpku, https://github.com/wjjpku/ML-final %}
 
 ## 项目概览
 
 每个样本都被写成类似下面的短序列：
 
-```text
-<x> <op> <y> <=> <x op y>
-```
+$$
+x\ \mathrm{op}\ y \Rightarrow x\ \mathrm{op}\ y
+$$
 
 训练时只监督最后一个答案 token。这样做的好处是任务非常干净：模型不是在学自然语言，而是在从离散符号样本中恢复隐藏的运算结构。
+
+{% mermaid %}
+flowchart LR
+  A["构造代数任务"] --> B["训练短序列模型"]
+  B --> C["跟踪训练与验证曲线"]
+  C --> D["比较架构、正则与训练比例"]
+{% endmermaid %}
 
 {% image https://raw.githubusercontent.com/wjjpku/ML-final/main/assets/grokking_accuracy_curves.png, alt=不同训练比例下训练与验证准确率曲线, width=100% %}
 
@@ -115,4 +123,4 @@ python train.py --architecture gru
 - 项目报告：`sample-1(2).pdf`
 - 代表性曲线图：`assets/grokking_accuracy_curves.png`
 
-{% btn https://github.com/wjjpku/ML-final, 查看 README 与代码, anzhiyufont anzhiyu-icon-arrow-right, block center %}
+{% link 查看 README 与代码, GitHub / ML-final, https://github.com/wjjpku/ML-final %}
