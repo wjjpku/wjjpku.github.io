@@ -2,7 +2,7 @@
 import http from "node:http";
 import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -78,6 +78,56 @@ function mimeExt(mime) {
   return map[mime] || "";
 }
 
+function uniqueCandidate(targetDir, baseName, ext) {
+  let candidate = `${baseName}${ext}`;
+  let counter = 2;
+  while (existsSync(path.join(targetDir, candidate))) {
+    candidate = `${baseName}-${counter}${ext}`;
+    counter += 1;
+  }
+  return {
+    candidate,
+    fullPath: path.join(targetDir, candidate)
+  };
+}
+
+function runProcess(command, args) {
+  return new Promise(resolve => {
+    const child = spawn(command, args);
+    let output = "";
+    child.stdout.on("data", chunk => { output += chunk.toString(); });
+    child.stderr.on("data", chunk => { output += chunk.toString(); });
+    child.on("error", error => resolve({ code: 1, output: error.message }));
+    child.on("close", code => resolve({ code, output }));
+  });
+}
+
+let cwebpAvailable;
+
+async function canUseCwebp() {
+  if (cwebpAvailable !== undefined) return cwebpAvailable;
+  cwebpAvailable = (await runProcess("cwebp", ["-version"])).code === 0;
+  return cwebpAvailable;
+}
+
+async function imageSize(filePath) {
+  const result = await runProcess("sips", ["-g", "pixelWidth", "-g", "pixelHeight", filePath]);
+  if (result.code !== 0) return null;
+  const width = Number(result.output.match(/pixelWidth:\s*(\d+)/)?.[1]);
+  const height = Number(result.output.match(/pixelHeight:\s*(\d+)/)?.[1]);
+  if (!width || !height) return null;
+  return { width, height };
+}
+
+function scaledSize(size, maxEdge) {
+  if (!size) return { width: maxEdge, height: 0 };
+  const scale = Math.min(1, maxEdge / Math.max(size.width, size.height));
+  return {
+    width: Math.max(1, Math.round(size.width * scale)),
+    height: Math.max(1, Math.round(size.height * scale))
+  };
+}
+
 function decodeDataUrl(dataUrl) {
   const match = String(dataUrl || "").match(/^data:([^;,]+)?;base64,(.*)$/);
   if (!match) throw Object.assign(new Error("文件数据格式不正确。"), { status: 400 });
@@ -117,7 +167,34 @@ async function sendStatic(response, filePath, contentType) {
   response.end(data);
 }
 
-async function saveUploads(files, targetDir, publicPrefix) {
+async function optimizeUpload(buffer, mime, targetDir, baseName, sourceExt, options) {
+  const shouldOptimize = options.optimize !== false
+    && mime !== "image/gif"
+    && mime !== "image/svg+xml"
+    && await canUseCwebp();
+  if (!shouldOptimize) return null;
+
+  const { candidate, fullPath } = uniqueCandidate(targetDir, baseName, ".webp");
+  const tempPath = path.join(targetDir, `.${baseName}-${Date.now()}-${Math.random().toString(16).slice(2)}${sourceExt}`);
+  await writeFile(tempPath, buffer);
+  const size = scaledSize(await imageSize(tempPath), options.maxEdge || 1800);
+  const result = await runProcess("cwebp", [
+    "-quiet",
+    "-q",
+    String(options.quality || 82),
+    "-resize",
+    String(size.width),
+    String(size.height),
+    tempPath,
+    "-o",
+    fullPath
+  ]);
+  await rm(tempPath, { force: true });
+  if (result.code !== 0 || !existsSync(fullPath)) return null;
+  return { candidate, fullPath };
+}
+
+async function saveUploads(files, targetDir, publicPrefix, options = {}) {
   if (!files.length) return [];
   await mkdir(targetDir, { recursive: true });
   const saved = [];
@@ -130,17 +207,14 @@ async function saveUploads(files, targetDir, publicPrefix) {
     const original = safeFileName(file.name || `image-${index + 1}${mimeExt(mime)}`);
     const parsed = path.parse(original);
     const ext = parsed.ext || mimeExt(mime) || ".bin";
-    let candidate = `${parsed.name}${ext}`;
-    let counter = 2;
-    while (existsSync(path.join(targetDir, candidate))) {
-      candidate = `${parsed.name}-${counter}${ext}`;
-      counter += 1;
+    let optimized = await optimizeUpload(buffer, mime, targetDir, parsed.name, ext, options);
+    if (!optimized) {
+      optimized = uniqueCandidate(targetDir, parsed.name, ext);
+      await writeFile(optimized.fullPath, buffer);
     }
-    const fullPath = path.join(targetDir, candidate);
-    await writeFile(fullPath, buffer);
     saved.push({
-      filename: candidate,
-      publicPath: `${publicPrefix}/${candidate}`,
+      filename: optimized.candidate,
+      publicPath: `${publicPrefix}/${optimized.candidate}`,
       alt: file.alt || parsed.name
     });
   }
@@ -170,7 +244,8 @@ async function createPost(payload) {
   const images = await saveUploads(
     payload.images || [],
     path.join(sourceRoot, "post_photos", slug),
-    `/post_photos/${slug}`
+    `/post_photos/${slug}`,
+    { maxEdge: 1800, quality: 84 }
   );
   const tags = splitList(payload.tags);
   if (kind === "note" && !tags.includes("笔记")) tags.unshift("笔记");
@@ -206,7 +281,10 @@ async function addPhotos(payload) {
   const date = payload.date || today();
   const caption = String(payload.caption || "").trim();
   const alt = String(payload.alt || caption || "生活照片").trim();
-  const images = await saveUploads(files, path.join(sourceRoot, "photos"), "/photos");
+  const images = await saveUploads(files, path.join(sourceRoot, "photos"), "/photos", {
+    maxEdge: 1800,
+    quality: 82
+  });
   const jsonPath = path.join(sourceRoot, "photos", "photos.json");
   const current = JSON.parse(await readFile(jsonPath, "utf8"));
   const entries = images.map(image => ({

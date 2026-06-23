@@ -117,7 +117,7 @@ layout: page
         const date = photo.date ? `<div class="photo-date">${escapeHtml(photo.date)}</div>` : '';
         box.innerHTML = `
           <a data-fancybox="gallery" href="${escapeHtml(photo.src)}">
-            <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt || photo.title || '生活照片')}">
+            <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt || photo.title || '生活照片')}" loading="${index < 2 ? 'eager' : 'lazy'}" decoding="async" fetchpriority="${index < 2 ? 'high' : 'low'}">
           </a>
           ${title}
           ${date}
