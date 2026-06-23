@@ -6,89 +6,227 @@
   <title>Author Studio</title>
   <style>
     :root {
-      color-scheme: light dark;
-      --bg: #f6f7fb;
-      --panel: #ffffff;
-      --text: #1f2937;
-      --muted: #64748b;
-      --line: #d8dee9;
-      --main: #2563eb;
-      --soft: #eef4ff;
+      color-scheme: light;
+      --bg: #f3f0ea;
+      --panel: #fffdf8;
+      --panel-strong: #f8f1e6;
+      --text: #23201b;
+      --muted: #706b62;
+      --line: #ded5c8;
+      --ink: #1f2b24;
+      --accent: #3f6f56;
+      --accent-dark: #2f5943;
+      --accent-soft: #e7efe9;
+      --warn: #a16207;
+      --shadow: 0 16px 40px rgba(48, 39, 25, 0.11);
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      min-width: 320px;
+      background: var(--bg);
+    }
+
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
-      background: var(--bg);
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
       color: var(--text);
-    }
-
-    .shell {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 28px 20px 48px;
-    }
-
-    header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      margin: 0 0 6px;
-      font-size: 28px;
+      background:
+        linear-gradient(180deg, rgba(255, 253, 248, 0.9) 0, rgba(243, 240, 234, 0) 320px),
+        var(--bg);
       letter-spacing: 0;
     }
 
-    p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.6;
+    button,
+    input,
+    textarea {
+      font: inherit;
+      letter-spacing: 0;
     }
 
-    .tabs {
-      display: flex;
-      gap: 8px;
-      margin: 18px 0;
-      flex-wrap: wrap;
+    button {
+      user-select: none;
     }
 
-    .tab {
-      border: 1px solid var(--line);
-      background: var(--panel);
-      color: var(--text);
-      padding: 10px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 650;
+    .shell {
+      width: min(1240px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 48px;
     }
 
-    .tab.active {
-      border-color: var(--main);
-      background: var(--soft);
-      color: var(--main);
-    }
-
-    .grid {
+    .topbar {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 360px;
-      gap: 18px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 720;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #3f8f5f;
+      box-shadow: 0 0 0 4px rgba(63, 143, 95, 0.13);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.05;
+      font-weight: 780;
+    }
+
+    .subtitle {
+      max-width: 700px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+      overflow-wrap: anywhere;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: var(--ink);
+      background: var(--panel);
+      cursor: pointer;
+      font-weight: 720;
+      white-space: nowrap;
+      transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease, color 0.16s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+    }
+
+    .button.primary {
+      color: #fffdf8;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .button.primary:hover {
+      background: var(--accent-dark);
+    }
+
+    .button:disabled {
+      cursor: wait;
+      opacity: 0.7;
+      transform: none;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 232px minmax(0, 1fr) 360px;
+      gap: 16px;
       align-items: start;
     }
 
-    .panel {
-      background: var(--panel);
+    .rail,
+    .panel,
+    .console {
       border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 18px;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, 0.92);
+      box-shadow: var(--shadow);
+    }
+
+    .rail {
+      position: sticky;
+      top: 18px;
+      padding: 10px;
+    }
+
+    .tab {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      min-height: 58px;
+      margin: 0;
+      border: 0;
+      border-radius: 8px;
+      padding: 10px;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .tab + .tab {
+      margin-top: 4px;
+    }
+
+    .tab-mark {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      font-size: 14px;
+      font-weight: 780;
+    }
+
+    .tab strong {
+      display: block;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .tab-copy {
+      display: block;
+      margin-top: 3px;
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .tab.active {
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+    }
+
+    .tab.active .tab-mark {
+      color: #fffdf8;
+      background: var(--accent);
+    }
+
+    .panel {
+      min-width: 0;
+      padding: 20px;
     }
 
     .form {
@@ -97,6 +235,40 @@
 
     .form.active {
       display: block;
+    }
+
+    .form-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .form-title {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .form-note {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 10px;
+      color: var(--muted);
+      background: var(--panel-strong);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
     }
 
     .row {
@@ -108,15 +280,9 @@
     label {
       display: block;
       margin: 0 0 14px;
-      font-weight: 650;
-    }
-
-    .hint {
-      display: block;
-      margin-top: 4px;
-      color: var(--muted);
+      color: var(--ink);
       font-size: 13px;
-      font-weight: 400;
+      font-weight: 740;
     }
 
     input,
@@ -125,102 +291,283 @@
       margin-top: 7px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      padding: 10px 11px;
-      font: inherit;
+      padding: 11px 12px;
       color: var(--text);
-      background: color-mix(in srgb, var(--panel) 92%, var(--bg));
+      background: rgba(255, 253, 248, 0.8);
+      outline: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      background: #fffdf8;
+      box-shadow: 0 0 0 4px rgba(63, 111, 86, 0.13);
     }
 
     textarea {
-      min-height: 320px;
+      min-height: 360px;
       resize: vertical;
-      line-height: 1.65;
+      line-height: 1.72;
     }
 
-    input[type="file"] {
-      padding: 9px;
-    }
-
-    button.primary,
-    button.secondary {
-      border: 0;
+    .dropzone {
+      display: grid;
+      gap: 12px;
+      margin: 7px 0 14px;
+      border: 1px dashed color-mix(in srgb, var(--accent) 45%, var(--line));
       border-radius: 8px;
-      padding: 11px 14px;
-      font: inherit;
-      font-weight: 700;
+      padding: 16px;
+      background: color-mix(in srgb, var(--accent-soft) 48%, var(--panel));
       cursor: pointer;
+      transition: border-color 0.16s ease, background 0.16s ease, transform 0.16s ease;
     }
 
-    button.primary {
-      background: var(--main);
-      color: white;
+    .dropzone:hover,
+    .dropzone.dragover {
+      border-color: var(--accent);
+      background: color-mix(in srgb, var(--accent-soft) 76%, var(--panel));
+      transform: translateY(-1px);
     }
 
-    button.secondary {
-      background: var(--soft);
-      color: var(--main);
-      border: 1px solid color-mix(in srgb, var(--main) 35%, var(--line));
+    .dropzone-main {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
     }
 
-    .actions {
-      display: flex;
+    .drop-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      color: #fffdf8;
+      background: var(--accent);
+      font-weight: 780;
+    }
+
+    .drop-title {
+      display: block;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 760;
+    }
+
+    .drop-meta {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 520;
+    }
+
+    .dropzone input[type="file"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(86px, 1fr));
       gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
+    }
+
+    .preview {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .preview img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: var(--panel-strong);
+    }
+
+    .preview span {
+      display: block;
+      overflow: hidden;
+      padding: 7px 8px;
+      color: var(--muted);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 620;
+    }
+
+    .form-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .console {
+      position: sticky;
+      top: 18px;
+      overflow: hidden;
+    }
+
+    .console-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel-strong);
+    }
+
+    .console-title {
+      font-size: 14px;
+      font-weight: 760;
+    }
+
+    .console-state {
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 720;
     }
 
     pre {
+      min-height: 470px;
+      max-height: 640px;
+      margin: 0;
+      overflow: auto;
+      padding: 16px;
+      color: #e9f1ea;
+      background: #17201a;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.58;
       white-space: pre-wrap;
       word-break: break-word;
-      background: #101827;
-      color: #dbeafe;
-      min-height: 340px;
-      max-height: 560px;
-      overflow: auto;
-      padding: 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      line-height: 1.5;
     }
 
-    @media (max-width: 860px) {
-      .grid,
-      .row {
+    @media (max-width: 1120px) {
+      .workspace {
+        grid-template-columns: 190px minmax(0, 1fr);
+      }
+
+      .console {
+        grid-column: 1 / -1;
+        position: static;
+      }
+
+      pre {
+        min-height: 260px;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .shell {
+        width: min(calc(100vw - 22px), 680px);
+        padding-top: 18px;
+      }
+
+      .topbar,
+      .workspace,
+      .row,
+      .dropzone-main {
         grid-template-columns: 1fr;
       }
 
-      header {
-        align-items: flex-start;
+      .actions {
+        justify-content: flex-start;
+      }
+
+      .rail,
+      .console {
+        position: static;
+      }
+
+      .rail {
+        display: flex;
+        gap: 6px;
+        max-width: 100%;
+        overflow: hidden;
+      }
+
+      .tab {
+        flex: 1 1 0;
+        width: auto;
+        min-width: 0;
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .tab-copy {
+        display: none;
+      }
+
+      .form-head,
+      .form-footer {
         flex-direction: column;
+        align-items: stretch;
+      }
+
+      textarea {
+        min-height: 300px;
       }
     }
   </style>
 </head>
 <body>
   <div class="shell">
-    <header>
+    <header class="topbar">
       <div>
+        <div class="eyebrow"><span class="status-dot"></span><span>Local Publishing Desk</span></div>
         <h1>Author Studio</h1>
-        <p>本地写作入口：生成感想、笔记，或把生活照片加入照片墙。它只写入本机仓库文件，不会暴露线上写入接口。</p>
+        <p class="subtitle">写最近的想法，整理笔记，或者把生活照片放进照片墙。所有内容只写入本机 Hexo 仓库。</p>
       </div>
       <div class="actions">
-        <button class="secondary" data-run="build">构建检查</button>
-        <button class="secondary" data-run="deploy">部署网站</button>
+        <button class="button" data-run="build" type="button">构建检查</button>
+        <button class="button primary" data-run="deploy" type="button">部署网站</button>
       </div>
     </header>
 
-    <div class="tabs">
-      <button class="tab active" data-tab="thought">最近感想</button>
-      <button class="tab" data-tab="note">笔记</button>
-      <button class="tab" data-tab="photos">生活照片</button>
-    </div>
+    <div class="workspace">
+      <nav class="rail" aria-label="内容类型">
+        <button class="tab active" data-tab="thought" type="button">
+          <span class="tab-mark">T</span>
+          <span class="tab-copy"><strong>最近感想</strong><span>日常、短文、随笔</span></span>
+        </button>
+        <button class="tab" data-tab="note" type="button">
+          <span class="tab-mark">N</span>
+          <span class="tab-copy"><strong>笔记</strong><span>课程、阅读、整理</span></span>
+        </button>
+        <button class="tab" data-tab="photos" type="button">
+          <span class="tab-mark">P</span>
+          <span class="tab-copy"><strong>生活照片</strong><span>只更新照片墙</span></span>
+        </button>
+      </nav>
 
-    <div class="grid">
       <main class="panel">
         <form class="form active" id="thought-form">
+          <div class="form-head">
+            <div>
+              <h2 class="form-title">最近感想</h2>
+              <p class="form-note">保存为普通 Hexo 文章，图片会用 Markdown 插入文首。</p>
+            </div>
+            <span class="pill">source/_posts</span>
+          </div>
+
           <div class="row">
             <label>标题
-              <input name="title" required placeholder="例如：今天在燕园想到的一件事">
+              <input name="title" required placeholder="今天在燕园想到的一件事">
             </label>
             <label>日期
               <input name="date" type="datetime-local">
@@ -228,8 +575,7 @@
           </div>
           <div class="row">
             <label>文件名
-              <input name="slug" placeholder="留空则自动用标题生成">
-              <span class="hint">会保存到 source/_posts/文件名.md</span>
+              <input name="slug" placeholder="留空则自动生成">
             </label>
             <label>标签
               <input name="tags" value="随笔" placeholder="用逗号分隔">
@@ -238,20 +584,41 @@
           <label>分类
             <input name="categories" value="日常" placeholder="用逗号分隔">
           </label>
-          <label>图片
+
+          <label>图片</label>
+          <div class="dropzone" data-dropzone>
+            <div class="dropzone-main">
+              <span class="drop-icon">IMG</span>
+              <span>
+                <span class="drop-title">拖拽图片到这里，或点击选择</span>
+                <span class="drop-meta" data-file-summary>第一张会作为文章封面</span>
+              </span>
+              <span class="pill">多图</span>
+            </div>
             <input name="images" type="file" accept="image/*" multiple>
-            <span class="hint">第一张会自动作为封面，图片会以普通 Markdown 插入文首。</span>
-          </label>
+            <div class="preview-grid" data-preview></div>
+          </div>
+
           <label>正文
             <textarea name="content" required placeholder="直接写 Markdown。"></textarea>
           </label>
-          <button class="primary" type="submit">保存感想文章</button>
+          <div class="form-footer">
+            <button class="button primary" type="submit">保存感想文章</button>
+          </div>
         </form>
 
         <form class="form" id="note-form">
+          <div class="form-head">
+            <div>
+              <h2 class="form-title">笔记</h2>
+              <p class="form-note">用于课程、阅读和阶段性整理，也会保存为 Hexo 文章。</p>
+            </div>
+            <span class="pill">source/_posts</span>
+          </div>
+
           <div class="row">
             <label>标题
-              <input name="title" required placeholder="例如：实分析的一点整理">
+              <input name="title" required placeholder="实分析的一点整理">
             </label>
             <label>日期
               <input name="date" type="datetime-local">
@@ -259,7 +626,7 @@
           </div>
           <div class="row">
             <label>文件名
-              <input name="slug" placeholder="留空则自动用标题生成">
+              <input name="slug" placeholder="留空则自动生成">
             </label>
             <label>标签
               <input name="tags" value="笔记" placeholder="用逗号分隔">
@@ -268,37 +635,75 @@
           <label>分类
             <input name="categories" value="笔记" placeholder="用逗号分隔">
           </label>
-          <label>图片
+
+          <label>图片</label>
+          <div class="dropzone" data-dropzone>
+            <div class="dropzone-main">
+              <span class="drop-icon">IMG</span>
+              <span>
+                <span class="drop-title">拖拽图片到这里，或点击选择</span>
+                <span class="drop-meta" data-file-summary>可空，适合插入截图或板书</span>
+              </span>
+              <span class="pill">多图</span>
+            </div>
             <input name="images" type="file" accept="image/*" multiple>
-          </label>
+            <div class="preview-grid" data-preview></div>
+          </div>
+
           <label>正文
             <textarea name="content" required placeholder="直接写 Markdown，可以放公式、列表、代码块。"></textarea>
           </label>
-          <button class="primary" type="submit">保存笔记文章</button>
+          <div class="form-footer">
+            <button class="button primary" type="submit">保存笔记文章</button>
+          </div>
         </form>
 
         <form class="form" id="photos-form">
+          <div class="form-head">
+            <div>
+              <h2 class="form-title">生活照片</h2>
+              <p class="form-note">只更新照片墙数据，不创建文章，也不生成 note。</p>
+            </div>
+            <span class="pill">source/photos</span>
+          </div>
+
           <div class="row">
             <label>日期
               <input name="date" type="date">
             </label>
             <label>照片说明
-              <input name="caption" placeholder="可空；照片不会生成文章或 note">
+              <input name="caption" placeholder="可空">
             </label>
           </div>
           <label>替代文本
-            <input name="alt" placeholder="可空；用于图片 alt">
+            <input name="alt" placeholder="可空">
           </label>
-          <label>照片
+
+          <label>照片</label>
+          <div class="dropzone" data-dropzone>
+            <div class="dropzone-main">
+              <span class="drop-icon">IMG</span>
+              <span>
+                <span class="drop-title">拖拽生活照片到这里，或点击选择</span>
+                <span class="drop-meta" data-file-summary>会写入照片墙 JSON</span>
+              </span>
+              <span class="pill">多图</span>
+            </div>
             <input name="images" type="file" accept="image/*" multiple required>
-            <span class="hint">只加入 source/photos/photos.json 和 source/photos/，不会创建 Markdown 文章。</span>
-          </label>
-          <button class="primary" type="submit">添加到生活照片</button>
+            <div class="preview-grid" data-preview></div>
+          </div>
+
+          <div class="form-footer">
+            <button class="button primary" type="submit">添加到生活照片</button>
+          </div>
         </form>
       </main>
 
-      <aside class="panel">
-        <p>操作日志</p>
+      <aside class="console">
+        <div class="console-head">
+          <span class="console-title">操作日志</span>
+          <span class="console-state" id="console-state">Ready</span>
+        </div>
         <pre id="log">等待操作...</pre>
       </aside>
     </div>
@@ -306,9 +711,21 @@
 
   <script>
     const logEl = document.getElementById('log');
+    const stateEl = document.getElementById('console-state');
 
-    function log(message) {
+    function setState(value) {
+      stateEl.textContent = value;
+    }
+
+    function log(message, state = 'Ready') {
+      setState(state);
       logEl.textContent = typeof message === 'string' ? message : JSON.stringify(message, null, 2);
+    }
+
+    function setBusy(isBusy) {
+      document.querySelectorAll('button').forEach(button => {
+        button.disabled = isBusy;
+      });
     }
 
     document.querySelectorAll('.tab').forEach(button => {
@@ -318,6 +735,64 @@
         button.classList.add('active');
         document.getElementById(`${button.dataset.tab}-form`).classList.add('active');
       });
+    });
+
+    function mergeFiles(input, incomingFiles) {
+      const transfer = new DataTransfer();
+      [...input.files, ...incomingFiles]
+        .filter(file => file.type.startsWith('image/'))
+        .forEach(file => transfer.items.add(file));
+      input.files = transfer.files;
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
+    function updatePreview(input) {
+      const zone = input.closest('[data-dropzone]');
+      const summary = zone.querySelector('[data-file-summary]');
+      const preview = zone.querySelector('[data-preview]');
+      const files = [...input.files];
+      summary.textContent = files.length ? `已选择 ${files.length} 张图片` : summary.dataset.defaultText;
+      preview.innerHTML = '';
+      files.slice(0, 12).forEach(file => {
+        const item = document.createElement('div');
+        item.className = 'preview';
+        const image = document.createElement('img');
+        image.src = URL.createObjectURL(file);
+        image.onload = () => URL.revokeObjectURL(image.src);
+        image.alt = file.name;
+        const name = document.createElement('span');
+        name.textContent = file.name;
+        item.append(image, name);
+        preview.appendChild(item);
+      });
+    }
+
+    document.querySelectorAll('[data-dropzone]').forEach(zone => {
+      const input = zone.querySelector('input[type="file"]');
+      const summary = zone.querySelector('[data-file-summary]');
+      summary.dataset.defaultText = summary.textContent;
+
+      zone.addEventListener('click', event => {
+        if (event.target.closest('.preview')) return;
+        input.click();
+      });
+
+      zone.addEventListener('dragover', event => {
+        event.preventDefault();
+        zone.classList.add('dragover');
+      });
+
+      zone.addEventListener('dragleave', event => {
+        if (!zone.contains(event.relatedTarget)) zone.classList.remove('dragover');
+      });
+
+      zone.addEventListener('drop', event => {
+        event.preventDefault();
+        zone.classList.remove('dragover');
+        mergeFiles(input, [...event.dataTransfer.files]);
+      });
+
+      input.addEventListener('change', () => updatePreview(input));
     });
 
     async function fileToData(file) {
@@ -344,6 +819,13 @@
       return data;
     }
 
+    function resetUploads(form) {
+      form.querySelectorAll('input[type="file"]').forEach(input => {
+        input.value = '';
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    }
+
     async function submitPost(event, kind) {
       event.preventDefault();
       const form = event.currentTarget;
@@ -357,16 +839,22 @@
         content: form.content.value,
         images: await files(form.images)
       };
-      log('正在保存...');
-      const result = await postJson('/api/post', payload);
-      log(result);
-      form.reset();
-      if (kind === 'thought') {
-        form.tags.value = '随笔';
-        form.categories.value = '日常';
-      } else {
-        form.tags.value = '笔记';
-        form.categories.value = '笔记';
+      setBusy(true);
+      log('正在保存...', 'Saving');
+      try {
+        const result = await postJson('/api/post', payload);
+        log(result, 'Saved');
+        form.reset();
+        if (kind === 'thought') {
+          form.tags.value = '随笔';
+          form.categories.value = '日常';
+        } else {
+          form.tags.value = '笔记';
+          form.categories.value = '笔记';
+        }
+        resetUploads(form);
+      } finally {
+        setBusy(false);
       }
     }
 
@@ -379,25 +867,51 @@
         alt: form.alt.value,
         images: await files(form.images)
       };
-      log('正在保存照片...');
-      const result = await postJson('/api/photos', payload);
-      log(result);
-      form.reset();
+      setBusy(true);
+      log('正在保存照片...', 'Saving');
+      try {
+        const result = await postJson('/api/photos', payload);
+        log(result, 'Saved');
+        form.reset();
+        resetUploads(form);
+      } finally {
+        setBusy(false);
+      }
     }
 
-    document.getElementById('thought-form').addEventListener('submit', event => submitPost(event, 'thought').catch(error => log(error.message)));
-    document.getElementById('note-form').addEventListener('submit', event => submitPost(event, 'note').catch(error => log(error.message)));
-    document.getElementById('photos-form').addEventListener('submit', event => submitPhotos(event).catch(error => log(error.message)));
+    document.getElementById('thought-form').addEventListener('submit', event => {
+      submitPost(event, 'thought').catch(error => {
+        setBusy(false);
+        log(error.message, 'Error');
+      });
+    });
+
+    document.getElementById('note-form').addEventListener('submit', event => {
+      submitPost(event, 'note').catch(error => {
+        setBusy(false);
+        log(error.message, 'Error');
+      });
+    });
+
+    document.getElementById('photos-form').addEventListener('submit', event => {
+      submitPhotos(event).catch(error => {
+        setBusy(false);
+        log(error.message, 'Error');
+      });
+    });
 
     document.querySelectorAll('[data-run]').forEach(button => {
       button.addEventListener('click', async () => {
         const action = button.dataset.run;
-        log(action === 'build' ? '正在构建检查...' : '正在部署...');
+        setBusy(true);
+        log(action === 'build' ? '正在构建检查...' : '正在部署...', action === 'build' ? 'Building' : 'Deploying');
         try {
           const result = await postJson('/api/run', { action });
-          log(result.result.output);
+          log(result.result.output, result.result.code === 0 ? 'Done' : 'Error');
         } catch (error) {
-          log(error.message);
+          log(error.message, 'Error');
+        } finally {
+          setBusy(false);
         }
       });
     });
