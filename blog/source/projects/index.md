@@ -1,5 +1,5 @@
 ---
-title: 学术工作
+title: 研究工作
 date: 2026-06-21 01:05:00
 layout: page
 type: equipment

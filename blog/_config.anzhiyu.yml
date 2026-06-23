@@ -4,7 +4,7 @@
 
 menu: # 主页最上面的
   Home: / || anzhiyu-icon-house-chimney
-  Academic Works: /projects/ || anzhiyu-icon-book-open
+  Research: /projects/ || anzhiyu-icon-book-open
   Friends: /link/ || anzhiyu-icon-link
   #  文章:
   #    隧道: https://generals.io || anzhiyu-icon-box-archive
@@ -40,7 +40,7 @@ nav:
           icon: /img/favicon.ico
     - title: Projects
       item:
-        - name: Academic Works
+        - name: Research
           link: /projects/
           icon: /img/favicon.ico
         - name: Friends
@@ -1059,11 +1059,11 @@ css_prefix: true
 home_top:
   enable: true # 开关
   timemode: date #date/updated
-  title: 学术工作
+  title: 研究工作
   subTitle: 项目与实验
   siteText: 机器学习 · 数学文本 · 交互作品
   random:
-    text: Academic Works
+    text: Research
     link: /projects/
   category:
     - name: Notes

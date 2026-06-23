@@ -28,20 +28,20 @@
 
     entries.forEach(entry => {
       entry.setAttribute("href", academicPath);
-      entry.setAttribute("title", "Academic Works");
+      entry.setAttribute("title", "Research");
       entry.onclick = goAcademic;
     });
 
     const bannerText = document.querySelector("#random-hover .bannerText");
     if (bannerText && !bannerText.dataset.academicText) {
       const arrow = bannerText.querySelector("i");
-      bannerText.textContent = "学术工作";
+      bannerText.textContent = "研究工作";
       if (arrow) bannerText.appendChild(arrow);
       bannerText.dataset.academicText = "true";
     }
 
     const menuText = document.querySelector("#menu-randomPost span");
-    if (menuText) menuText.textContent = "学术工作";
+    if (menuText) menuText.textContent = "研究工作";
   }
 
   bindAcademicEntry();

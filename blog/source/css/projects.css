@@ -1,4 +1,4 @@
-/* Page-level tuning for the native AnZhiYu equipment cards on Academic Works. */
+/* Page-level tuning for the native AnZhiYu equipment cards on Research. */
 body[data-type="equipment"] #equipment .equipment-item-content-item {
   width: calc(50% - 12px);
 }
