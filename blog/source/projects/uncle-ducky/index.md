@@ -2,50 +2,82 @@
 title: 鸭腿叔叔
 date: 2026-06-21 01:13:00
 layout: page
-description: 微信聊天框形式的虚构经营小游戏，用聊天界面承载多线叙事。
+description: 微信聊天框形式的虚构经营小游戏，用信息流和红点压力承载经营叙事。
 comments: false
 aside: false
 ---
 
-> 鸭腿叔叔是一个微信聊天框形式的虚构经营小游戏。它把经营决策、群聊信息、供应商变化、家人态度和舆论风险都塞进聊天界面里，让“读消息”本身成为玩法。
+> 鸭腿叔叔是一个聊天式经营小游戏。玩家不是在传统面板里点按钮，而是在微信群、供应商私聊、家人提醒、平台通知和舆论截图之间回复消息；每一次回复都会改变收益、风险和流量。
 
 {% link 鸭腿叔叔代码仓库, GitHub / wjjpku, https://github.com/wjjpku/UncleDucky, https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png %}
 
 ## 项目概览
 
-鸭腿叔叔是一个微信聊天框形式的虚构经营小游戏。玩家以“鸭腿叔叔”的视角经营校园烤腿生意，在群聊、供应商、家人、舆论和监管消息之间做选择。
+这个项目把微信聊天框当作游戏机制本身。玩家以“鸭腿叔叔”的身份经营校园烤腿生意，面对不断冒出的红点：供应商催你选货，群聊催你解释，家人提醒你别越线，平台和监管又把前面的选择串起来。
 
-它更像一个叙事界面实验：不是先做一个传统游戏界面，再往里面塞剧情，而是直接把聊天界面作为游戏机制本身。
+{% image https://raw.githubusercontent.com/wjjpku/UncleDucky/main/assets/duck-leg-uncle-avatar.png, alt=鸭腿叔叔玩家头像, width=260px %}
 
-## 视觉入口
-
-{% image https://raw.githubusercontent.com/wjjpku/UncleDucky/main/assets/duck-leg-uncle-avatar.png, alt=鸭腿叔叔玩家头像, width=220px %}
-
-{% folding orange, 聊天框为什么适合这个项目 %}
-
-聊天框天然适合多线信息流：  
-一个经营决策可能同时影响顾客反馈、供应商报价、家人态度和舆论风险。玩家不需要学习复杂操作，只要像读消息一样推进剧情。
-
-{% endfolding %}
+## 交互机制
 
 {% tabs uncleducky, 1 %}
-<!-- tab 文件结构 -->
+<!-- tab 状态系统 -->
 
-| 文件 | 作用 |
+游戏状态不是单一分数，而是多组互相牵制的指标：
+
+| 维度 | 指标 |
 | --- | --- |
-| `index.html` | 页面结构 |
-| `styles.css` | 聊天界面样式 |
-| `game.js` | 剧情、状态和交互逻辑 |
-| `assets/duck-leg-uncle-avatar.png` | 玩家头像 |
+| 收益 | cash, margin, cost, dailyExpense |
+| 风险 | documents, risk, conscience |
+| 流量 | heat, reputation, family |
+
+短期赚钱、票据合规、口碑和舆论会互相拉扯。
 
 <!-- endtab -->
-<!-- tab 可以继续扩展的方向 -->
+<!-- tab 时间压力 -->
 
-- 加入多结局路线，让关键选择影响后续分支。
-- 增加状态面板，例如资金、口碑、健康、监管风险。
-- 把聊天对象拆成更明确的角色线，形成更完整的互动小说结构。
+营业时间从 09:00 推进到 21:00。未读红点不会静止等待，未处理任务会持续带来压力。玩家回复太慢时，群聊猜测、截图和舆论会继续发酵。
+
+<!-- endtab -->
+<!-- tab 叙事记忆 -->
+
+游戏会记住关键选择，例如是否明示品类、是否接过灰色货源、是否退款、是否用公关话术处理舆论。这些 flag 会影响后续文本、群名变化和结局分析。
 
 <!-- endtab -->
 {% endtabs %}
 
-{% btn https://github.com/wjjpku/UncleDucky, 查看完整 README 与代码, anzhiyufont anzhiyu-icon-arrow-right, block center %}
+## 为什么用聊天框
+
+校园生意和舆论传播天然是信息流问题。聊天框可以同时承载：
+
+- 群聊热度和误解扩散
+- 供应商报价和货源风险
+- 家人提醒带来的道德压力
+- 平台、监管和截图带来的后果追踪
+
+玩家不需要学习复杂操作，只需要像日常读消息一样推进剧情；但每一句回复都在改写经营账本。
+
+{% folding orange, 我觉得这个形式有效的地方 %}
+
+聊天界面让“信息太多、必须回复、越拖越麻烦”的压力很自然地出现。它比传统经营面板更适合表现校园群聊、谣言、供应商话术和舆论连锁反应。这个项目最有意思的不是数值系统有多复杂，而是交互形式和叙事主题很贴。
+
+{% endfolding %}
+
+## 文件结构
+
+| 文件 | 作用 |
+| --- | --- |
+| `index.html` | 页面结构，包含开场弹窗、聊天面板、指标栏和设置面板。 |
+| `styles.css` | 微信式聊天界面、经营指标、设置抽屉和结局页样式。 |
+| `game.js` | 剧情数据、状态机、时间推进、选择效果和渲染逻辑。 |
+| `assets/duck-leg-uncle-avatar.png` | 玩家头像和项目主视觉。 |
+| `vercel.json` | 静态部署配置。 |
+
+## 代码入口
+
+- `initialState`：定义现金、口碑、良心、风险、票据、流量等初始状态。
+- `chapters`：定义 7 天经营剧情、聊天消息和选项。
+- `applyEffects`：根据选择更新经营指标。
+- `applyOverduePressure` / `applyContinuousPressure`：处理未读红点和时间压力。
+- `renderBanners` / `renderConversation` / `renderEnding`：渲染聊天列表、对话和结局。
+
+{% btn https://github.com/wjjpku/UncleDucky, 查看 README 与代码, anzhiyufont anzhiyu-icon-arrow-right, block center %}

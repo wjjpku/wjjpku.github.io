@@ -2,57 +2,117 @@
 title: MLfinal
 date: 2026-06-21 01:11:00
 layout: page
-description: 在二元运算表上训练小型模型，观察数学结构学习与泛化现象。
+description: 在小型算法数据集上复现和扩展 grokking，比较模型架构、训练比例与优化设置。
 comments: false
 aside: false
 ---
 
-> MLfinal 用二元运算表构造监督学习任务，观察小型 Transformer 如何从符号样本里学到隐藏代数结构。这个项目的重点不是单纯分类准确率，而是训练过程里“先记忆、后泛化”的现象。
+> MLfinal 围绕 grokking 现象展开：模型先把训练集拟合到很高准确率，验证集却长期不动；继续训练很多步后，验证准确率突然上升。项目把模运算、S5 群运算和 K 元求和写成短序列预测任务，观察模型是否真的学到了代数结构。
 
 {% link MLfinal 代码仓库, GitHub / wjjpku, https://github.com/wjjpku/ML-final, https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png %}
 
 ## 项目概览
 
-MLfinal 用二元运算表构造监督学习任务，让模型从形如 `a ∘ b = c` 的符号样本中学习隐藏运算规则。实验对象包括模加法、模减法、模除法、多项式型模运算，以及对称群上的乘法与共轭相关运算。
+每个样本都被写成类似下面的短序列：
 
-这个项目最有意思的地方在于：模型并不只是背答案。随着训练步数增加，它可能先表现为过拟合，随后验证准确率突然上升，呈现类似 grokking 的泛化现象。
+```text
+<x> <op> <y> <=> <x op y>
+```
+
+训练时只监督最后一个答案 token。这样做的好处是任务非常干净：模型不是在学自然语言，而是在从离散符号样本中恢复隐藏的运算结构。
+
+{% image https://raw.githubusercontent.com/wjjpku/ML-final/main/assets/grokking_accuracy_curves.png, alt=不同训练比例下训练与验证准确率曲线, width=100% %}
+
+## 这个项目实际做了什么
 
 {% tabs mlfinal, 1 %}
-<!-- tab 数据与任务 -->
+<!-- tab 任务 -->
 
-- 样本形式：`a ∘ b = c`
-- 典型运算：模加法、模减法、模除法、多项式型模运算、`S_5` 上的群运算。
-- 训练集比例：可以调整为 50%、30%、25% 等不同设置。
-- 评估指标：输出 token 的准确率，以及训练/验证曲线随时间的变化。
-
-<!-- endtab -->
-<!-- tab 模型设置 -->
-
-| 项目 | 设置 |
+| 类型 | 例子 |
 | --- | --- |
-| 模型 | 解码器式 Transformer |
-| 层数 | 2 层 |
-| 隐藏宽度 | 128 |
-| 注意力头数 | 4 |
-| 优化器 | AdamW / Adam |
-| 关注现象 | 过拟合后的延迟泛化 |
+| 模运算 | `mod_add`, `mod_sub`, `mod_div` |
+| 分段运算 | `div_or_sub_by_y_parity` |
+| 多项式型模运算 | `x2_y2`, `x2_xy_y2`, `x3_xy2_plus_y` |
+| 群运算 | `S5` 上的乘法、共轭、`x·y·x` |
+| K 元任务 | `sum_mod` / `mod_add` with `--k > 2` |
 
 <!-- endtab -->
-<!-- tab 可以继续追的问题 -->
+<!-- tab 模型 -->
 
-1. 哪些运算更容易让模型学出结构？
-2. 训练集比例下降时，grokking 的出现时间如何变化？
-3. 权重衰减、噪声、dropout 对泛化时间有没有稳定影响？
-4. 输出嵌入的可视化是否能对应到数学对象的结构？
+默认主模型是 2 层 decoder-only Transformer：
+
+- hidden size `128`
+- 4 个 attention heads
+- causal attention mask
+- 最后一位用等号 token 占位并预测答案
+
+同时实现了 MLP、LSTM、GRU，用来比较 grokking 是否依赖某个特定架构。
+
+<!-- endtab -->
+<!-- tab 训练变量 -->
+
+项目系统调整了这些变量：
+
+- 训练数据比例：例如 `0.25 / 0.30 / 0.50 / 0.70`
+- 优化器：AdamW、Adam、SGD、RMSprop
+- 正则与噪声：dropout、梯度噪声、权重噪声、weight decay
+- 训练时长：从快速 smoke run 到长步数 grokking run
 
 <!-- endtab -->
 {% endtabs %}
 
-{% folding cyan, 为什么这个任务值得看 %}
+## 为什么它值得展示
 
-二元运算表任务表面上是离散符号预测，实质上在问模型能不能学到背后的代数结构。  
-如果模型只记忆训练样本，它在未见过的组合上会失败；如果模型学到了结构，它就能在验证集上泛化。
+这个项目的价值不只是“跑了一个 Transformer”。它把一个机器学习现象变成了可控实验：
+
+- 如果模型只是记忆训练表格，未见过的 `(x, y)` 组合会失败。
+- 如果模型学到了模加法或群运算的结构，验证集才会突然上升。
+- 数据比例、正则强度和优化器会改变泛化发生的时间尺度。
+- 从二元运算扩展到 K 元求和，可以把任务难度继续推高。
+
+{% folding green, 我自己的理解 %}
+
+Grokking 最有意思的地方在于“训练准确率已经不能告诉你模型是否理解结构”。它逼着我们把训练过程拉长，观察参数范数、正则化和表示结构如何一起影响泛化。这个项目虽然是课程项目，但问题意识很清楚：算法数据集足够小，却能暴露出神经网络从记忆到结构学习的转变。
 
 {% endfolding %}
 
-{% btn https://github.com/wjjpku/ML-final, 查看完整 README 与代码, anzhiyufont anzhiyu-icon-arrow-right, block center %}
+## 运行入口
+
+快速运行：
+
+```bash
+python train.py --op mod_add --steps 3000 --target-val-acc 0.90
+```
+
+典型 grokking 设置：
+
+```bash
+python train.py \
+  --op mod_add \
+  --train-ratio 0.25 \
+  --steps 100000 \
+  --target-val-acc 0.9995 \
+  --optimizer adam \
+  --dropout 0.1 \
+  --grad-noise-std 1.0
+```
+
+切换架构：
+
+```bash
+python train.py --architecture transformer
+python train.py --architecture mlp
+python train.py --architecture lstm
+python train.py --architecture gru
+```
+
+## 仓库入口
+
+- 命令行入口：`train.py`
+- 数据构造：`mlfinal/data.py`
+- 模型结构：`mlfinal/architectures.py`
+- 训练循环：`mlfinal/trainer.py`
+- 项目报告：`sample-1(2).pdf`
+- 代表性曲线图：`assets/grokking_accuracy_curves.png`
+
+{% btn https://github.com/wjjpku/ML-final, 查看 README 与代码, anzhiyufont anzhiyu-icon-arrow-right, block center %}

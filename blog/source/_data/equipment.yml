@@ -1,28 +1,28 @@
 - class_name: 学术工作
   description: 项目与实验
-  tip: 课程实验、数学文本识别和交互叙事，各自保留问题意识、方法细节和可追溯的代码入口。
+  tip: 四个项目分别落在训练曲线建模、算法数据集泛化、数学文本来源识别和交互叙事上；这里保留研究问题、方法证据和可追溯的代码入口。
   top_background: /photos/all.jpg
   good_things:
     - title: 公开项目
-      description: 从课程实验到交互作品，保留问题、方法、图示和代码入口。
+      description: 从损失曲线、代数结构学习到数学文本检测和聊天式经营游戏，展示我近期做过的几类完整项目。
       equipment_list:
         - name: DLfinal
-          specification: Deep Learning / Loss Curve Transfer
-          description: 学习率计划与损失曲线迁移实验，关注从 cosine 曲线到 WSD-family 计划时，哪些响应信号真正可迁移。
+          specification: Loss Curve Transfer / Schedule Response
+          description: 从公开 cosine loss curve 中识别可迁移的学习率下降响应，在不读取目标 WSD loss 的前提下改进 MPL baseline。
           image: https://raw.githubusercontent.com/wjjpku/DL-final/main/slides/figs/fig_projection_decomposition_cosine_100M.png
           link: /projects/dl-final/
         - name: MLfinal
-          specification: Machine Learning / Symbolic Structure
-          description: 在二元运算表上训练小型 Transformer，观察模型怎样从符号样本里学到模运算、群运算等数学结构。
-          image: https://opengraph.githubassets.com/wjjpku-ml-final/wjjpku/ML-final
+          specification: Grokking / Algorithmic Datasets
+          description: 把模运算、S5 群运算和 K 元求和写成短序列预测任务，比较 Transformer、MLP、LSTM 等模型的延迟泛化。
+          image: https://raw.githubusercontent.com/wjjpku/ML-final/main/assets/grokking_accuracy_curves.png
           link: /projects/ml-final/
         - name: Modelmid
-          specification: Mathematical Text Attribution
-          description: 数学推导文本溯源分类器，比较人类写作与不同大模型生成文本在结构、公式和逻辑风格上的差异。
+          specification: Math Text Attribution / Adversarial Detection
+          description: 识别人类与 DeepSeek、GLM、GPT、Kimi、Qwen 等模型生成的数学解答，并分析跨语言泛化和防检测提示。
           image: https://raw.githubusercontent.com/wjjpku/Modelmid/main/docs/figures/gpt_augmented/pca_clusters_2d.png
           link: /projects/modelmid/
         - name: 鸭腿叔叔
-          specification: Interactive Fiction / Chat UI Game
-          description: 微信聊天框形式的虚构经营小游戏，用聊天界面承载校园语境、经营选择和多线叙事。
+          specification: Interactive Fiction / Chat-Based Business Game
+          description: 用微信式聊天界面承载经营决策、群聊舆论、供应商风险和多结局复盘，让读消息本身成为玩法。
           image: https://raw.githubusercontent.com/wjjpku/UncleDucky/main/assets/duck-leg-uncle-avatar.png
           link: /projects/uncle-ducky/
