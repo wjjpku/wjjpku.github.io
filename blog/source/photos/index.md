@@ -92,41 +92,45 @@ layout: page
 </div>
 
 <script>
-  const photos = [
-    { src: '/photos/scmy.jpg', alt: '雨后清晨', title: '四川绵阳思政实践，雨后清晨', date: '2025-06-24' },
-    { src: '/photos/wh.jpg', alt: 'wh', title: '偶遇王虹教授，膜拜', date: '2025-06-17' },
-    { src: '/photos/pt.jpg', alt: '拼图', title: '数院周边：可以挂起来的漂亮的拼图', date: '2025-05-20' },
-    { src: '/photos/sywx.jpg', alt: '晚霞', title: '智华楼与晚霞', date: '2025-04-01' },
-    { src: '/photos/pizza.jpg', alt: 'pizza', title: '学术组的 pizza 沙龙活动，出现了 pizza 龙', date: '2025-05-13' },
-    { src: '/photos/wzdj.jpg', alt: 'wzdj', title: '第一次拿顶级发育路！', date: '2025-06-03' },
-    { src: '/photos/trump.jpg', alt: 'trump', title: '啊我被“刺杀”了，子弹掠过我的耳旁', date: '2025-04-22' },
-    { src: '/photos/thut.jpg', alt: '清华游', title: '为了拿免费的 komo 蛋糕……清华半日游', date: '2025-04-06' },
-    { src: '/photos/walledworld.jpg', alt: 'ww', title: 'Walled World 摄于北大南门南侧的天桥', date: '2025-03-25' },
-    { src: '/photos/xian.jpg', alt: '鼓楼', title: '西安鼓楼一角', date: '2025-02-02' }
-  ];
-
-  // 时间倒序排序（越新越前）
-  photos.sort((a, b) => new Date(b.date) - new Date(a.date));
-
   const leftCol = document.getElementById('left-column');
   const rightCol = document.getElementById('right-column');
 
-  photos.forEach((photo, index) => {
-    const box = document.createElement('div');
-    box.className = 'photo-box';
-    box.innerHTML = `
-      <a data-fancybox="gallery" href="${photo.src}">
-        <img src="${photo.src}" alt="${photo.alt}">
-      </a>
-      <div class="photo-caption">${photo.title}</div>
-      <div class="photo-date">${photo.date}</div>
-    `;
+  function escapeHtml(value) {
+    return String(value || '').replace(/[&<>"']/g, char => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[char]));
+  }
 
-    // 奇数放左栏，偶数放右栏
-    if (index % 2 === 0) {
-      leftCol.appendChild(box);
-    } else {
-      rightCol.appendChild(box);
-    }
-  });
+  function renderPhotos(photos) {
+    leftCol.innerHTML = '';
+    rightCol.innerHTML = '';
+    photos
+      .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
+      .forEach((photo, index) => {
+        const box = document.createElement('div');
+        box.className = 'photo-box';
+        const title = photo.title ? `<div class="photo-caption">${escapeHtml(photo.title)}</div>` : '';
+        const date = photo.date ? `<div class="photo-date">${escapeHtml(photo.date)}</div>` : '';
+        box.innerHTML = `
+          <a data-fancybox="gallery" href="${escapeHtml(photo.src)}">
+            <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.alt || photo.title || '生活照片')}">
+          </a>
+          ${title}
+          ${date}
+        `;
+        (index % 2 === 0 ? leftCol : rightCol).appendChild(box);
+      });
+  }
+
+  fetch('/photos/photos.json', { cache: 'no-store' })
+    .then(response => response.json())
+    .then(renderPhotos)
+    .catch(error => {
+      leftCol.innerHTML = '<div class="photo-caption">照片数据暂时无法加载。</div>';
+      console.error(error);
+    });
 </script>
