@@ -821,7 +821,21 @@
       });
     }
 
-    async function loadImage(file) {
+    async function loadDrawable(file) {
+      if ('createImageBitmap' in window) {
+        try {
+          const bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+          return {
+            source: bitmap,
+            width: bitmap.width,
+            height: bitmap.height,
+            close: () => bitmap.close && bitmap.close()
+          };
+        } catch (error) {
+          // Fall through to HTMLImageElement for browsers without full option support.
+        }
+      }
+
       const url = URL.createObjectURL(file);
       try {
         const image = new Image();
@@ -835,7 +849,12 @@
             image.onerror = reject;
           });
         }
-        return image;
+        return {
+          source: image,
+          width: image.naturalWidth || image.width,
+          height: image.naturalHeight || image.height,
+          close: () => {}
+        };
       } finally {
         URL.revokeObjectURL(url);
       }
@@ -852,9 +871,9 @@
       }
 
       try {
-        const image = await loadImage(file);
-        const sourceWidth = image.naturalWidth || image.width;
-        const sourceHeight = image.naturalHeight || image.height;
+        const image = await loadDrawable(file);
+        const sourceWidth = image.width;
+        const sourceHeight = image.height;
         const scale = Math.min(1, profile.maxEdge / Math.max(sourceWidth, sourceHeight));
         const width = Math.max(1, Math.round(sourceWidth * scale));
         const height = Math.max(1, Math.round(sourceHeight * scale));
@@ -862,7 +881,8 @@
         canvas.width = width;
         canvas.height = height;
         const context = canvas.getContext('2d', { alpha: true });
-        context.drawImage(image, 0, 0, width, height);
+        context.drawImage(image.source, 0, 0, width, height);
+        image.close();
         const blob = await canvasToBlob(canvas, 'image/webp', profile.quality);
         if (!blob) throw new Error('压缩失败');
         return {

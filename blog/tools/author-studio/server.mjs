@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const blogRoot = path.resolve(__dirname, "../..");
 const sourceRoot = path.join(blogRoot, "source");
+const optimizerScript = path.join(__dirname, "optimize-image.py");
 const port = Number(process.env.STUDIO_PORT || process.argv[2] || 4050);
 const maxBodyBytes = 80 * 1024 * 1024;
 
@@ -103,11 +104,38 @@ function runProcess(command, args) {
 }
 
 let cwebpAvailable;
+let pythonOptimizerAvailable;
+let pythonOptimizerCommand;
 
 async function canUseCwebp() {
   if (cwebpAvailable !== undefined) return cwebpAvailable;
   cwebpAvailable = (await runProcess("cwebp", ["-version"])).code === 0;
   return cwebpAvailable;
+}
+
+async function canUsePythonOptimizer() {
+  if (pythonOptimizerAvailable !== undefined) return pythonOptimizerAvailable;
+  if (!existsSync(optimizerScript)) {
+    pythonOptimizerAvailable = false;
+  } else {
+    const candidates = [
+      process.env.AUTHOR_STUDIO_PYTHON,
+      "python3",
+      "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3",
+      "/opt/homebrew/bin/python3",
+      "/usr/local/bin/python3",
+      "/usr/bin/python3"
+    ].filter(Boolean);
+    for (const candidate of candidates) {
+      if ((await runProcess(candidate, [optimizerScript, "--help"])).code === 0) {
+        pythonOptimizerCommand = candidate;
+        pythonOptimizerAvailable = true;
+        return pythonOptimizerAvailable;
+      }
+    }
+    pythonOptimizerAvailable = false;
+  }
+  return pythonOptimizerAvailable;
 }
 
 async function imageSize(filePath) {
@@ -170,13 +198,30 @@ async function sendStatic(response, filePath, contentType) {
 async function optimizeUpload(buffer, mime, targetDir, baseName, sourceExt, options) {
   const shouldOptimize = options.optimize !== false
     && mime !== "image/gif"
-    && mime !== "image/svg+xml"
-    && await canUseCwebp();
+    && mime !== "image/svg+xml";
   if (!shouldOptimize) return null;
 
   const { candidate, fullPath } = uniqueCandidate(targetDir, baseName, ".webp");
   const tempPath = path.join(targetDir, `.${baseName}-${Date.now()}-${Math.random().toString(16).slice(2)}${sourceExt}`);
   await writeFile(tempPath, buffer);
+  if (await canUsePythonOptimizer()) {
+    const result = await runProcess(pythonOptimizerCommand, [
+      optimizerScript,
+      tempPath,
+      fullPath,
+      "--max-edge",
+      String(options.maxEdge || 1800),
+      "--quality",
+      String(options.quality || 82)
+    ]);
+    await rm(tempPath, { force: true });
+    if (result.code === 0 && existsSync(fullPath)) return { candidate, fullPath };
+    return null;
+  }
+  if (!await canUseCwebp()) {
+    await rm(tempPath, { force: true });
+    return null;
+  }
   const size = scaledSize(await imageSize(tempPath), options.maxEdge || 1800);
   const result = await runProcess("cwebp", [
     "-quiet",
