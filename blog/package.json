@@ -8,6 +8,7 @@
     "deploy": "hexo clean && hexo generate && hexo deploy",
     "server": "hexo server",
     "studio": "node tools/author-studio/server.mjs",
+    "test:studio": "node --test tools/author-studio/*.test.mjs",
     "install-studio-app": "node tools/author-studio/install-macos-app.mjs"
   },
   "hexo": {

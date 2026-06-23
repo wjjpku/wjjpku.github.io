@@ -5,6 +5,7 @@ import { existsSync } from "node:fs";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { publishSourceChanges } from "./publish.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const blogRoot = path.resolve(__dirname, "../..");
@@ -380,6 +381,13 @@ async function handleApi(request, response, pathname) {
     const result = await runShell(commands[action]);
     return sendJson(response, result.code === 0 ? 200 : 500, { ok: result.code === 0, result });
   }
+  if (pathname === "/api/push" && request.method === "POST") {
+    const result = await publishSourceChanges({
+      blogRoot,
+      content: payload.content
+    });
+    return sendJson(response, 200, { ok: true, result });
+  }
   return sendJson(response, 404, { ok: false, error: "Not found" });
 }
 
@@ -396,7 +404,8 @@ const server = http.createServer(async (request, response) => {
   } catch (error) {
     return sendJson(response, error.status || 500, {
       ok: false,
-      error: error.message || String(error)
+      error: error.message || String(error),
+      output: error.output
     });
   }
 });

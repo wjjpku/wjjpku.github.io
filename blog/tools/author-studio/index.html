@@ -107,6 +107,13 @@
       justify-content: flex-end;
     }
 
+    .commit-input {
+      width: min(280px, 100%);
+      min-height: 40px;
+      margin-top: 0;
+      background: var(--panel);
+    }
+
     .button {
       display: inline-flex;
       align-items: center;
@@ -531,9 +538,11 @@
       <div>
         <div class="eyebrow"><span class="status-dot"></span><span>Local Publishing Desk</span></div>
         <h1>Author Studio</h1>
-        <p class="subtitle">写最近的想法，整理笔记，或者把生活照片放进照片墙。所有内容只写入本机 Hexo 仓库。</p>
+        <p class="subtitle">写最近的想法，整理笔记，或者把生活照片放进照片墙。提交并推送会提交当前未忽略的源码改动。</p>
       </div>
       <div class="actions">
+        <input class="commit-input" id="commit-content" placeholder="提交内容，例如：更新生活照片">
+        <button class="button" id="push-source" type="button">提交并推送</button>
         <button class="button" data-run="build" type="button">构建检查</button>
         <button class="button primary" data-run="deploy" type="button">部署网站</button>
       </div>
@@ -908,7 +917,11 @@
         body: JSON.stringify(payload)
       });
       const data = await response.json();
-      if (!response.ok || !data.ok) throw new Error(data.error || '操作失败');
+      if (!response.ok || !data.ok) {
+        const error = new Error(data.error || '操作失败');
+        error.output = data.output;
+        throw error;
+      }
       return data;
     }
 
@@ -1007,6 +1020,25 @@
           setBusy(false);
         }
       });
+    });
+
+    document.getElementById('push-source').addEventListener('click', async () => {
+      const content = document.getElementById('commit-content').value.trim();
+      if (!content) {
+        log('请先填写提交内容。', 'Error');
+        return;
+      }
+      if (!window.confirm('将提交并推送当前所有未忽略的源码改动，继续吗？')) return;
+      setBusy(true);
+      log('正在构建、提交并推送 main...', 'Pushing');
+      try {
+        const result = await postJson('/api/push', { content });
+        log(result.result.output, result.result.noChanges ? 'No changes' : 'Pushed');
+      } catch (error) {
+        log(error.output || error.message, 'Error');
+      } finally {
+        setBusy(false);
+      }
     });
   </script>
 </body>
