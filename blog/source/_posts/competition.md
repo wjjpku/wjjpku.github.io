@@ -2,7 +2,7 @@
 title: 记第一次数模竞赛
 date: 2025-9-11
 tags:
-  - 回忆
+  - memories
 cover: /post_photos/competition/p1.jpg
 ---
 

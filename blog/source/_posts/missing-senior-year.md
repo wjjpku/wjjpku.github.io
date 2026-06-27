@@ -2,21 +2,21 @@
 title: 面对缺失的高三，你会有遗憾吗？
 date: 2025-06-11 22:00:00
 tags:
-  - 回忆
-  - 高中
-  - 毕业季
-cover: /post_photos/毕业遗憾/p1.jpg
+  - memories
+  - high-school
+  - graduation-season
+cover: /post_photos/missing-senior-year/p1.jpg
 ---
 
 <div style="display: flex; overflow-x: auto; gap: 1rem; padding-bottom: 1rem;">
-  <img src="/post_photos/毕业遗憾/p1.jpg" alt="p1" style="height: 160px; border-radius: 8px;">
-  <img src="/post_photos/毕业遗憾/p2.jpg" alt="p2" style="height: 160px; border-radius: 8px;">
-  <img src="/post_photos/毕业遗憾/p3.jpg" alt="p3" style="height: 160px; border-radius: 8px;">
-  <img src="/post_photos/毕业遗憾/p4.jpg" alt="p4" style="height: 160px; border-radius: 8px;">
-  <img src="/post_photos/毕业遗憾/p5.jpg" alt="p5" style="height: 160px; border-radius: 8px;">
-  <img src="/post_photos/毕业遗憾/p6.jpg" alt="p6" style="height: 160px; border-radius: 8px;">
-  <img src="/post_photos/毕业遗憾/p7.jpg" alt="p7" style="height: 160px; border-radius: 8px;">
-  <img src="/post_photos/毕业遗憾/p8.jpg" alt="p8" style="height: 160px; border-radius: 8px;">
+  <img src="/post_photos/missing-senior-year/p1.jpg" alt="p1" style="height: 160px; border-radius: 8px;">
+  <img src="/post_photos/missing-senior-year/p2.jpg" alt="p2" style="height: 160px; border-radius: 8px;">
+  <img src="/post_photos/missing-senior-year/p3.jpg" alt="p3" style="height: 160px; border-radius: 8px;">
+  <img src="/post_photos/missing-senior-year/p4.jpg" alt="p4" style="height: 160px; border-radius: 8px;">
+  <img src="/post_photos/missing-senior-year/p5.jpg" alt="p5" style="height: 160px; border-radius: 8px;">
+  <img src="/post_photos/missing-senior-year/p6.jpg" alt="p6" style="height: 160px; border-radius: 8px;">
+  <img src="/post_photos/missing-senior-year/p7.jpg" alt="p7" style="height: 160px; border-radius: 8px;">
+  <img src="/post_photos/missing-senior-year/p8.jpg" alt="p8" style="height: 160px; border-radius: 8px;">
 </div>
 
 今天是6月11日，高考结束的第二天。晚上军理考试后，我打开 puq，看到了在转发高三毕业的同学们…… 不禁问自己了一句：

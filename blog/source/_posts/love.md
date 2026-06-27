@@ -2,7 +2,7 @@
 title: 算力耗尽之前，我试图爱你
 date: 2025-12-21 01:30:00
 tags:
-  - 回忆
+  - memories
 cover: /post_photos/love/p1.jpg
 ---
 

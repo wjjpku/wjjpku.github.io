@@ -2,17 +2,17 @@
 title: 灯火、书摊，这样洒在北大的毕业季
 date: 2025-06-26 23:30:00
 tags:
-  - 北大
-  - 毕业季
-  - 生活随笔
-cover: /post_photos/书摊/p1.jpg
+  - pku
+  - graduation-season
+  - life-essay
+cover: /post_photos/bookstalls/p1.jpg
 ---
 
 <div style="display: flex; overflow-x: auto; gap: 1rem; padding-bottom: 1rem;">
-  <img src="/post_photos/书摊/p2.jpg" alt="图片1" style="height: 160px; border-radius: 8px;">
-  <img src="/post_photos/书摊/p3.jpg" alt="图片2" style="height: 160px; border-radius: 8px;">
-  <img src="/post_photos/书摊/p4.jpg" alt="图片3" style="height: 160px; border-radius: 8px;">
-   <img src="/post_photos/书摊/p5.jpg" alt="图片4" style="height: 160px; border-radius: 8px;">
+  <img src="/post_photos/bookstalls/p2.jpg" alt="图片1" style="height: 160px; border-radius: 8px;">
+  <img src="/post_photos/bookstalls/p3.jpg" alt="图片2" style="height: 160px; border-radius: 8px;">
+  <img src="/post_photos/bookstalls/p4.jpg" alt="图片3" style="height: 160px; border-radius: 8px;">
+   <img src="/post_photos/bookstalls/p5.jpg" alt="图片4" style="height: 160px; border-radius: 8px;">
 </div>
 
 从学一食堂往东看去，无尽的书摊、零散的灯光交织成眼前的夜晚。

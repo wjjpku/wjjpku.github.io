@@ -2,14 +2,14 @@
 title: '聊对大模型可解释性的理解'
 date: 2026-06-28 01:39:00
 tags:
-  - 随笔
+  - essays
 categories:
-  - 日常
-cover: /post_photos/聊对大模型可解释性的理解/IMG_7155.webp
+  - life
+cover: /post_photos/llm-interpretability/IMG_7155.webp
 mathjax: true
 ---
 
-![IMG_7155](/post_photos/聊对大模型可解释性的理解/IMG_7155.webp)
+![IMG_7155](/post_photos/llm-interpretability/IMG_7155.webp)
 
 # 聊对大模型可解释性的理解
 

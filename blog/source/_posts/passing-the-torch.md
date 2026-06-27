@@ -2,10 +2,10 @@
 title: 薪火相传
 date: 2026-03-20 12:00:00
 tags:
-  - 随笔
+  - essays
 categories:
-  - 日常
-cover: /post_photos/薪火相传/121.jpg
+  - life
+cover: /post_photos/passing-the-torch/121.jpg
 ---
 
 
