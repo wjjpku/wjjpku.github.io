@@ -437,8 +437,16 @@ test("custom profile and project pages keep mobile-specific layout guards", () =
   assert.match(mobileProfileCss, /#about-page \.author-box[\s\S]*grid-template-columns: 1fr/);
   assert.match(mobileProfileCss, /#about-page \.author-tag-left,\s*#about-page \.author-tag-right[\s\S]*display: none/);
   assert.match(mobileProfileCss, /#about-page \.author-content[\s\S]*grid-template-columns: 1fr/);
+  assert.match(mobileProfileCss, /#about-page \.author-content-item \.card-content[\s\S]*position: static/);
+  assert.match(mobileProfileCss, /#about-page \.author-content-item\.skills[\s\S]*min-height: 300px/);
+  assert.match(mobileProfileCss, /#about-page \.author-content-item\.careers[\s\S]*min-height: 220px/);
+  assert.match(mobileProfileCss, /#about-page \.author-content-item-group\.column\.mapAndInfo[\s\S]*grid-template-columns: 1fr/);
+  assert.match(mobileProfileCss, /#about-page \.author-content-item\.selfInfo[\s\S]*grid-template-columns: 1fr/);
+  assert.match(mobileProfileCss, /#about-page \.author-content-item\.selfInfo div[\s\S]*width: 100%/);
+  assert.match(mobileProfileCss, /#about-page \.author-content-item\.selfInfo \.selfInfo-content[\s\S]*overflow-wrap: anywhere/);
   assert.match(mobileProfileCss, /#about-page \.hello-about[\s\S]*min-height/);
   assert.match(mobileProfileCss, /#about-page \.aboutsiteTips h2[\s\S]*overflow-wrap: anywhere/);
+  assert.match(mobileProfileCss, /#about-page \.author-content-item\.personalities \.author-content-item-title,\s*#about-page \.author-content-item\.personalities \.title2[\s\S]*overflow-wrap: anywhere/);
   assert.match(mobileProfileCss, /#about-page \.author-content-item\.personalities \.image[\s\S]*position: static/);
   assert.match(mobileProfileCss, /#about-page \.comic-box[\s\S]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
   assert.match(mobileProfileCss, /#about-page \.comic-item[\s\S]*min-width: 0/);

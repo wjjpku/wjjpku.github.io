@@ -811,6 +811,8 @@ html[data-bilingual-active="zh"] blockquote[data-bilingual-lang="zh"] {
     grid-template-columns: 1fr;
     gap: 12px;
     margin-top: 12px;
+    width: 100%;
+    max-width: 100%;
   }
 
   #about-page .author-content-item,
@@ -824,7 +826,60 @@ html[data-bilingual-active="zh"] blockquote[data-bilingual-lang="zh"] {
   }
 
   #about-page .author-content-item .card-content {
+    position: static;
+    inset: auto;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
     min-width: 0;
+    padding: 0;
+  }
+
+  #about-page .author-content-item.skills {
+    min-height: 300px;
+  }
+
+  #about-page .author-content-item.careers {
+    min-height: 220px;
+    background-size: cover;
+    background-position: center bottom;
+  }
+
+  #about-page .author-content-item-group.column.mapAndInfo {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 0;
+  }
+
+  #about-page .author-content-item.map {
+    min-height: 180px;
+    height: auto;
+    margin-bottom: 0;
+  }
+
+  #about-page .author-content-item.selfInfo {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    height: auto !important;
+    padding: 18px;
+  }
+
+  #about-page .author-content-item.selfInfo div {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+  }
+
+  #about-page .author-content-item.selfInfo .selfInfo-content {
+    display: block;
+    width: 100% !important;
+    max-width: 100%;
+    font-size: clamp(2rem, 10vw, 2.7rem);
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   #about-page .myInfoAndSayHello .title2 {
@@ -868,6 +923,15 @@ html[data-bilingual-active="zh"] blockquote[data-bilingual-lang="zh"] {
 
   #about-page .author-content-item.personalities {
     height: auto;
+  }
+
+  #about-page .author-content-item.personalities .author-content-item-title,
+  #about-page .author-content-item.personalities .title2 {
+    display: block;
+    max-width: 100%;
+    font-size: clamp(2.05rem, 11vw, 2.8rem);
+    line-height: 1.02;
+    overflow-wrap: anywhere;
   }
 
   #about-page .author-content-item.personalities .image {
