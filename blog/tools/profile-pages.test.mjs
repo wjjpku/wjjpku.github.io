@@ -456,3 +456,21 @@ test("custom profile and project pages keep mobile-specific layout guards", () =
   assert.match(mobileProjectsCss, /\.equipment-item-content-item-toolbar[\s\S]*flex-wrap: wrap/);
   assert.match(mobileProjectsCss, /\.equipment-report-link[\s\S]*margin-left: 0/);
 });
+
+test("home page top panel stays readable on phones", () => {
+  const profileCss = read("source/css/profile.css");
+  const mobileProfileCss = mediaBlock(profileCss, "(max-width: 700px)");
+
+  assert.match(mobileProfileCss, /#home_top[\s\S]*overflow: hidden/);
+  assert.match(mobileProfileCss, /#home_top \.swiper_container_card[\s\S]*height: auto/);
+  assert.match(mobileProfileCss, /#home_top #bannerGroup[\s\S]*display: block/);
+  assert.match(mobileProfileCss, /#home_top #random-banner,\s*#home_top \.topGroup[\s\S]*display: none/);
+  assert.match(mobileProfileCss, /#home_top \.topGroup \.recent-post-item[\s\S]*display: none/);
+  assert.match(mobileProfileCss, /#home_top \.categoryGroup[\s\S]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(mobileProfileCss, /#home_top \.categoryGroup \.categoryItem[\s\S]*height: clamp\(88px, 26vw, 112px\)/);
+  assert.match(mobileProfileCss, /#home_top a\.categoryButton i,\s*#home_top a\.categoryButton svg[\s\S]*display: block/);
+  assert.match(mobileProfileCss, /#categoryBar[\s\S]*position: static/);
+  assert.match(mobileProfileCss, /#categoryBar[\s\S]*max-width: 100%/);
+  assert.match(mobileProfileCss, /#recent-posts > \.recent-post-item[\s\S]*max-width: 100%/);
+  assert.match(mobileProfileCss, /#recent-posts > \.recent-post-item \.article-title[\s\S]*overflow-wrap: anywhere/);
+});
