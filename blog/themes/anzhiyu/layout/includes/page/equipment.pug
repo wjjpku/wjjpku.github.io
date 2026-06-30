@@ -26,7 +26,7 @@
               each iten, indey in item.equipment_list
                 .equipment-item-content-item
                   .equipment-item-content-item-cover
-                    img.equipment-item-content-item-image(data-lazy-src=url_for(iten.image) onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.flink) + `'` alt=iten.name)
+                    img.equipment-item-content-item-image.nolazyload(src=url_for(iten.image) onerror=`this.onerror=null;this.src='` + url_for(theme.error_img.flink) + `'` alt=iten.name loading='lazy' decoding='async')
                   .equipment-item-content-item-info
                     .equipment-item-content-item-name(onclick=`rm.rightmenuCopyText("${iten.name}");anzhiyu.snackbarShow("${_p('Snackbar.copy_equipment_name') + " 【" + iten.name + "】"}");` title=iten.name)= iten.name
                     .equipment-item-content-item-specification
@@ -37,15 +37,15 @@
                       span(data-bilingual-lang="zh")= iten.description_zh || iten.description
                     .equipment-item-content-item-toolbar
                       if iten.link.includes('https://') || iten.link.includes('http://')
-                        a.equipment-item-content-item-link(href= iten.link, target='_blank')
+                        a.equipment-item-content-item-link(href= iten.link, target='_blank', rel='noopener noreferrer')
                           span(data-bilingual-lang="en") View
                           span(data-bilingual-lang="zh") 查看
                       else  
-                        a.equipment-item-content-item-link(href= iten.link, target='_blank')
+                        a.equipment-item-content-item-link(href= iten.link, target='_blank', rel='noopener noreferrer')
                           span(data-bilingual-lang="en") View
                           span(data-bilingual-lang="zh") 查看
                       if iten.report
-                        a.equipment-item-content-item-link.equipment-report-link(href= iten.report, target='_blank', rel='noopener')
+                        a.equipment-item-content-item-link.equipment-report-link(href= iten.report, target='_blank', rel='noopener noreferrer')
                           i.anzhiyufont.anzhiyu-icon-file-lines
                           span(data-bilingual-lang="en") Report
                           span(data-bilingual-lang="zh") 报告

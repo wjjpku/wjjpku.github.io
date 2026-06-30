@@ -26,8 +26,8 @@
                     if item.image
                       .album-container-img
                         each iten, indey in item.image
-                          a.album-content-img(href=item.image[indey], target="_blank", data-fancybox="gallery", data-caption="")
-                            img(src=item.image[indey])
+                          a.album-content-img(href=item.image[indey], target="_blank", data-fancybox="gallery", data-caption=item.content)
+                            img(src=item.image[indey], alt=item.content, loading="lazy", decoding="async")
                         .album-content-noimg
                         .album-content-noimg
                         .album-content-noimg

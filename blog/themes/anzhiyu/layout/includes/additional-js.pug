@@ -128,5 +128,28 @@ div
   if theme.accesskey.enable
     script(charset="UTF-8" src=url_for(theme.asset.accesskey_js))
 
+  script.
+    (() => {
+      const secureOneBlankTargetLink = anchor => {
+        const rel = new Set((anchor.getAttribute("rel") || "").toLowerCase().split(/\s+/).filter(Boolean));
+        rel.add("noopener");
+        rel.add("noreferrer");
+        anchor.setAttribute("rel", Array.from(rel).join(" "));
+      };
+      const secureBlankTargetLinks = root => {
+        if (!root) return;
+        if (root.matches && root.matches('a[target="_blank"]')) secureOneBlankTargetLink(root);
+        root.querySelectorAll && root.querySelectorAll('a[target="_blank"]').forEach(secureOneBlankTargetLink);
+      };
+      const run = () => secureBlankTargetLinks(document);
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run, { once: true });
+      else run();
+      new MutationObserver(mutations => {
+        mutations.forEach(mutation => mutation.addedNodes.forEach(node => {
+          if (node.nodeType === Node.ELEMENT_NODE) secureBlankTargetLinks(node);
+        }));
+      }).observe(document.documentElement, { childList: true, subtree: true });
+    })();
+
   if is_current("/") && theme.greetingBox.enable
     #greetingBox

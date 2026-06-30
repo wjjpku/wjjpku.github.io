@@ -20,7 +20,10 @@ mixin postUI(posts)
       if post_cover && theme.cover.index_enable
         .post_cover(class=leftOrRight)
           a(href=url_for(link) title=title style='display: flex;height: 100%;')
-            img.post_bg(src=url_for(post_cover) onerror=`this.onerror=null;this.src='`+ url_for(theme.error_img.post_page) + `'` alt=title style='pointer-events: none')
+            if index === 0 && is_home()
+              img.post_bg.nolazyload(src=url_for(post_cover) onerror=`this.onerror=null;this.src='`+ url_for(theme.error_img.post_page) + `'` alt=title style='pointer-events: none' loading='eager' fetchpriority='high' decoding='async')
+            else
+              img.post_bg(src=url_for(post_cover) onerror=`this.onerror=null;this.src='`+ url_for(theme.error_img.post_page) + `'` alt=title style='pointer-events: none' loading='lazy' decoding='async')
 
       .recent-post-info(class=no_cover)
         .recent-post-info-top

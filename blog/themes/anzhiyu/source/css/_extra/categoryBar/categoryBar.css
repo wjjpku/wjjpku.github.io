@@ -58,7 +58,7 @@
 
 .catalog-list-item.select a {
   background: var(--anzhiyu-main);
-  color: var(--anzhiyu-white);
+  color: var(--anzhiyu-black);
   border-radius: 8px;
 }
 

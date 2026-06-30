@@ -46,7 +46,7 @@
 
 .catalog-list-item.selected a {
   background: var(--anzhiyu-lighttext);
-  color: var(--anzhiyu-white);
+  color: var(--anzhiyu-black);
 }
 
 a.catalog-more {

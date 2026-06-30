@@ -10,6 +10,7 @@
     "studio": "node tools/author-studio/server.mjs",
     "test:paths": "node tools/check-english-paths.mjs",
     "test:profile": "node --test tools/profile-pages.test.mjs",
+    "test:quality": "hexo generate && node --test tools/site-quality.test.mjs",
     "test:studio": "node --test tools/author-studio/*.test.mjs",
     "install-studio-app": "node tools/author-studio/install-macos-app.mjs"
   },
@@ -22,6 +23,7 @@
     "hexo-generator-archive": "^2.0.0",
     "hexo-generator-category": "^2.0.0",
     "hexo-generator-index": "^4.0.0",
+    "hexo-generator-sitemap": "^3.0.1",
     "hexo-generator-tag": "^2.0.0",
     "hexo-renderer-ejs": "^2.0.0",
     "hexo-renderer-marked": "^7.0.0",

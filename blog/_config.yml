@@ -11,6 +11,9 @@ author: Justin Wu
 language: en
 timezone: ''
 
+sitemap:
+  path: sitemap.xml
+
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://wjjpku.github.io
