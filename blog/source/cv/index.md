@@ -1,7 +1,7 @@
 ---
 title: Academic CV
 date: 2026-06-29 19:20:00
-updated: 2026-06-30 15:20:00
+updated: 2026-07-01 01:50:00
 layout: page
 description: Academic CV and project profile for Justin Wu.
 comments: false
@@ -104,14 +104,14 @@ aside: false
 
 <article class="cv-project">
 <div class="cv-project-head">
-<h3>Digital Persona Agent System</h3>
-<a href="/projects/digital-persona-agent/">Project Notes</a>
+<h3>MultiagentFinal: Intent-Grounded Cooperative Sokoban</h3>
+<a href="/projects/multiagent-final/">Project Notes</a>
 </div>
-<p>Two-repository agent prototype for building retrieval-grounded digital personas from interviews and personal documents rather than a flat personality prompt.</p>
+<p>Final project for Multi-Agent Foundations. Built StrictCoop-Sokoban and studied intent-grounded recurrent communication for partially observable cooperative multi-agent reinforcement learning.</p>
 <ul>
-<li>Built an interview collection layer with FastAPI, React, staged Chain-of-Tree follow-up generation, persona-profile updates, and sliding-window conversation memory.</li>
-<li>Built a RAG persona layer that extracts cognitive engrams: episodic memory, semantic cognition, expression style, and source metadata.</li>
-<li>Added intent recognition, FAISS retrieval, session-level memory deduplication, and explicit premise checks to reduce unsupported persona claims.</li>
+<li>Removed action aliasing in cooperative Sokoban by enforcing strict push semantics, planner-verified level pools, local observations, and a disjoint hard evaluation split.</li>
+<li>Designed IGRC-MAPPO with low-dimensional broadcast intent messages, future-box auxiliary grounding, and DRC-style ConvLSTM memory under centralized training and decentralized execution.</li>
+<li>Improved hard-v2 performance from MAPPO's 0.763 ± 0.012 pass@8 to 0.949 ± 0.015 pass@8 across three seeds, with ablations separating communication, grounding, memory, capacity, and masks.</li>
 </ul>
 </article>
 

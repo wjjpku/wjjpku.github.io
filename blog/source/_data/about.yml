@@ -77,9 +77,9 @@
       - name: Causal Transformer
         href: /projects/quant-transformer/
         cover: /img/projects/quant-transformer-cover.png
-      - name: Digital persona agents
-        href: /projects/digital-persona-agent/
-        cover: /img/projects/digital-persona-cover.png
+      - name: MultiagentFinal
+        href: /projects/multiagent-final/
+        cover: /img/projects/multiagent-final-cover.png
       - name: Tuvalon agent platform
         href: /projects/tuvalon/
         cover: /img/projects/tuvalon-cover.png

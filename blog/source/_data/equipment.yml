@@ -42,13 +42,14 @@
           description_zh: "一个灵均量化挑战赛项目，用 causal Transformer 建模日内微观结构数据，重点放在时间切分、归一化和防止信息泄漏的验证流程上。"
           image: /img/projects/quant-transformer-cover.png
           link: /projects/quant-transformer/
-        - name: Digital Persona Agent
-          specification: Agent Prototype / Interview and RAG Memory
-          specification_zh: 智能体原型 / 访谈与 RAG 记忆
-          description: "A two-repository prototype: interview_agent collects long-form interview material, while Unigrow-agent turns documents into cognitive engrams for guarded RAG persona responses."
-          description_zh: "一个由两个仓库组成的原型：interview_agent 收集长访谈材料，Unigrow-agent 将文档组织成 cognitive engrams，用于更有边界的 RAG 人格回答。"
-          image: /img/projects/digital-persona-cover.png
-          link: /projects/digital-persona-agent/
+        - name: MultiagentFinal
+          specification: Final Project / Multi-Agent Foundations
+          specification_zh: 多智能体系统 / 期末大作业
+          description: "A course final project on StrictCoop-Sokoban, intent-grounded communication, and recurrent MAPPO for partially observable cooperative multi-agent reinforcement learning."
+          description_zh: "一份关于 StrictCoop-Sokoban、意图接地通信和 recurrent MAPPO 的多智能体系统期末大作业，研究部分可观测协作任务中的长期角色承诺。"
+          image: /img/projects/multiagent-final-cover.png
+          link: /projects/multiagent-final/
+          report: /pdfs/projects/multiagent-final-report.pdf
         - name: Tuvalon
           specification: TA Project Design / Data Structures and Algorithms B
           specification_zh: 数据结构与算法 B / 助教大作业设计
