@@ -574,6 +574,253 @@ html[data-bilingual-active="zh"] blockquote[data-bilingual-lang="zh"] {
   }
 }
 
+@media (max-width: 700px) {
+  #page {
+    overflow-x: hidden;
+  }
+
+  .profile-hero {
+    margin-bottom: 18px;
+    padding: 24px 18px;
+  }
+
+  .profile-lede {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .cv-name-note {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.5em;
+  }
+
+  .profile-actions {
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .profile-actions a {
+    min-width: 0;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .cv-grid {
+    gap: 14px;
+  }
+
+  .cv-main,
+  .cv-panel,
+  .about-narrative {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  .cv-main p,
+  .cv-project li,
+  .cv-panel p,
+  .about-narrative p,
+  .about-narrative h2 {
+    overflow-wrap: anywhere;
+  }
+
+  .cv-entry,
+  .cv-project-head {
+    gap: 8px;
+  }
+
+  .interest-list {
+    gap: 8px;
+  }
+
+  .interest-list span,
+  .fact-grid span {
+    width: 100%;
+  }
+
+  #about-page .author-box {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 10px;
+  }
+
+  #about-page .author-tag-left,
+  #about-page .author-tag-right {
+    display: none;
+  }
+
+  #about-page .author-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  #about-page .author-content-item,
+  #about-page .author-content-item-group.column {
+    box-sizing: border-box;
+    width: 100% !important;
+    min-width: 0;
+    min-height: auto;
+    margin-top: 0;
+    padding: 16px;
+  }
+
+  #about-page .author-content-item .card-content {
+    min-width: 0;
+  }
+
+  #about-page .myInfoAndSayHello .title2 {
+    font-size: 1.9rem;
+  }
+
+  #about-page .myInfoAndSayHello .title1,
+  #about-page .author-content-item-title,
+  #about-page .author-content-item .content-bottom .tips {
+    overflow-wrap: anywhere;
+  }
+
+  #about-page .aboutsiteTips h2 {
+    font-size: clamp(1.55rem, 8vw, 2.1rem);
+    line-height: 1.12;
+    overflow-wrap: anywhere;
+  }
+
+  #about-page .aboutsiteTips .mask {
+    height: 1.16em;
+  }
+
+  #about-page .aboutsiteTips .mask span {
+    top: 1.16em;
+  }
+
+  #about-page .hello-about {
+    min-height: 220px;
+    margin: 16px 0 0;
+  }
+
+  #about-page .hello-about .shapes,
+  #about-page .hello-about .content {
+    height: 220px;
+  }
+
+  #about-page .hello-about h1 {
+    padding: 0 16px;
+    font-size: clamp(2rem, 11vw, 3.1rem) !important;
+  }
+
+  #about-page .author-content-item.personalities {
+    height: auto;
+  }
+
+  #about-page .author-content-item.personalities .image {
+    position: static;
+    width: min(210px, 72vw);
+    margin: 16px auto 0;
+    transform: none;
+  }
+
+  #about-page .author-content-item.personalities .image img {
+    max-height: 220px;
+  }
+
+  #about-page .author-content-item.game-yuanshen,
+  #about-page .author-content-item.like-technology,
+  #about-page .author-content-item.like-music {
+    min-height: 220px;
+  }
+
+  #about-page .comic-box {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+
+  #about-page .comic-item {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    transform: none;
+  }
+
+  #about-page .comic-item:hover {
+    width: 100%;
+  }
+
+  #about-page .comic-item .comic-item-cover {
+    position: static;
+    width: 100%;
+    height: 100%;
+    transform: none;
+  }
+
+  #about-page .comic-item:hover .comic-item-cover {
+    left: auto;
+    transform: none;
+  }
+
+  #about-page .comic-item .comic-item-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #about-page .author-content-item.comic-content::after {
+    content: none;
+  }
+
+  #about-page .author-content-item.comic-content .author-content-item-tips,
+  #about-page .author-content-item.comic-content .author-content-item-title {
+    color: var(--anzhiyu-fontcolor);
+    margin-bottom: 8px;
+  }
+
+  #about-page .author-content-item .card-content .banner-button-group {
+    position: static;
+    display: flex;
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  #about-page .author-content-item .card-content .banner-button-group .banner-button {
+    width: 100%;
+    justify-content: center;
+    padding: 9px 12px;
+  }
+
+  #about-page .author-content-item .card-content .banner-button-group .banner-button i {
+    width: auto;
+    height: auto;
+    margin: 0 6px 0 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    font-size: 1rem;
+  }
+
+  #about-page .author-content-item .card-content .banner-button-group .banner-button .banner-button-text {
+    display: inline;
+  }
+
+  .bilingual-switch {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+
+  .bilingual-switch button {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
 @media (max-width: 560px) {
   .profile-actions a,
   .cv-project-head {
@@ -593,5 +840,45 @@ html[data-bilingual-active="zh"] blockquote[data-bilingual-lang="zh"] {
   #about-page .hello-about h1 {
     padding: 0 18px;
     font-size: 2.35rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-hero {
+    padding: 22px 16px;
+  }
+
+  .profile-hero h1 {
+    font-size: 1.95rem;
+    line-height: 1.12;
+  }
+
+  .profile-lede {
+    font-size: 0.96rem;
+  }
+
+  .cv-main,
+  .cv-panel,
+  .about-narrative {
+    padding: 18px 16px;
+  }
+
+  .about-narrative h2 {
+    font-size: 1.38rem;
+  }
+
+  #about-page .author-content-item,
+  #about-page .author-content-item-group.column {
+    padding: 14px;
+  }
+
+  #about-page .comic-box {
+    grid-template-columns: 1fr;
+  }
+
+  #about-page .author-content-item.game-yuanshen,
+  #about-page .author-content-item.like-technology,
+  #about-page .author-content-item.like-music {
+    min-height: 190px;
   }
 }

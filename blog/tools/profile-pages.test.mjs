@@ -9,6 +9,21 @@ function read(relativePath) {
   return readFileSync(join(root, relativePath), "utf8");
 }
 
+function mediaBlock(css, query) {
+  const start = css.indexOf(`@media ${query} {`);
+  if (start === -1) return "";
+
+  const bodyStart = css.indexOf("{", start);
+  let depth = 0;
+  for (let index = bodyStart; index < css.length; index += 1) {
+    if (css[index] === "{") depth += 1;
+    if (css[index] === "}") depth -= 1;
+    if (depth === 0) return css.slice(start, index + 1);
+  }
+
+  return "";
+}
+
 test("academic profile pages are present and wired into navigation", () => {
   const cv = read("source/cv/index.md");
   const about = read("source/about/index.md");
@@ -407,4 +422,37 @@ test("academic profile pages are present and wired into navigation", () => {
   const publicContent = [cv, about, aboutData, albumData, equipmentData, quant, persona, tuvalon].join("\n");
   assert.doesNotMatch(publicContent, /3323516279|qq\.com/);
   assert.doesNotMatch([cv, about, aboutData].join("\n"), /30\.88%|98\.1%/);
+});
+
+test("custom profile and project pages keep mobile-specific layout guards", () => {
+  const profileCss = read("source/css/profile.css");
+  const projectsCss = read("source/css/projects.css");
+
+  const mobileProfileCss = mediaBlock(profileCss, "(max-width: 700px)");
+  const compactProfileCss = mediaBlock(profileCss, "(max-width: 480px)");
+  const mobileProjectsCss = mediaBlock(projectsCss, "(max-width: 640px)");
+
+  assert.match(mobileProfileCss, /#page[\s\S]*overflow-x: hidden/);
+  assert.match(mobileProfileCss, /\.profile-hero[\s\S]*padding/);
+  assert.match(mobileProfileCss, /#about-page \.author-box[\s\S]*grid-template-columns: 1fr/);
+  assert.match(mobileProfileCss, /#about-page \.author-tag-left,\s*#about-page \.author-tag-right[\s\S]*display: none/);
+  assert.match(mobileProfileCss, /#about-page \.author-content[\s\S]*grid-template-columns: 1fr/);
+  assert.match(mobileProfileCss, /#about-page \.hello-about[\s\S]*min-height/);
+  assert.match(mobileProfileCss, /#about-page \.aboutsiteTips h2[\s\S]*overflow-wrap: anywhere/);
+  assert.match(mobileProfileCss, /#about-page \.author-content-item\.personalities \.image[\s\S]*position: static/);
+  assert.match(mobileProfileCss, /#about-page \.comic-box[\s\S]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(mobileProfileCss, /#about-page \.comic-item[\s\S]*min-width: 0/);
+  assert.match(mobileProfileCss, /\.bilingual-switch[\s\S]*width: 100%/);
+  assert.match(compactProfileCss, /\.profile-hero h1[\s\S]*font-size/);
+  assert.match(compactProfileCss, /\.cv-main,\s*\.cv-panel,\s*\.about-narrative[\s\S]*padding/);
+
+  assert.match(mobileProjectsCss, /body\[data-type="equipment"\] #equipment[\s\S]*overflow-x: hidden/);
+  assert.match(mobileProjectsCss, /\.goodthings-item[\s\S]*padding/);
+  assert.match(mobileProjectsCss, /\.goodthings-title[\s\S]*overflow-wrap: anywhere/);
+  assert.match(mobileProjectsCss, /\.equipment-item-content[\s\S]*gap/);
+  assert.match(mobileProjectsCss, /\.equipment-item-content-item[\s\S]*min-height: auto/);
+  assert.match(mobileProjectsCss, /\.equipment-item-content-item-info[\s\S]*min-width: 0/);
+  assert.match(mobileProjectsCss, /\.equipment-item-content-item-name[\s\S]*overflow-wrap: anywhere/);
+  assert.match(mobileProjectsCss, /\.equipment-item-content-item-toolbar[\s\S]*flex-wrap: wrap/);
+  assert.match(mobileProjectsCss, /\.equipment-report-link[\s\S]*margin-left: 0/);
 });
