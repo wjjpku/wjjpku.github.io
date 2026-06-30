@@ -1,9 +1,9 @@
 ---
-title: 研究工作
+title: Project Portfolio
 date: 2026-06-21 01:05:00
 layout: page
 type: equipment
-description: 收纳 wjjpku 在深度学习、机器学习、数学文本识别和交互叙事上的公开项目。
+description: A portfolio of course reports, challenge projects, teaching-assistant project design, and independent builds across machine learning, modeling, agents, and interactive systems.
 comments: false
 aside: false
 ---

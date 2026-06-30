@@ -9,6 +9,7 @@
     "server": "hexo server",
     "studio": "node tools/author-studio/server.mjs",
     "test:paths": "node tools/check-english-paths.mjs",
+    "test:profile": "node --test tools/profile-pages.test.mjs",
     "test:studio": "node --test tools/author-studio/*.test.mjs",
     "install-studio-app": "node tools/author-studio/install-macos-app.mjs"
   },

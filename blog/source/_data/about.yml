@@ -1,0 +1,104 @@
+- subtitle: "I study mathematics at PKU, follow large-model interpretability, and keep notes while learning how to think in public."
+  avatarImg: /img/headelephant.jpg
+  name: Justin Wu
+  description: "I work on large-model interpretability, mathematical reasoning, and evidence-driven project work."
+  helloAbout: "Interpretability. Evidence. Reasoning."
+  skillsTips:
+    tips: Research Toolkit
+    title: What I Work With
+  careers:
+    tips: Academic Thread
+    title: An Interpretability Story in Progress
+    img: /photos/profile/cmo-gold-medal.webp
+    list:
+      - desc: Research focus on large-model interpretability and mathematical reasoning
+        color: "#2f80ed"
+      - desc: Mathematics student at Peking University
+        color: "#23a37f"
+      - desc: CMO Gold Medal and Lingjun Linghang Scholarship
+        color: "#ef8354"
+      - desc: Building research taste through coursework, attribution, mechanisms, and careful baselines
+        color: "#8b5cf6"
+  avatarSkills:
+    left:
+      - Mathematics
+      - Interpretability
+      - PyTorch
+    right:
+      - LLMs
+      - Experiments
+      - Writing
+  aboutsiteTips:
+    tips: Site Thesis
+    title1: A portfolio for
+    title2: interpretability and voice
+    word:
+      - mechanisms
+      - reasoning
+      - evidence
+      - narrative
+  map:
+    background: /photos/profile/campus-whiteboard.webp
+    backgroundDark: /photos/profile/academic-lecture.webp
+    title: Studying from
+    StrengthenTitle: Beijing
+  selfInfo:
+    selfInfoTips1: PKU year
+    selfInfoContentYear: 2
+    selfInfoTips2: Focus
+    selfInfoContent2: LLM interpretability
+    selfInfoTips3: Home base
+    selfInfoContent3: PKU SMS
+  personalities:
+    author_name: Justin Wu
+    personality_type: ENTJ
+    photo_url: /photos/profile/seaside-life.webp
+    personality_img: /photos/profile/travel-jeju-open-arms.webp
+    name_url: /about/
+    personality_type_color: "#3563a9"
+  game:
+    game_tips: Texas Hold'em
+    game_title: Probability under incomplete information
+    game_uid: Ranges, pot odds, table image, and the discipline to fold
+    game_bg: /photos/profile/poker-life.webp
+  comic:
+    comic_tips: Project Shelf
+    comic_title: Course reports, challenges, and independent builds
+    comic_list:
+      - name: Source-only schedule transfer
+        href: /projects/dl-final/
+        cover: /img/projects/dl-final-cover.png
+      - name: Grokking harness
+        href: /projects/ml-final/
+        cover: /img/projects/ml-final-cover.png
+      - name: Math text attribution
+        href: /projects/modelmid/
+        cover: /img/projects/modelmid-cover.png
+      - name: Causal Transformer
+        href: /projects/quant-transformer/
+        cover: /img/projects/quant-transformer-cover.png
+      - name: Digital persona agents
+        href: /projects/digital-persona-agent/
+        cover: /img/projects/digital-persona-cover.png
+      - name: Tuvalon agent platform
+        href: /projects/tuvalon/
+        cover: /img/projects/tuvalon-cover.png
+      - name: Uncle Ducky
+        href: /projects/uncle-ducky/
+        cover: /img/projects/uncle-ducky-cover.png
+  music:
+    music_tips: Soundtrack
+    music_title: Long walks after experiments
+    music_link: /about/
+    music_bg: /photos/profile/travel-singapore-skyline.webp
+  like:
+    like_tips: Travel Notes
+    like_title: Japan, Singapore, Jeju, and the habit of noticing structure
+    like_bottom: "Travel keeps the research voice porous: more patient, more visual, less sealed inside benchmarks."
+    like_link: /travel/
+    like_button: View travel notes
+    like_bg: /photos/profile/travel-japan-maple.webp
+  statistic:
+    cover: /photos/profile/travel-japan-bamboo.webp
+    link: /projects/
+    text: View projects

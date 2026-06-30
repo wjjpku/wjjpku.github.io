@@ -1,15 +1,43 @@
 /* Page-level tuning for the native AnZhiYu equipment cards on Research. */
 body[data-type="equipment"] #equipment .equipment-item-content-item {
   width: calc(50% - 12px);
+  min-height: 432px;
 }
 
 body[data-type="equipment"] #equipment .equipment-item-content-item-cover {
   height: 240px;
+  overflow: hidden;
+  display: block;
+  background: var(--anzhiyu-secondbg);
+}
+
+body[data-type="equipment"] #equipment .equipment-item-content-item-info {
+  padding-bottom: 56px;
+}
+
+body[data-type="equipment"] #equipment .equipment-item-content-item-description {
+  line-height: 1.55;
+}
+
+body[data-type="equipment"] #equipment .equipment-item-content-item-toolbar {
+  gap: 10px;
+  align-items: center;
+}
+
+body[data-type="equipment"] #equipment .equipment-report-link {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }
 
 body[data-type="equipment"] #equipment .equipment-item-content-item-image {
-  width: 320px;
-  max-width: 82%;
+  display: block;
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center;
 }
 
 @media (max-width: 768px) {

@@ -1,7 +1,7 @@
 (function () {
-  const academicPath = "/projects/";
+  const primaryPath = "/about/";
 
-  function goAcademic(event) {
+  function goPrimary(event) {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
@@ -9,15 +9,15 @@
     }
 
     if (window.pjax && typeof window.pjax.loadUrl === "function") {
-      window.pjax.loadUrl(academicPath);
+      window.pjax.loadUrl(primaryPath);
     } else {
-      window.location.href = academicPath;
+      window.location.href = primaryPath;
     }
   }
 
-  function bindAcademicEntry() {
+  function bindPrimaryEntry() {
     window.toRandomPost = function () {
-      goAcademic();
+      goPrimary();
     };
 
     const entries = [
@@ -27,24 +27,24 @@
     ].filter(Boolean);
 
     entries.forEach(entry => {
-      entry.setAttribute("href", academicPath);
-      entry.setAttribute("title", "Research");
-      entry.onclick = goAcademic;
+      entry.setAttribute("href", primaryPath);
+      entry.setAttribute("title", "About");
+      entry.onclick = goPrimary;
     });
 
     const bannerText = document.querySelector("#random-hover .bannerText");
-    if (bannerText && !bannerText.dataset.academicText) {
+    if (bannerText && !bannerText.dataset.primaryText) {
       const arrow = bannerText.querySelector("i");
-      bannerText.textContent = "研究工作";
+      bannerText.textContent = "About";
       if (arrow) bannerText.appendChild(arrow);
-      bannerText.dataset.academicText = "true";
+      bannerText.dataset.primaryText = "true";
     }
 
     const menuText = document.querySelector("#menu-randomPost span");
-    if (menuText) menuText.textContent = "研究工作";
+    if (menuText) menuText.textContent = "About";
   }
 
-  bindAcademicEntry();
-  document.addEventListener("DOMContentLoaded", bindAcademicEntry);
-  document.addEventListener("pjax:complete", bindAcademicEntry);
+  bindPrimaryEntry();
+  document.addEventListener("DOMContentLoaded", bindPrimaryEntry);
+  document.addEventListener("pjax:complete", bindPrimaryEntry);
 })();

@@ -1,28 +1,65 @@
-- class_name: 研究工作
-  description: 项目与实验
-  tip: 四个项目分别落在训练曲线建模、算法数据集泛化、数学文本来源识别和交互叙事上；这里保留研究问题、方法证据和可追溯的代码入口。
-  top_background: /photos/sywx.jpg
+- class_name: Project Portfolio
+  class_name_zh: 项目作品集
+  description: Course Reports, Challenges, and Independent Builds
+  description_zh: 课程报告、挑战赛与独立构建
+  tip: "This page is a record of serious coursework, challenge work, teaching-assistant project design, and independent building. These are not publication-style research claims yet; they are project reports that show how I formulate questions, build systems, run experiments, and explain what I learned."
+  tip_zh: "这个页面记录的是严肃的课程作业、挑战赛工作、助教项目设计和独立构建。它们还不是发表式科研宣称，而是展示我如何提出问题、搭系统、做实验，并解释自己学到了什么的项目报告。"
+  top_background: /photos/profile/campus-whiteboard.webp
   good_things:
-    - title: 公开项目
-      description: 从损失曲线、代数结构学习到数学文本检测和聊天式经营游戏，展示我近期做过的几类完整项目。
+    - title: Project Reports
+      title_zh: 项目报告
+      description: "The common thread is training: coursework made me practice mathematical modeling and controlled experiments; challenges forced validation discipline; independent builds taught me how interfaces and agents behave when ideas meet users."
+      description_zh: "共同线索是训练：课程作业让我练习数学建模和受控实验；挑战赛迫使我重视验证纪律；独立构建则让我看到界面和智能体在真正遇到用户时会怎样表现。"
       equipment_list:
         - name: DLfinal
-          specification: Loss Curve Transfer / Schedule Response
-          description: 从公开 cosine loss curve 中识别可迁移的学习率下降响应，在不读取目标 WSD loss 的前提下改进 MPL baseline。
+          specification: Final Project / Mathematical Introduction to Machine Learning
+          specification_zh: 机器学习数学导引 / 期末大作业
+          description: "A course final project on source-only cosine-to-WSD loss-curve prediction, treating MPL as a frozen baseline and separating transferable LR-drop response from MPL-LD nuisance drift."
+          description_zh: "一份关于 source-only cosine-to-WSD 损失曲线预测的课程期末项目，把 MPL 作为冻结基线，并把可迁移的 LR-drop 响应从 MPL-LD 漂移中分离出来。"
           image: /img/projects/dl-final-cover.png
           link: /projects/dl-final/
+          report: /pdfs/projects/dl-final-report.pdf
         - name: MLfinal
-          specification: Grokking / Algorithmic Datasets
-          description: 把模运算、S5 群运算和 K 元求和写成短序列预测任务，比较 Transformer、MLP、LSTM 等模型的延迟泛化。
+          specification: Final Project / Selected Topics in Deep Learning Theory
+          specification_zh: 深度学习理论选讲 / 期末大作业
+          description: "A course final project and reproducible PyTorch harness for grokking on modular arithmetic, polynomial modular operations, S5 group tasks, and K-ary modular summation."
+          description_zh: "一份关于 grokking 的课程期末项目和可复现实验框架，覆盖模运算、多项式模任务、S5 群任务和 K-ary 模求和。"
           image: /img/projects/ml-final-cover.png
           link: /projects/ml-final/
+          report: /pdfs/projects/ml-final-report.pdf
         - name: Modelmid
-          specification: Math Text Attribution / Adversarial Detection
-          description: 识别人类与 DeepSeek、GLM、GPT、Kimi、Qwen 等模型生成的数学解答，并分析跨语言泛化和防检测提示。
+          specification: Midterm Project / Mathematical Modeling
+          specification_zh: 数学模型 / 期中作业
+          description: "A mathematical modeling midterm project on identifying the source of math solutions, using LaTeX structure, proof rhythm, formula density, and adversarial rewriting as modeling signals."
+          description_zh: "一份关于数学解答来源识别的数学建模期中项目，把 LaTeX 结构、证明节奏、公式密度和对抗改写作为建模信号。"
           image: /img/projects/modelmid-cover.png
           link: /projects/modelmid/
-        - name: 鸭腿叔叔
-          specification: Interactive Fiction / Chat-Based Business Game
-          description: 用微信式聊天界面承载经营决策、群聊舆论、供应商风险和多结局复盘，让读消息本身成为玩法。
+          report: /pdfs/projects/modelmid-report.pdf
+        - name: Quant Transformer
+          specification: Challenge Work / Lingjun Quant Challenge
+          specification_zh: 灵均量化挑战赛 / 项目实践
+          description: "A Lingjun Quant Challenge project using causal Transformer modeling on intraday microstructure data, with emphasis on chronological splits, normalization, and leakage-aware validation."
+          description_zh: "一个灵均量化挑战赛项目，用 causal Transformer 建模日内微观结构数据，重点放在时间切分、归一化和防止信息泄漏的验证流程上。"
+          image: /img/projects/quant-transformer-cover.png
+          link: /projects/quant-transformer/
+        - name: Digital Persona Agent
+          specification: Agent Prototype / Interview and RAG Memory
+          specification_zh: 智能体原型 / 访谈与 RAG 记忆
+          description: "A two-repository prototype: interview_agent collects long-form interview material, while Unigrow-agent turns documents into cognitive engrams for guarded RAG persona responses."
+          description_zh: "一个由两个仓库组成的原型：interview_agent 收集长访谈材料，Unigrow-agent 将文档组织成 cognitive engrams，用于更有边界的 RAG 人格回答。"
+          image: /img/projects/digital-persona-cover.png
+          link: /projects/digital-persona-agent/
+        - name: Tuvalon
+          specification: TA Project Design / Data Structures and Algorithms B
+          specification_zh: 数据结构与算法 B / 助教大作业设计
+          description: "A Flask-based Avalon agent battle platform from pkulab409/pkudsa.avalon, with Python submissions, referee-controlled phases, automatic matching, an ELO system, and replay logs."
+          description_zh: "一个来自 pkulab409/pkudsa.avalon 的 Flask 阿瓦隆智能体对战平台，支持 Python 提交、裁判控制阶段、自动匹配、ELO 系统和对局回放日志。"
+          image: /img/projects/tuvalon-cover.png
+          link: /projects/tuvalon/
+        - name: Uncle Ducky
+          specification: Independent Mini-Game / Chat-Based Business Narrative
+          specification_zh: 独立小游戏 / 聊天式经营叙事
+          description: "An independent mini-game that uses a chat interface to turn unread messages, supplier pressure, public sentiment, and platform risk into narrative state."
+          description_zh: "一个独立小游戏，用聊天界面把未读消息、供应商压力、舆论和平台风险转化为叙事状态。"
           image: /img/projects/uncle-ducky-cover.png
           link: /projects/uncle-ducky/

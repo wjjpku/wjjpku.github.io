@@ -1,111 +1,72 @@
 ---
 title: Modelmid
 date: 2026-06-21 01:12:00
+updated: 2026-06-30 16:10:00
 layout: page
-description: 数学解答来源识别项目，分析人类与多种大模型在数学写作中的风格指纹。
+description: Midterm project for Mathematical Modeling, using source attribution on mathematical solutions as a modeling and evaluation exercise.
 comments: false
 aside: false
 ---
 
-> Modelmid 研究“数学解答是谁写的”。它不是普通主题分类，而是从 LaTeX 习惯、公式密度、段落结构、逻辑连接和证明语气中识别人类与大模型的写作指纹。
+> This was my midterm project for Mathematical Modeling. I used mathematical-solution attribution as a modeling problem: given a written solution, can I infer whether it came from a human student or from a specific LLM?
 
-{% link Modelmid 代码仓库, GitHub / wjjpku, https://github.com/wjjpku/Modelmid %}
+I keep the report, data-processing scripts, classifier experiments, and later extensions in [GitHub / wjjpku/Modelmid](https://github.com/wjjpku/Modelmid).
 
-## 项目概览
+## What I studied
 
-项目给同一道数学题收集人类解答和多个大模型解答，然后训练检测器判断文本来源。公开版覆盖 Human、DeepSeek、GLM、GPT-4.1-mini、Kimi、Qwen 等来源。
+The original midterm version focused on human writing plus four LLM sources: DeepSeek, Kimi, GLM, and Qwen. Later, I extended the public version with GPT-4.1-mini related generation and adversarial experiments. I do not treat every later figure as part of the original midterm submission; I treat the repository as a course project that kept growing after the deadline.
 
-它最有意思的地方在于：数学文本不是普通自然语言。公式、换行、证明组织方式、LaTeX 环境、逻辑词和段落节奏，本身就是模型风格的一部分。
+The point was not ordinary topic classification. The same or similar math problems were answered by different sources, so the detector had to look for writing and formatting fingerprints rather than problem content alone.
 
-{% image https://raw.githubusercontent.com/wjjpku/Modelmid/main/docs/figures/gpt_augmented/pca_clusters_2d.png, alt=不同来源数学解答在特征空间中的 PCA 聚类, width=100% %}
+I focused on signals such as:
 
-{% mermaid %}
-flowchart LR
-  A["同题多来源解答"] --> B["结构与 LaTeX 特征"]
-  B --> C["传统 ML 与端到端模型"]
-  C --> D["跨分布与对抗评估"]
-{% endmermaid %}
+- paragraph count and paragraph length
+- line breaks and step formatting
+- inline and display LaTeX usage
+- logical connectors and proof-transition words
+- TF-IDF phrase patterns
+- source-specific habits in mathematical explanation
 
-## 工作流
+![不同来源数学解答在特征空间中的 PCA 聚类](https://raw.githubusercontent.com/wjjpku/Modelmid/main/docs/figures/gpt_augmented/pca_clusters_2d.png)
 
-{% timeline 项目流程,blue %}
-<!-- timeline 数据构建 -->
-构建同题配对的多来源数学解答数据集，覆盖训练、泛化和对抗评估。
-<!-- endtimeline -->
-<!-- timeline 特征提取 -->
-提取段落数量、公式密度、LaTeX 环境、逻辑连接词、TF-IDF 等结构与词汇特征。
-<!-- endtimeline -->
-<!-- timeline 模型训练 -->
-比较 RandomForest、HistGradientBoosting、ResNet_DNN、Simple_MLP、Conv1D_Net 和端到端 DistilBERT。
-<!-- endtimeline -->
-<!-- timeline 泛化与对抗 -->
-测试跨分布表现，并用大模型根据检测器反馈迭代优化 prompt，观察绕过率如何变化。
-<!-- endtimeline -->
-{% endtimeline %}
+## My workflow
 
-## 公开版结果
+1. Build paired mathematical-solution datasets across sources.
+2. Extract lexical, structural, LaTeX, and proof-style features.
+3. Train traditional machine-learning classifiers and neural baselines.
+4. Evaluate in-distribution performance, cross-domain generalization, and adversarial rewriting.
+5. Use feature analysis to understand what the detector is actually relying on.
 
-{% tabs modelmid, 1 %}
-<!-- tab 分类器 -->
+## Models I compared
 
-| Model | Type | Accuracy |
-| --- | --- | ---: |
-| RandomForest | ML | `0.977` |
-| HistGradientBoosting | ML | `0.974` |
-| ResNet_DNN | DL | `0.974` |
-| Simple_MLP | DL | `0.970` |
-| Conv1D_Net | DL | `0.965` |
-| End-to-End DistilBERT | E2E Transformer | `0.981` |
+I compared two families of detectors.
 
-传统 ML 检测器训练快、解释性强；端到端 Transformer 检测器准确率更高，但解释成本也更高。
+The first family used feature engineering: TF-IDF plus custom structural features, then tree-based models or similar classifiers. This was easier to inspect because I could see whether the model cared about paragraph structure, LaTeX packaging, proof rhythm, or phrase choice.
 
-<!-- endtab -->
-<!-- tab 特征 -->
+The second family used end-to-end neural models, including DistilBERT in the expanded experiments. These could be stronger in distribution, but they were also harder to explain. I cared about that tradeoff more than about a single leaderboard number.
 
-公开版报告保留了 28 个排版、结构和逻辑特征。比较突出的信号包括：
+## How I separate the versions
 
-- 人类平均段落数更少，但单段长度和信息密度更高。
-- 不同模型对行内公式和块级公式有明显偏好。
-- 逻辑连接词、LaTeX 环境和换行模式能帮助区分来源。
+I now think about the project in two layers.
 
-<!-- endtab -->
-<!-- tab 对抗 -->
+The midterm layer is the submitted assignment: feature extraction, source classification, cross-domain generalization, and anti-detection analysis on the original source set.
 
-GPT-4.1-mini 迭代对抗实验中，数据驱动 prompt 优化在第 5 轮达到 `100%` 绕过率：
+The expanded repository layer adds GPT-4.1-mini generation, stealth-generation scripts, six-source reports, updated figures, and adversarial experiment summaries. I keep that distinction because otherwise the project sounds cleaner than it really was.
 
-| Round | Bypass Rate |
-| --- | ---: |
-| 1 | `0.00%` |
-| 2 | `20.00%` |
-| 3 | `46.67%` |
-| 4 | `60.00%` |
-| 5 | `100.00%` |
+## The adversarial lesson
 
-这说明可解释特征既能帮助我们理解检测器，也会在暴露后成为对抗绕过的入口。
+The adversarial part became the most interesting lesson. Once I exposed the detector's feature preferences, a generator could be guided to change its paragraphing, formula packaging, and proof style. Data-driven prompt feedback can weaken a detector surprisingly quickly.
 
-<!-- endtab -->
-{% endtabs %}
+This makes the project more honest than a classifier demo: interpretability helps explain a model, but it also creates an attack surface.
 
-## 关键图示
+## Figures
 
-{% image https://raw.githubusercontent.com/wjjpku/Modelmid/main/docs/figures/gpt_augmented/confusion_matrix_ml.png, alt=数学解答来源识别的混淆矩阵, width=100% %}
+![数学解答来源识别的混淆矩阵](https://raw.githubusercontent.com/wjjpku/Modelmid/main/docs/figures/gpt_augmented/confusion_matrix_ml.png)
 
-{% image https://raw.githubusercontent.com/wjjpku/Modelmid/main/docs/figures/gpt_augmented/feature_importances.png, alt=来源识别中的特征重要性, width=100% %}
+![来源识别中的特征重要性](https://raw.githubusercontent.com/wjjpku/Modelmid/main/docs/figures/gpt_augmented/feature_importances.png)
 
-{% image https://raw.githubusercontent.com/wjjpku/Modelmid/main/docs/figures/gpt_augmented/stealth_success_rate.png, alt=防检测提示下的绕过率变化, width=100% %}
+![防检测提示下的绕过率变化](https://raw.githubusercontent.com/wjjpku/Modelmid/main/docs/figures/gpt_augmented/stealth_success_rate.png)
 
-{% folding green, 我觉得有价值的点 %}
+## What I Learned
 
-这个项目把“AI 数学解答的风格”拆成了可以观察的信号。它不仅能训练分类器，也能反过来暴露检测器的脆弱处：当一个大模型知道检测器关心什么，它就可能沿着这些特征进行伪装。这让项目同时具有可解释性和安全性讨论价值。
-
-{% endfolding %}
-
-## 仓库入口
-
-- 数据集：`dataset/`
-- 特征与报告：`docs/experiment_report.md`
-- 分类结果：`results/classification/`
-- 对抗实验：`iterative_adversarial_experiment/`
-- 主要脚本：`scripts/model_training/`, `scripts/visualization/`
-
-{% link 查看 README 与代码, GitHub / Modelmid, https://github.com/wjjpku/Modelmid %}
+The project taught me to treat detection claims carefully. High in-distribution performance is not the same as robust understanding. A detector can learn real style signals, but those same signals can be manipulated once they are known.

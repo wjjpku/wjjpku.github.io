@@ -1,0 +1,49 @@
+- creativity_list:
+    - name: Python
+      color: "#3776ab"
+      icon: /img/tech-icons/python.svg
+    - name: PyTorch
+      color: "#ee4c2c"
+      icon: /img/tech-icons/pytorch.svg
+    - name: Hugging Face
+      color: "#d97706"
+      icon: /img/tech-icons/huggingface.svg
+    - name: Jupyter
+      color: "#f37626"
+      icon: /img/tech-icons/jupyter.svg
+    - name: NumPy
+      color: "#4d77cf"
+      icon: /img/tech-icons/numpy.svg
+    - name: pandas
+      color: "#150458"
+      icon: /img/tech-icons/pandas.svg
+    - name: scikit-learn
+      color: "#f7931e"
+      icon: /img/tech-icons/scikitlearn.svg
+    - name: Plotly
+      color: "#3f4f75"
+      icon: /img/tech-icons/plotly.svg
+    - name: LaTeX
+      color: "#008080"
+      icon: /img/tech-icons/latex.svg
+    - name: GitHub
+      color: "#24292f"
+      icon: /img/tech-icons/github.svg
+    - name: Markdown
+      color: "#222222"
+      icon: /img/tech-icons/markdown.svg
+    - name: Docker
+      color: "#2496ed"
+      icon: /img/tech-icons/docker.svg
+    - name: Linux
+      color: "#333333"
+      icon: /img/tech-icons/linux.svg
+    - name: OpenAI
+      color: "#111111"
+      icon: /img/tech-icons/openai.svg
+    - name: arXiv
+      color: "#b31b1b"
+      icon: /img/tech-icons/arxiv.svg
+    - name: VS Code
+      color: "#007acc"
+      icon: /img/tech-icons/visualstudiocode.svg

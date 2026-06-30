@@ -14,9 +14,12 @@ if home_top_config.enable
               .banners-title-small=siteText
             include ../anzhiyu/tags-group-all.pug
 
-          a#random-hover(href='javascript:toRandomPost()')
+          - let randomLink = home_top_config.random && home_top_config.random.link ? home_top_config.random.link : 'javascript:toRandomPost()'
+          - let randomText = home_top_config.random && home_top_config.random.text ? home_top_config.random.text : '随便逛逛'
+          a#random-hover(href=url_for(randomLink))
             i.anzhiyufont.anzhiyu-icon-paper-plane
-            .bannerText 随便逛逛
+            .bannerText
+              = randomText
               i.anzhiyufont.anzhiyu-icon-arrow-right
         .categoryGroup
           each item in home_top_config.category
@@ -132,4 +135,3 @@ if home_top_config.enable
       setTimeout(()=>{
         initBlogSlider()
       }, 100)
-

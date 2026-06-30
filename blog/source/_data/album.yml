@@ -1,0 +1,93 @@
+- class_name: Travel Notes
+  path_name: /travel/
+  top_tips: Album
+  description: "Japan, Singapore, Jeju, and small city walks: images that keep research from becoming airless."
+  top_background: /photos/travel/jeju-columnar-coast.webp
+  top_link: /about/
+  top_btn_text: Back to About
+  type: 1
+  album_list:
+    - date: 2026-05-31
+      content: "Jeju's softer side: hotel glass, evening streets, and a sunset that feels like a held breath."
+      address: Jeju, South Korea
+      from: Travel Notes
+      image:
+        - /photos/travel/jeju-hotel-pool-view.webp
+        - /photos/profile/travel-jeju-sunset.webp
+        - /photos/travel/jeju-neon-street.webp
+    - date: 2026-05-29
+      content: "Basalt, wind, and bright water: Jeju as a landscape of edges, columns, and sudden motion."
+      address: Jeju, South Korea
+      from: Travel Notes
+      image:
+        - /photos/travel/jeju-columnar-coast.webp
+        - /photos/travel/jeju-lighthouse-coast.webp
+        - /photos/travel/jeju-boat-wake.webp
+        - /photos/travel/jeju-basalt-path.webp
+        - /photos/travel/jeju-basalt-selfie.webp
+    - date: 2026-01-23
+      content: "Singapore at night: a skyline pool, jellyfish light, and flamingos blurred into something closer to memory."
+      address: Singapore
+      from: Travel Notes
+      image:
+        - /photos/profile/travel-singapore-skyline.webp
+        - /photos/travel/singapore-rooftop-skyline.webp
+        - /photos/travel/singapore-aquarium-jellyfish.webp
+        - /photos/travel/singapore-night-flamingos.webp
+    - date: 2026-01-23
+      content: "At the southernmost point of continental Asia: a small sign with a wonderfully oversized claim."
+      address: Sentosa, Singapore
+      from: Travel Notes
+      image:
+        - /photos/travel/singapore-southernmost-point.webp
+    - date: 2025-11-30
+      content: "Tokyo at night, where attention has to learn a different rhythm."
+      address: Tokyo, Japan
+      from: Travel Notes
+      image:
+        - /photos/profile/travel-japan-shibuya.webp
+        - /photos/IMG_4713.webp
+    - date: 2025-11-29
+      content: "Kyoto in late autumn: bamboo, maple leaves, temple roofs, and a slower grammar of looking."
+      address: Kyoto, Japan
+      from: Travel Notes
+      image:
+        - /photos/profile/travel-japan-bamboo.webp
+        - /photos/profile/travel-japan-maple.webp
+        - /photos/travel/kyoto-maple-floor.webp
+        - /photos/travel/kyoto-soba-table.webp
+        - /photos/IMG_4378.webp
+        - /photos/IMG_4662.webp
+        - /photos/IMG_4640.webp
+        - /photos/IMG_3995.webp
+    - date: 2025-11-28
+      content: "A traditional tower and a sloping street: small architectural memories from the road."
+      address: Japan
+      from: Travel Notes
+      image:
+        - /photos/profile/traditional-tower.webp
+        - /photos/travel/kyoto-street-cyclist.webp
+    - date: 2025-06-24
+      content: "Rain after a practice trip in Mianyang: a quiet morning with enough distance to think."
+      address: Mianyang, China
+      from: City Walks
+      image:
+        - /photos/scmy.jpg
+    - date: 2025-04-06
+      content: "A half-day walk through Tsinghua, mainly for cake, partly for campus scale."
+      address: Beijing, China
+      from: City Walks
+      image:
+        - /photos/thut.jpg
+    - date: 2025-03-25
+      content: "Walled World near the south gate of PKU: a city frame discovered on an ordinary walk."
+      address: Beijing, China
+      from: City Walks
+      image:
+        - /photos/walledworld.jpg
+    - date: 2025-02-02
+      content: "A corner of the Drum Tower in Xi'an, held for its geometry and dusk color."
+      address: Xi'an, China
+      from: City Walks
+      image:
+        - /photos/xian.jpg

@@ -4,7 +4,7 @@
 
 menu: # 主页最上面的
   Home: / || anzhiyu-icon-house-chimney
-  Research: /projects/ || anzhiyu-icon-book-open
+  About: /about/ || anzhiyu-icon-paper-plane
   Friends: /link/ || anzhiyu-icon-link
   #  文章:
   #    隧道: https://generals.io || anzhiyu-icon-box-archive
@@ -40,8 +40,14 @@ nav:
           icon: /img/favicon.ico
     - title: Projects
       item:
-        - name: Research
+        - name: Projects
           link: /projects/
+          icon: /img/favicon.ico
+        - name: CV
+          link: /cv/
+          icon: /img/favicon.ico
+        - name: About
+          link: /about/
           icon: /img/favicon.ico
         - name: Friends
           link: /link/
@@ -1059,33 +1065,28 @@ css_prefix: true
 home_top:
   enable: true # 开关
   timemode: date #date/updated
-  title: 研究工作
-  subTitle: 项目与实验
-  siteText: 机器学习 · 数学文本 · 交互作品
+  title: About
+  subTitle: Justin Wu
+  siteText: Large-model interpretability · travel notes · academic voice
   random:
-    text: Research
-    link: /projects/
+    text: About
+    link: /about/
   category:
-    - name: Notes
-      path: /notes/
+    - name: Projects
+      path: /projects/
       shadow: var(--anzhiyu-shadow-blue)
       class: blue
-      icon: anzhiyu-icon-dove
-    - name: Work
-      path: /work/
-      shadow: var(--anzhiyu-shadow-red)
-      class: red
-      icon: anzhiyu-icon-fire
+      icon: anzhiyu-icon-book-open
     - name: Life
-      path: /photos/
+      path: /travel/
       shadow: var(--anzhiyu-shadow-green)
       class: green
       icon: anzhiyu-icon-book
-    - name: Friends
-      path: /link/
-      shadow: var(--anzhiyu-shadow-blue)
-      class: blue
-      icon: anzhiyu-icon-link
+    - name: CV
+      path: /cv/
+      shadow: var(--anzhiyu-shadow-red)
+      class: red
+      icon: anzhiyu-icon-file
   default_descr: 再怎么看我也不知道怎么描述它的啦！
   swiper:
     enable: false
@@ -1261,11 +1262,14 @@ inject:
     - <link rel="stylesheet" href="/css/friends.css">
     - <link rel="stylesheet" href="/css/nav.css">
     - <link rel="stylesheet" href="/css/projects.css">
+    - <link rel="stylesheet" href="/css/profile.css">
 
   bottom:
     # 自定义js
     # - <script src="/js/xxx"></script>
     - <script src="/js/academic-entry.js"></script>
+    - <script src="/js/bilingual.js"></script>
+    - <script src="/js/about-page.js"></script>
 
 # CDN
 # Don't modify the following settings unless you know how they work
