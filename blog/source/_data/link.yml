@@ -2,6 +2,10 @@
   class_desc: 临时赛博友链，等真实朋友站点信息补齐后可以直接替换。
   flink_style: anzhiyu
   link_list:
+    - name: Rratic
+      link: https://rratic.top/
+      avatar: https://rratic.top/images/avater.jpg
+      descr: 过去小橘猫不可得，现在小橘猫不可得，未来小橘猫不可得。
     - name: 马斯克
       link: https://wjjpku.github.io
       avatar: /img/headelephant.jpg
