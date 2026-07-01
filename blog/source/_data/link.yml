@@ -1,5 +1,5 @@
-- class_name: Cyber Friends
-  class_desc: 临时赛博友链，等真实朋友站点信息补齐后可以直接替换。
+- class_name: Friends
+  class_desc: 朋友们的站点，欢迎串门。
   flink_style: anzhiyu
   link_list:
     - name: Rratic
