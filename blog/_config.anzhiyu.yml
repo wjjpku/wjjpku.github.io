@@ -1093,10 +1093,10 @@ home_top:
     swiper_css: https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css #swiper css依赖
     swiper_js: https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.js #swiper js依赖
   banner:
-    tips: 北大数院学生会学术组网站
-    title: PKUSMS
-    image: /photos/all.jpg
-    link: https://pkusms.com
+    tips: 11 级识数鸡合成游戏
+    title: 合成识数鸡
+    image: /game/stickers/09-king.png
+    link: /game/
 
 # 朋友圈配置
 friends_vue:
