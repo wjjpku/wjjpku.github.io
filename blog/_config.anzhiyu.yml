@@ -1096,7 +1096,7 @@ home_top:
     tips: 合成识数鸡
     title: GAME
     image: /game/cover.webp
-    link: /game/
+    link: https://chick.pkusms.com/
 
 # 朋友圈配置
 friends_vue:
