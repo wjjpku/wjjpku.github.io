@@ -1093,9 +1093,9 @@ home_top:
     swiper_css: https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css #swiper css依赖
     swiper_js: https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.js #swiper js依赖
   banner:
-    tips: 识数鸡消消乐
+    tips: 合成识数鸡
     title: GAME
-    image: /game/cover.png
+    image: /game/cover.webp
     link: /game/
 
 # 朋友圈配置
