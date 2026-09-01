@@ -1,0 +1,159 @@
+/* Page-level tuning for the native AnZhiYu equipment cards on Research. */
+body[data-type="equipment"] #equipment .equipment-item-content-item {
+  width: calc(50% - 12px);
+  min-height: 432px;
+}
+
+body[data-type="equipment"] #equipment .equipment-item-content-item-cover {
+  height: 240px;
+  overflow: hidden;
+  display: block;
+  background: var(--anzhiyu-secondbg);
+}
+
+body[data-type="equipment"] #equipment .equipment-item-content-item-info {
+  padding-bottom: 56px;
+}
+
+body[data-type="equipment"] #equipment .equipment-item-content-item-description {
+  line-height: 1.55;
+}
+
+body[data-type="equipment"] #equipment .equipment-item-content-item-toolbar {
+  gap: 10px;
+  align-items: center;
+}
+
+body[data-type="equipment"] #equipment .equipment-report-link {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+body[data-type="equipment"] #equipment .equipment-item-content-item-image {
+  display: block;
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center;
+}
+
+@media (max-width: 768px) {
+  body[data-type="equipment"] #equipment .equipment-item-content-item {
+    width: 100%;
+  }
+
+  body[data-type="equipment"] #equipment .equipment-item-content-item-cover {
+    height: 210px;
+  }
+}
+
+@media (max-width: 640px) {
+  body[data-type="equipment"] #equipment {
+    overflow-x: hidden;
+  }
+
+  body[data-type="equipment"] #equipment .author-content.author-content-item.fcirclePage.single {
+    height: 22rem;
+    min-height: 320px;
+    padding: 18px !important;
+  }
+
+  body[data-type="equipment"] #equipment .fcirclePage .card-content {
+    padding: 20px 22px;
+  }
+
+  body[data-type="equipment"] #equipment .fcirclePage .author-content-item-title {
+    font-size: clamp(1.85rem, 7.8vw, 2.35rem);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  body[data-type="equipment"] #equipment .fcirclePage .content-bottom .tips {
+    display: -webkit-box;
+    font-size: 0.96rem;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  body[data-type="equipment"] #equipment .goodthings-item {
+    padding: 4px 0 12px;
+  }
+
+  body[data-type="equipment"] #equipment .goodthings-title {
+    margin: 16px 0 10px;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  body[data-type="equipment"] #equipment .goodthings-item-description {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+  }
+
+  body[data-type="equipment"] #equipment .equipment-item-content {
+    gap: 12px;
+    margin: 0;
+  }
+
+  body[data-type="equipment"] #equipment .equipment-item-content-item {
+    width: 100% !important;
+    min-height: auto;
+    margin: 0;
+    border-radius: 8px;
+  }
+
+  body[data-type="equipment"] #equipment .equipment-item-content-item-cover {
+    height: clamp(176px, 48vw, 210px);
+  }
+
+  body[data-type="equipment"] #equipment .equipment-item-content-item-info {
+    min-width: 0;
+    margin-top: 0;
+    padding: 14px;
+  }
+
+  body[data-type="equipment"] #equipment .equipment-item-content-item-name {
+    width: 100%;
+    line-height: 1.25;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  body[data-type="equipment"] #equipment .equipment-item-content-item-specification,
+  body[data-type="equipment"] #equipment .equipment-item-content-item-description {
+    height: auto;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    -webkit-line-clamp: initial;
+  }
+
+  body[data-type="equipment"] #equipment .equipment-item-content-item-toolbar {
+    position: static;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+    width: auto;
+    margin-top: 12px;
+    padding: 0;
+  }
+
+  body[data-type="equipment"] #equipment .equipment-item-content-item-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 32px;
+    padding: 6px 10px;
+  }
+
+  body[data-type="equipment"] #equipment .equipment-report-link {
+    margin-left: 0;
+  }
+}

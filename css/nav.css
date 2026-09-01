@@ -1,0 +1,9 @@
+/* Keep English top navigation compact while preserving AnZhiYu's native menu layout. */
+#menus > div.menus_items > div > a.site-page {
+  letter-spacing: 0;
+  padding: 0 0.62em;
+}
+
+#menus > div.menus_items > div > a.site-page span {
+  letter-spacing: 0;
+}

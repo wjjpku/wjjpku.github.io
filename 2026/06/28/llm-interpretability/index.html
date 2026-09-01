@@ -1,0 +1,568 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>聊对模型的理解 | Justin Wu</title><meta name="keywords" content="essays"><meta name="author" content="Justin Wu"><meta name="copyright" content="Justin Wu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#18171d"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="聊对模型的理解"><meta name="application-name" content="聊对模型的理解"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#18171d"><meta property="og:type" content="article"><meta property="og:title" content="聊对模型的理解"><meta property="og:url" content="https://wjjpku.github.io/2026/06/28/llm-interpretability/index.html"><meta property="og:site_name" content="Justin Wu"><meta property="og:description" content="聊对模型的理解我的第一篇工作将围绕我对模型机制的可解释性的理解展开。在我进入下一段学习之前，希望通过一些文字来保留和记载我目前对机器学习模型的一些理解。可能我的观点是片面的，但是这保留了我当前的一些直觉。 我们先从一个尽可能理论化的模型定义开始。 一、从监督学习模型的本质说起对于一个监督学习任务，"><meta property="og:locale" content="en"><meta property="og:image" content="https://wjjpku.github.io/post_photos/llm-interpretability/IMG_7155.webp"><meta property="article:author" content="Justin Wu"><meta property="article:tag" content="Justin Wu,wjjpku,PKU,机器学习,深度学习,数学文本识别"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://wjjpku.github.io/post_photos/llm-interpretability/IMG_7155.webp"><meta name="description" content="聊对模型的理解我的第一篇工作将围绕我对模型机制的可解释性的理解展开。在我进入下一段学习之前，希望通过一些文字来保留和记载我目前对机器学习模型的一些理解。可能我的观点是片面的，但是这保留了我当前的一些直觉。 我们先从一个尽可能理论化的模型定义开始。 一、从监督学习模型的本质说起对于一个监督学习任务，"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://wjjpku.github.io/2026/06/28/llm-interpretability/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["嘻嘻","不嘻嘻"]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"Author: Justin Wu","link":"Link: ","source":"Source: Justin Wu","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.","copySuccess":"Copy success, copy and reprint please mark the address of this article"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Justin Wu',
+  title: '聊对模型的理解',
+  postAI: '',
+  pageFillDescription: '聊对模型的理解, 一、从监督学习模型的本质说起, 二、数据分布与 IID 假设, 三、Hypothesis Space、模型架构与归纳偏置, 四、优化算法与训练动力学, 五、强化学习的不稳定性, 六、回到大模型可解释性聊对模型的理解我的第一篇工作将围绕我对模型机制的可解释性的理解展开在我进入下一段学习之前希望通过一些文字来保留和记载我目前对机器学习模型的一些理解可能我的观点是片面的但是这保留了我当前的一些直觉我们先从一个尽可能理论化的模型定义开始一从监督学习模型的本质说起对于一个监督学习任务我们有样本空间和标签空间监督学习模型的本质就是一个函数一个从样本空间映射到标签空间中的函数而我们所期望的完美模型或者说目标模型应当是所有这样函数集合中的某个特定子集或者某个满足真实规律的目标函数我们的目标便是使用一个服从某分布的采样器从样本空间中有限次采样并获取带噪声的使用这些数据去构建一个拟合函数使它在函数空间里渐进逼近这个目标子集从泛函的角度来理解我们可以在函数空间上定义一个刻画函数好坏的量它不一定严格是一个但它承担了类似距离目标函数有多远的作用自然地我们希望零点或者最小点定义在目标函数上即理想情况下有这样我们的目标便是尽可能降低当前函数的风险遗憾的是我们不知道也不可能知道准确的的表达式这个风险函数的零点本身就蕴含着我们的目标函数因此我们只能构建一个的近似即这里的可以通过我们采到的样本来构建一个直觉是我们的模型在已知数据上预测得越好我们就认为它在上的预测也会更好因此我们经验性地认为如果一个函数能够很好地我们的训练数据那么这样的函数就是我们希望得到的拟合函数然而数据的标签有噪音满足训练数据的函数又太多我们得到的这些函数集合应当与目标函数集合距离比较近但我们不能任意地取否则一个极端不连续只在训练点上表现很好的函数也可能成为训练集上的优秀拟合函数之一类似狄利克雷函数那样的构造可以在有限采样点上取得很好的却完全没有我们想要的泛化意义因此我们需要对函数空间有一定的假设比如连续性连续可微性或者连续性另外对函数的表达也要有明确的参数表示比如也就是说我们需要一个可以用于直接表示函数的具体形式由此定义这里中的任何一个函数均可以用参数表达可以是多元矢量在这样的假设里我们可以很好地刻画一个模型的误差估计过程首先目标函数不一定出现在我们的中因为我们的只是上的一个极小子集直觉地可以看成一个零测子集因此我们考虑在中使最小的函数也就是我们能在里表达的最接近目标函数的函数这便是它由的表达能力限制产生其次我们的训练数据是有限的我们无法得到因此我们使用有限样本下的这里往往会被定义为与真实之间的或者其他我们取在中使最小的函数它是我们能在里表达的经验地认为最好的函数这便是它由样本数量和样本质量的局限性产生最后我们考虑得到的过程无论是显式算出还是通过训练得到最终的问题都归结为一个多元函数的优化问题梯度下降是解决优化问题的方法之一我们的训练需要更新参数调整当前函数以逐渐接近的最小解在解决优化问题的过程中产生的误差就是它由训练时间算力和优化算法的限制产生因此我们可以将模型与目标函数之间的误差粗略分解为对于大模型来说训练时间和训练方法数据量和数据质量模型参数量和模型表达能力便成为限制模型能力的三个重要因素二数据分布与假设对于模型理论的理解我们还可以再深入一些我们对数据采样分布的假设往往是即独立同分布这里的在机器学习理论中至关重要无论是还是衡量泛化能力这里的都是对数据采样过程的极大简化描述也是最简描述对于相同的分布我们往往还会承认它满足一定的正则性假设比如均值方差有限然而在部分模型中假设并不能很好满足一个经典的例子便是强化学习对于的强化学习算法数据收集来自当前模型因此轨迹的采样分布会随着模型能力提升而变化这显然不是的对此人们有一些改进比如它通过临时存储样本并在后期训练时重新采样来获取过去模型产生的轨迹数据从而部分降低数据相关性和分布漂移的问题然而这种方法也不能彻底解决问题的容量有限前期训练无法使用优质数据旧策略生成的数据又可能与当前策略不匹配因此强化学习在数据采样上天然不满足标准分布这也成为训练不稳定的因素之一对于大语言模型的预训练来说数据通常是提前收集好的大规模语料训练时可以从固定语料分布中采样因此它在工程上更接近的监督学习当然严格来说大语言模型的预训练数据也并不是真正完美的文档之间存在来源差异之间存在强相关语料本身也往往是多个分布的混合但相比强化学习它至少更接近固定数据分布下的经验风险最小化问题三模型架构与归纳偏置的定义影响模型的表达能力一个经典的定理是对于两层神经网络在一些连续性假设下随着参数量或者隐层宽度趋向无穷它有几乎万能的函数表达能力也就是说神经网络在理论上可以逼近非常广泛的连续函数举例而言等架构本质上都是对的定义即给出一个由参数生成函数的方案一个具有万能表达能力的架构似乎很容易构建那么为什么还会诞生如此多不同的架构为什么不使用做自然语言处理为什么不使用做大语言模型其中细微的差距值得我们探索不同模型首先不同的就是表达习惯也称归纳偏置我个人认为它也可以理解为表达偏执对一个架构而言它会有自己独自擅长的领域和处理处理图像数据本质原因在于数据自身的关联关系要和模型的假设基本匹配和的流式设计可以在处理序列数据时关注附近的表现并且随着距离增大关系逐渐减弱这与自然语言中词语之间关系强度的分布基本相符的卷积核设计则可以更好捕获二维局部性质这与图像中近邻像素之间关系更强的特点基本相符而是自由度最高的架构之一有相对最弱的偏执它既有处理序列数据的能力又有处理图像数据的能力所以我们说可是是吗我们可以将所有问题都交给处理吗并非如此在一些任务上的表现仍然会超过我个人理解为这是架构先验和数据后验对训练共同作用的结果模型架构越有特色预先假设的相关性越强逻辑关系越明显架构先验就越强于是可以更快更好地学习同类型的数据而自由的架构会被鼓励通过数据学习到结构比如的注意力机制可以认为是和那种先验注意力关系也就是相邻关系的上游设计在数据充分时模型可以出近邻相关的注意力甚至出更好的人类无法提前想到的结构因此归纳偏置越强模型越容易学到匹配的数据但是上限可能更低归纳偏置越弱模型越难学到数据但是在数据和算力充分时上限可能更高一个极端的例子是的参数拟合与预训练前者只拟合个位数个参数最终拟合结果极其依赖的结构具有极强的归纳偏置比如中的新形式会显著影响拟合效果后者依靠大量语料进行训练捕获复杂语义关系上限高但是训练周期长因此归纳偏置的强弱和偏好会影响模型的表达偏好进而影响模型在特定数据上的表现四优化算法与训练动力学优化算法的选择则影响模型走向最小函数的物理效率也就是算力成本对于而言一个模型的训练动辄几周几个月在确认模型架构和数据之后找到一个帮助模型迅速收敛的优化器十分关键我们对上的每一个函数定义也就是对参数空间中的每一点定义于是我们的优化任务变为在多元参数空间中最小化梯度下降算法便应运而生随机梯度下降和都是梯度下降的改进旨在经验上更高效地找到低的区域并尽量避免停留在很差的局部结构附近现主流应用的是它通过动量估计自适应学习率和解耦改变参数在损失地形中的移动方式使训练在工程上更加稳定有效最新的一些优化器比如则考虑使用矩阵结构来处理梯度更新例如它会关注梯度矩阵中的主要结构方向而不只是逐元素地更新参数直觉上这类似于通过分解梯度矩阵关注主要特征值对应的特征空间移动这一方法可以用于处理高噪音数据例如高频量化交易数据当然这更多还是一种经验层面的理解需要在具体任务中验证模型训练的动力学中有一个经典现象是即灵感一现它表达的是在过参数化的上做一些具有结构性的训练任务比如加法乘法群运算等模型会先在训练数据上拟合得很好但是由于它只是记忆数据而不是总结规律所以很难泛化到其他结果随着训练时间增长模型会在某一个较短时间窗口内产生的跃迁仿佛瞬间顿悟了训练任务事实上这可能是由于正则化效应导致的参数平移经验地我们认为对于一个特定任务表达这个任务的函数应当是参数稀疏的它不应该完全利用到所有神经元和所有参数而且一个有规律的任务应当具有更简单的表达形式因此我们认为在同样拟合数据的情况下稀疏解低复杂度解或者更结构化的解往往具有更强的泛化能力机器学习理论中和都可以从正则化的角度理解它们并不完全等同但在直觉上都有抑制复杂解偏向简单解或低范数解的作用因此我们可以用的图像来理解这个问题在过参数模型中参数个数远远超过样本个数因此使为的参数往往不是一个点而是构成了或参数空间中的一个高维区域模型会在训练初期迅速收敛到这个区域附近之后参数会在这个区域附近缓慢移动利用正则项的梯度逐渐移动到更具有结构性更稀疏的表达上进而找到最有规律的所以并不是真的神秘地突然获得了灵感而更像是模型在训练动力学中从迁移到的过程五强化学习的不稳定性另一个经典现象是强化学习的不稳定性强化学习模型在训练中的明显具有较大波动性模型崩溃的概率也高于一般机器学习模型我理解的原因有几个首先是任务难度与数据之间的矛盾强化学习模型往往希望找到一个策略来完成具有强思维难度的任务比如德州扑克而在强化学习的数据收集中每次一轮带来的数据有限无法像大语言模型那样高效使用互联网信息或者通过其他方式迅速获取特定任务的大量优质数据因此对于特定的困难任务强化学习的数据获取困难导致有效较小数据收集方差较大再加上数据收集并不是的这共同导致强化学习的数据质量不高数量较少训练天然具有困难其次是模型参数量和目标函数复杂性的限制由于任务并不简单策略的微小变化可能导致行动选择发生巨大变化而行动选择的改变又会导致后续轨迹和奖励发生巨大变化因此策略到收益之间的函数关系可能非常不平滑直觉上这意味着目标函数的连续性较差或者有效常数较大而在机器学习的许多理论推导中假设是必要的其数值也会影响最终误差的上界估计因此如果强化学习问题中的有效常数很大或者目标函数本身非常不平滑那么收敛就会更加困难在模型表达上由于这种弱连续性和高方差渐进拟合表达的也会受到挑战最终导致整体表现不稳定六回到大模型可解释性这就是我目前对机器学习模型尤其是大模型可解释性的一些前置理解大模型首先是一个函数但它又不只是一个黑箱函数我们可以从数据分布归纳偏置优化动力学和训练现象几个层面去理解它如果我们想理解大模型为什么能够表达复杂语义为什么某些结构会在训练中出现为什么它有时只是记忆而有时能够学到规律那么这些理论视角都是必要的起点大模型可解释性要解释的最终也许不是某一个单独参数也不是某一次输出而是模型如何在训练过程中形成结构如何在高维参数空间中找到可以泛化的表示以及这些表示如何组合成我们观察到的能力',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-09-01 15:47:50',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/friends.css"><link rel="stylesheet" href="/css/nav.css"><link rel="stylesheet" href="/css/projects.css"><link rel="stylesheet" href="/css/profile.css"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/img/headelephant.jpg#%20%E8%87%AA%E5%AE%9A%E5%8A%A0%E8%BD%BD%E5%8A%A8%E7%94%BB%E4%B9%89%E5%A4%B4%E5%83%8F"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">Justin Wu</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><span> Home</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><span> About</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/link/"><span> Friends</span></a></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="Random Post" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="Console" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png" target="_blank" rel="noopener noreferrer"><img class="post-qr-code-img" alt="微信" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png" target="_blank" rel="noopener noreferrer"><img class="post-qr-code-img" alt="支付宝" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">Interests</div><span class="author-content-item-title">Find your area of interest</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/essays/" style="font-size: 1.05rem;">essays<sup>2</sup></a><a href="/tags/graduation-season/" style="font-size: 1.05rem;">graduation-season<sup>2</sup></a><a href="/tags/grokking/" style="font-size: 1.05rem;">grokking<sup>1</sup></a><a href="/tags/group-theory/" style="font-size: 1.05rem;">group-theory<sup>1</sup></a><a href="/tags/high-school/" style="font-size: 1.05rem;">high-school<sup>1</sup></a><a href="/tags/life-essay/" style="font-size: 1.05rem;">life-essay<sup>1</sup></a><a href="/tags/mechanistic-interpretability/" style="font-size: 1.05rem;">mechanistic-interpretability<sup>1</sup></a><a href="/tags/memories/" style="font-size: 1.05rem;">memories<sup>3</sup></a><a href="/tags/pku/" style="font-size: 1.05rem;">pku<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>Articles</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/06/"><span class="card-archive-list-date">June 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">March 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">December 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">September 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/06/"><span class="card-archive-list-date">June 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="Toggle Sidebar"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="Toggle Music"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="Toggle"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/life/" itemprop="url">life</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/essays/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>essays</span></a></span></div></div><h1 class="post-title" itemprop="name headline">聊对模型的理解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-06-27T17:39:00.000Z" title="Created 2026-06-28 01:39:00">2026-06-28</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-09-01T07:47:50.979Z" title="Updated 2026-09-01 15:47:50">2026-09-01</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为北京"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>北京</span></div></div></div><article class="post-content" id="article-container" itemscope itemtype="https://wjjpku.github.io/2026/06/28/llm-interpretability/"><header><a class="post-meta-categories" href="/categories/life/" itemprop="url">life</a><a href="/tags/essays/" tabindex="-1" itemprop="url">essays</a><h1 id="CrawlerTitle" itemprop="name headline">聊对模型的理解</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Justin Wu</span><time itemprop="dateCreated datePublished" datetime="2026-06-27T17:39:00.000Z" title="Created 2026-06-28 01:39:00">2026-06-28</time><time itemprop="dateCreated datePublished" datetime="2026-09-01T07:47:50.979Z" title="Updated 2026-09-01 15:47:50">2026-09-01</time></header><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/post_photos/llm-interpretability/IMG_7155.webp" alt="IMG_7155"></p>
+<h1 id="聊对模型的理解"><a href="#聊对模型的理解" class="headerlink" title="聊对模型的理解"></a>聊对模型的理解</h1><p>我的第一篇工作将围绕我对模型机制的可解释性的理解展开。在我进入下一段学习之前，希望通过一些文字来保留和记载我目前对机器学习模型的一些理解。可能我的观点是片面的，但是这保留了我当前的一些直觉。</p>
+<p>我们先从一个尽可能理论化的模型定义开始。</p>
+<h2 id="一、从监督学习模型的本质说起"><a href="#一、从监督学习模型的本质说起" class="headerlink" title="一、从监督学习模型的本质说起"></a>一、从监督学习模型的本质说起</h2><p>对于一个监督学习任务，我们有样本空间 $\mathcal X$ 和标签空间 $\mathcal Y$。监督学习模型的本质就是一个函数，一个从样本空间映射到标签空间中的函数：</p>
+<script type="math/tex; mode=display">
+f:\mathcal X\to \mathcal Y.
+</script>
+
+<p>而我们所期望的完美模型，或者说目标模型，应当是所有这样函数集合中的某个特定子集，或者某个满足真实规律的目标函数。我们的目标，便是使用一个服从某分布的采样器，从样本空间中有限次采样，并获取带噪声的 label，使用这些数据去构建一个拟合函数，使它在函数空间里渐进逼近这个目标子集。</p>
+<p>从泛函的角度来理解，我们可以在函数空间上定义一个刻画函数好坏的量：population risk $R$。它不一定严格是一个 norm，但它承担了类似“距离目标函数有多远”的作用。自然地，我们希望零点或者最小点定义在目标函数上，即理想情况下有</p>
+<script type="math/tex; mode=display">
+R(f_{\text{target}})=0.
+</script>
+
+<p>这样，我们的目标便是尽可能降低当前函数的风险。</p>
+<p>遗憾的是，我们不知道，也不可能知道准确的 $R$ 的表达式。这个风险函数的零点本身就蕴含着我们的目标函数。因此我们只能构建一个 $R$ 的近似，即 empirical risk。这里的 empirical risk 可以通过我们采到的样本来构建：</p>
+<script type="math/tex; mode=display">
+\hat R_n(f)=\frac{1}{n}\sum_{i=1}^n \ell(f(x_i),y_i).
+</script>
+
+<p>一个直觉是：我们的模型在已知数据上预测得越好，我们就认为它在 population 上的预测也会更好。因此，我们经验性地认为，如果一个函数能够很好地 fit 我们的训练数据，那么这样的函数就是我们希望得到的拟合函数。</p>
+<p>然而，数据的标签有噪音，满足训练数据的函数又太多。我们得到的这些函数集合应当与目标函数集合距离比较近，但我们不能任意地取 $f$。否则，一个极端不连续、只在训练点上表现很好的函数，也可能成为训练集上的优秀拟合函数之一。类似狄利克雷函数那样的构造，可以在有限采样点上取得很好的 empirical risk，却完全没有我们想要的泛化意义。</p>
+<p>因此，我们需要对函数空间有一定的假设，比如连续性、连续可微性，或者 Lipschitz 连续性。另外，对函数的表达也要有明确的参数表示，比如</p>
+<script type="math/tex; mode=display">
+e^{ax}+bx+c.
+</script>
+
+<p>也就是说，我们需要一个可以用于直接表示函数的具体形式。由此定义 hypothesis space $\mathcal F$。这里 $\mathcal F$ 中的任何一个函数均可以用参数 $\theta$ 表达，$\theta$ 可以是多元矢量。</p>
+<p>在这样的假设里，我们可以很好地刻画一个模型的误差估计过程。</p>
+<p>首先，目标函数不一定出现在我们的 hypothesis space 中。因为我们的 space 只是 all-function space 上的一个极小子集，直觉地可以看成一个零测子集。因此，我们考虑在 hypothesis space 中使 population risk 最小的函数，也就是我们能在 hypothesis space 里表达的、最接近目标函数的函数：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+f_{\mathcal F}^{*} &= \arg\min_{f\in \mathcal F} R(f).
+\end{aligned}
+</script>
+
+<p>这便是 approximation error，它由 hypothesis space 的表达能力限制产生。</p>
+<p>其次，我们的训练数据是有限的，我们无法得到 exact population risk。因此，我们使用有限样本下的 empirical risk。这里往往会被定义为 predicted label 与真实 label 之间的 square loss，或者其他 loss function。我们取在 hypothesis space 中使 empirical risk 最小的函数：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\hat f_n &= \arg\min_{f\in \mathcal F} \hat R_n(f).
+\end{aligned}
+</script>
+
+<p>它是我们能在 hypothesis space 里表达的、经验地认为最好的函数。这便是 estimation error，它由样本数量和样本质量的局限性产生。</p>
+<p>最后，我们考虑得到 $\hat f_n$ 的过程。无论是显式算出，还是通过训练得到，最终的问题都归结为一个多元函数的优化问题。梯度下降是解决优化问题的方法之一。我们的训练需要更新参数，调整当前函数，以逐渐接近 empirical risk 的最小解。在解决优化问题的过程中产生的误差，就是 optimization error，它由训练时间、算力和优化算法的限制产生。</p>
+<p>因此，我们可以将模型与目标函数之间的误差粗略分解为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+R(f_{\theta_T})-R(f_{\text{target}})
+&= \text{approximation error} \\
+&\quad + \text{estimation error} \\
+&\quad + \text{optimization error}.
+\end{aligned}
+</script>
+
+<p>对于大模型来说，训练时间和训练方法、数据量和数据质量、模型参数量和模型表达能力，便成为限制模型能力的三个重要因素。</p>
+<h2 id="二、数据分布与-IID-假设"><a href="#二、数据分布与-IID-假设" class="headerlink" title="二、数据分布与 IID 假设"></a>二、数据分布与 IID 假设</h2><p>对于模型理论的理解，我们还可以再深入一些。</p>
+<p>我们对数据采样分布的假设往往是 iid，即独立同分布。这里的 iid 在机器学习理论中至关重要。无论是 estimation error，还是衡量泛化能力，这里的 iid 都是对数据采样过程的极大简化描述，也是最简描述。对于相同的分布，我们往往还会承认它满足一定的正则性假设，比如均值、方差有限。</p>
+<p>然而，在部分模型中，iid 假设并不能很好满足。一个经典的例子便是强化学习。</p>
+<p>对于 on-policy 的强化学习算法，数据收集来自当前模型。因此，轨迹的采样分布会随着模型能力提升而变化，这显然不是 iid 的。对此，人们有一些改进，比如 replay buffer。它通过临时存储样本，并在后期训练时重新采样，来获取过去模型产生的轨迹数据，从而部分降低数据相关性和分布漂移的问题。</p>
+<p>然而，这种方法也不能彻底解决问题。buffer 的容量有限，前期训练无法使用优质数据，旧策略生成的数据又可能与当前策略不匹配。因此，强化学习在数据采样上天然不满足标准 iid 分布，这也成为训练不稳定的因素之一。</p>
+<p>对于大语言模型的预训练来说，数据通常是提前收集好的大规模语料，训练时可以从固定语料分布中采样。因此，它在工程上更接近 iid 的监督学习。当然，严格来说，大语言模型的预训练数据也并不是真正完美 iid 的：文档之间存在来源差异，token 之间存在强相关，语料本身也往往是多个分布的混合。但相比 on-policy 强化学习，它至少更接近固定数据分布下的经验风险最小化问题。</p>
+<h2 id="三、Hypothesis-Space、模型架构与归纳偏置"><a href="#三、Hypothesis-Space、模型架构与归纳偏置" class="headerlink" title="三、Hypothesis Space、模型架构与归纳偏置"></a>三、Hypothesis Space、模型架构与归纳偏置</h2><p>Hypothesis space 的定义影响模型的表达能力。</p>
+<p>一个经典的定理是：对于两层神经网络，在一些连续性假设下，随着参数量或者隐层宽度趋向无穷，它有几乎万能的函数表达能力。也就是说，神经网络在理论上可以逼近非常广泛的连续函数。</p>
+<p>举例而言，MLP、CNN、RNN、LSTM、Transformer 等架构，本质上都是对 hypothesis space 的定义，即给出一个由参数生成函数的方案。</p>
+<p>一个具有万能表达能力的架构似乎很容易构建。那么，为什么还会诞生如此多不同的架构？为什么不使用 CNN 做自然语言处理？为什么不使用 MLP 做大语言模型？其中细微的差距值得我们探索。</p>
+<p>不同模型首先不同的就是表达习惯，也称归纳偏置。我个人认为，它也可以理解为“表达偏执”。</p>
+<p>对一个架构而言，它会有自己独自擅长的领域。RNN 和 LSTM 处理 sequence data，CNN 处理图像数据。本质原因在于，数据自身的关联关系要和模型的假设基本匹配。</p>
+<p>RNN 和 LSTM 的流式设计，可以在处理序列数据时关注 token 附近的 tokens 表现，并且随着距离增大，关系逐渐减弱。这与自然语言中词语之间关系强度的分布基本相符。</p>
+<p>CNN 的卷积核设计，则可以更好捕获二维局部性质。这与图像中近邻像素之间关系更强的特点基本相符。</p>
+<p>而 Transformer 是自由度最高的架构之一，有相对最弱的“偏执”。它既有处理序列数据的能力，又有处理图像数据的能力。所以我们说 Transformer is all you need。</p>
+<p>可是，Transformer 是 only need 吗？我们可以将所有问题都交给 Transformer 处理吗？并非如此。在一些任务上，CNN 的表现仍然会超过 Transformer。</p>
+<p>我个人理解为，这是“架构先验”和“数据后验”对训练共同作用的结果。</p>
+<p>模型架构越有特色，预先假设的相关性越强，逻辑关系越明显，架构先验就越强，于是可以更快、更好地学习同类型的数据。而自由的架构，会被鼓励通过数据学习到结构。比如 Transformer 的注意力机制，可以认为是 CNN 和 RNN 那种先验注意力关系，也就是相邻关系的上游设计。在数据充分时，模型可以 grok 出近邻相关的注意力，甚至 grok 出更好的人类无法提前想到的结构。</p>
+<p>因此，归纳偏置越强，模型越容易学到匹配的数据，但是上限可能更低；归纳偏置越弱，模型越难学到数据，但是在数据和算力充分时，上限可能更高。</p>
+<p>一个极端的例子是 scaling law 的参数拟合与 LLM 预训练。前者只拟合个位数个参数，最终拟合结果极其依赖 scaling law 的结构，具有极强的归纳偏置。比如 Multi-Power Law 中，law 的新形式会显著影响拟合效果。后者依靠大量语料进行训练，捕获复杂语义关系，上限高，但是训练周期长。</p>
+<p>因此，归纳偏置的强弱和偏好，会影响模型的表达偏好，进而影响模型在特定数据上的表现。</p>
+<h2 id="四、优化算法与训练动力学"><a href="#四、优化算法与训练动力学" class="headerlink" title="四、优化算法与训练动力学"></a>四、优化算法与训练动力学</h2><p>优化算法的选择，则影响模型走向 empirical risk 最小函数的物理效率，也就是算力成本。</p>
+<p>对于 LLM 而言，一个模型的训练动辄几周、几个月。在确认模型架构和数据之后，找到一个帮助模型迅速收敛的优化器十分关键。</p>
+<p>我们对 hypothesis space 上的每一个函数定义 empirical risk，也就是对参数空间中的每一点定义 empirical risk。于是，我们的优化任务变为：在多元参数空间中最小化 empirical risk。梯度下降算法便应运而生。</p>
+<p>随机梯度下降和 AdamW 都是梯度下降的改进，旨在经验上更高效地找到低 empirical risk 的区域，并尽量避免停留在很差的局部结构附近。现主流应用的是 AdamW。它通过动量估计、自适应学习率和解耦 weight decay，改变参数在损失地形中的移动方式，使训练在工程上更加稳定有效。</p>
+<p>最新的一些优化器，比如 Muon，则考虑使用矩阵结构来处理梯度更新。例如，它会关注梯度矩阵中的主要结构方向，而不只是逐元素地更新参数。直觉上，这类似于通过分解梯度矩阵，关注主要特征值对应的特征空间移动。这一方法可以用于处理高噪音数据，例如高频量化交易数据。当然，这更多还是一种经验层面的理解，需要在具体任务中验证。</p>
+<p>模型训练的动力学中，有一个经典现象是 grokking，即“灵感一现”。</p>
+<p>它表达的是：在过参数化的 model 上做一些具有结构性的训练任务，比如 mod 加法、乘法、群运算等，模型会先在训练数据上拟合得很好，但是由于它只是记忆数据，而不是总结规律，所以很难泛化到其他结果。随着训练时间增长，模型会在某一个较短时间窗口内产生 validation accuracy 的跃迁，仿佛瞬间“顿悟”了训练任务。</p>
+<p>事实上，这可能是由于正则化效应导致的参数平移。</p>
+<p>经验地，我们认为，对于一个特定任务，表达这个任务的函数应当是参数稀疏的。它不应该完全利用到所有神经元和所有参数。而且，一个有规律的任务应当具有更简单的表达形式。因此我们认为，在同样拟合数据的情况下，稀疏解、低复杂度解或者更结构化的解，往往具有更强的泛化能力。</p>
+<p>机器学习理论中，weight decay、dropout 和 ridge regression 都可以从正则化的角度理解。它们并不完全等同，但在直觉上都有抑制复杂解、偏向简单解或低范数解的作用。因此，我们可以用 ridge regression 的图像来理解这个问题。</p>
+<p>在过参数模型中，参数个数远远超过样本个数，因此使 empirical risk 为 0 的参数往往不是一个点，而是构成了 hypothesis space 或参数空间中的一个高维区域。模型会在训练初期迅速收敛到这个区域附近，之后参数会在这个区域附近缓慢移动，利用正则项的梯度逐渐移动到更具有结构性、更稀疏的表达上，进而找到最有规律的 empirical risk zero function。</p>
+<p>所以，grokking 并不是真的神秘地突然获得了灵感，而更像是模型在训练动力学中，从 memorization solution 迁移到 algorithmic solution 的过程。</p>
+<h2 id="五、强化学习的不稳定性"><a href="#五、强化学习的不稳定性" class="headerlink" title="五、强化学习的不稳定性"></a>五、强化学习的不稳定性</h2><p>另一个经典现象是强化学习的不稳定性。</p>
+<p>强化学习模型在训练中的 loss curve 明显具有较大波动性，模型崩溃的概率也高于一般机器学习模型。我理解的原因有几个。</p>
+<p>首先是任务难度与数据之间的矛盾。强化学习模型往往希望找到一个策略，来完成具有强思维难度的任务，比如德州扑克。而在强化学习的数据收集中，每次 rollout 一轮带来的数据有限，无法像大语言模型那样高效使用互联网信息，或者通过其他方式迅速获取特定任务的大量优质数据。</p>
+<p>因此，对于特定的困难任务，强化学习的数据获取困难，导致有效 batch size 较小，数据收集方差较大。再加上数据收集并不是 iid 的，这共同导致强化学习的数据质量不高、数量较少，训练天然具有困难。</p>
+<p>其次是模型参数量和目标函数复杂性的限制。由于任务并不简单，策略的微小变化可能导致行动选择发生巨大变化，而行动选择的改变又会导致后续轨迹和奖励发生巨大变化。因此，策略到收益之间的函数关系可能非常不平滑。直觉上，这意味着目标函数的连续性较差，或者有效 Lipschitz 常数较大。</p>
+<p>而在机器学习的许多理论推导中，Lipschitz 假设是必要的，其数值也会影响最终误差的上界估计。因此，如果强化学习问题中的有效 Lipschitz 常数很大，或者目标函数本身非常不平滑，那么收敛就会更加困难。</p>
+<p>在模型表达上，由于这种弱连续性和高方差，渐进拟合表达的 variance 也会受到挑战，最终导致整体表现不稳定。</p>
+<h2 id="六、回到大模型可解释性"><a href="#六、回到大模型可解释性" class="headerlink" title="六、回到大模型可解释性"></a>六、回到大模型可解释性</h2><p>这就是我目前对机器学习模型，尤其是大模型可解释性的一些前置理解。</p>
+<p>大模型首先是一个函数，但它又不只是一个黑箱函数。我们可以从 hypothesis space、数据分布、归纳偏置、优化动力学和训练现象几个层面去理解它。</p>
+<p>如果我们想理解大模型为什么能够表达复杂语义，为什么某些结构会在训练中出现，为什么它有时只是记忆而有时能够学到规律，那么这些理论视角都是必要的起点。</p>
+<p>大模型可解释性要解释的，最终也许不是某一个单独参数，也不是某一次输出，而是模型如何在训练过程中形成结构，如何在高维参数空间中找到可以泛化的表示，以及这些表示如何组合成我们观察到的能力。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/headelephant.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/headelephant.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Justin Wu</div><div class="post-copyright__author_desc">乌鸡卷</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://wjjpku.github.io/2026/06/28/llm-interpretability/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://wjjpku.github.io/2026/06/28/llm-interpretability/')">聊对模型的理解</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://wjjpku.github.io/2026/06/28/llm-interpretability/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=undefined&amp;url=https://wjjpku.github.io/2026/06/28/llm-interpretability/&amp;pic=undefined" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/essays/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>essays<span class="tagsPageCount">2</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/post_photos/s5-circuit/cover.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/03/20/passing-the-torch/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/post_photos/passing-the-torch/121.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">薪火相传</div></div></a></div><div class="next-post pull-right"><a href="/2026/06/30/s5-circuit/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/post_photos/s5-circuit/cover.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">研究S5对称群的circuit</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2026/03/20/passing-the-torch/" title="薪火相传"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/post_photos/passing-the-torch/121.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-03-20</div><div class="title">薪火相传</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/headelephant.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/headelephant.jpg" alt="status"/></div></div><div class="author-info__description">Justin Wu 的个人主页，整理机器学习、深度学习、数学文本识别、课程笔记与校园项目。</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">Justin Wu</h1><div class="author-info__desc">乌鸡卷</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/wjjpku" target="_blank" title="Github" rel="noopener noreferrer"><i class="anzhiyufont anzhiyu-icon-github"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%81%8A%E5%AF%B9%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">聊对模型的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%8E%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%9C%AC%E8%B4%A8%E8%AF%B4%E8%B5%B7"><span class="toc-number">1.1.</span> <span class="toc-text">一、从监督学习模型的本质说起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83%E4%B8%8E-IID-%E5%81%87%E8%AE%BE"><span class="toc-number">1.2.</span> <span class="toc-text">二、数据分布与 IID 假设</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81Hypothesis-Space%E3%80%81%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%BD%92%E7%BA%B3%E5%81%8F%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">三、Hypothesis Space、模型架构与归纳偏置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E4%B8%8E%E8%AE%AD%E7%BB%83%E5%8A%A8%E5%8A%9B%E5%AD%A6"><span class="toc-number">1.4.</span> <span class="toc-text">四、优化算法与训练动力学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%8D%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="toc-number">1.5.</span> <span class="toc-text">五、强化学习的不稳定性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%9B%9E%E5%88%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%A3%E9%87%8A%E6%80%A7"><span class="toc-number">1.6.</span> <span class="toc-text">六、回到大模型可解释性</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/06/30/s5-circuit/" title="研究S5对称群的circuit"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/post_photos/s5-circuit/cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="研究S5对称群的circuit"/></a><div class="content"><a class="title" href="/2026/06/30/s5-circuit/" title="研究S5对称群的circuit">研究S5对称群的circuit</a><time datetime="2026-06-30T13:20:17.000Z" title="Created 2026-06-30 21:20:17">2026-06-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/06/28/llm-interpretability/" title="聊对模型的理解"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/post_photos/llm-interpretability/IMG_7155.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="聊对模型的理解"/></a><div class="content"><a class="title" href="/2026/06/28/llm-interpretability/" title="聊对模型的理解">聊对模型的理解</a><time datetime="2026-06-27T17:39:00.000Z" title="Created 2026-06-28 01:39:00">2026-06-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/20/passing-the-torch/" title="薪火相传"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/post_photos/passing-the-torch/121.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="薪火相传"/></a><div class="content"><a class="title" href="/2026/03/20/passing-the-torch/" title="薪火相传">薪火相传</a><time datetime="2026-03-20T04:00:00.000Z" title="Created 2026-03-20 12:00:00">2026-03-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/21/love/" title="算力耗尽之前，我试图爱你"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/post_photos/love/p1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算力耗尽之前，我试图爱你"/></a><div class="content"><a class="title" href="/2025/12/21/love/" title="算力耗尽之前，我试图爱你">算力耗尽之前，我试图爱你</a><time datetime="2025-12-20T17:30:00.000Z" title="Created 2025-12-21 01:30:00">2025-12-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/11/competition/" title="记第一次数模竞赛"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/post_photos/competition/p1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记第一次数模竞赛"/></a><div class="content"><a class="title" href="/2025/09/11/competition/" title="记第一次数模竞赛">记第一次数模竞赛</a><time datetime="2025-09-10T16:00:00.000Z" title="Created 2025-09-11 00:00:00">2025-09-11</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="workboard"><img class="workSituationImg boardsign" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0" rel="noopener noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题" rel="noopener noreferrer"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2026 By <a class="footer-bar-link" href="/" title="Justin Wu" target="_blank" rel="noopener noreferrer">Justin Wu</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener noreferrer" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/" title="tag"><div class="headline">Tags</div><div class="length-num">9</div></a><a href="/categories/" title="category"><div class="headline">Categories</div><div class="length-num">2</div></a></div><span class="sidebar-menu-item-title">Function</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="Display Mode"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>Display Mode</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">Site</div><div class="back-menu-list"><a class="back-menu-item" href="/" title="Blog"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="Blog"/><span class="back-menu-item-text">Blog</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">Projects</div><div class="back-menu-list"><a class="back-menu-item" href="/projects/" title="Projects"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="Projects"/><span class="back-menu-item-text">Projects</span></a><a class="back-menu-item" href="/cv/" title="CV"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="CV"/><span class="back-menu-item-text">CV</span></a><a class="back-menu-item" href="/about/" title="About"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="About"/><span class="back-menu-item-text">About</span></a><a class="back-menu-item" href="/link/" title="Friends"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="Friends"/><span class="back-menu-item-text">Friends</span></a><a class="back-menu-item" target="_blank" rel="noopener noreferrer" href="https://github.com/wjjpku" title="GitHub"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="GitHub"/><span class="back-menu-item-text">GitHub</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><span> Home</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><span> About</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/link/"><span> Friends</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/essays/" style="font-size: 0.88rem;">essays<sup>2</sup></a><a href="/tags/graduation-season/" style="font-size: 0.88rem;">graduation-season<sup>2</sup></a><a href="/tags/grokking/" style="font-size: 0.88rem;">grokking<sup>1</sup></a><a href="/tags/group-theory/" style="font-size: 0.88rem;">group-theory<sup>1</sup></a><a href="/tags/high-school/" style="font-size: 0.88rem;">high-school<sup>1</sup></a><a href="/tags/life-essay/" style="font-size: 0.88rem;">life-essay<sup>1</sup></a><a href="/tags/mechanistic-interpretability/" style="font-size: 0.88rem;">mechanistic-interpretability<sup>1</sup></a><a href="/tags/memories/" style="font-size: 0.88rem;">memories<sup>3</sup></a><a href="/tags/pku/" style="font-size: 0.88rem;">pku<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="Switch Between Traditional Chinese And Simplified Chinese">繁</button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8152976493" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("07/01/2025 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.7.1",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 Justin Wu 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("07/01/2025 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.cbd.int/mermaid@11.12.2/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.1/bubble/bubble.js"></script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script src="/js/academic-entry.js"></script><script src="/js/bilingual.js"></script><script src="/js/about-page.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script><script>(() => {
+  const secureOneBlankTargetLink = anchor => {
+    const rel = new Set((anchor.getAttribute("rel") || "").toLowerCase().split(/\s+/).filter(Boolean));
+    rel.add("noopener");
+    rel.add("noreferrer");
+    anchor.setAttribute("rel", Array.from(rel).join(" "));
+  };
+  const secureBlankTargetLinks = root => {
+    if (!root) return;
+    if (root.matches && root.matches('a[target="_blank"]')) secureOneBlankTargetLink(root);
+    root.querySelectorAll && root.querySelectorAll('a[target="_blank"]').forEach(secureOneBlankTargetLink);
+  };
+  const run = () => secureBlankTargetLinks(document);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run, { once: true });
+  else run();
+  new MutationObserver(mutations => {
+    mutations.forEach(mutation => mutation.addedNodes.forEach(node => {
+      if (node.nodeType === Node.ELEMENT_NODE) secureBlankTargetLinks(node);
+    }));
+  }).observe(document.documentElement, { childList: true, subtree: true });
+})();
+</script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

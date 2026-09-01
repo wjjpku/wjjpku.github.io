@@ -1,0 +1,68 @@
+/* Site-level tuning for the native AnZhiYu friend-link cards. */
+#article-container .anzhiyu-flink-list {
+  margin: -8px;
+}
+
+#article-container .anzhiyu-flink-list .flink-list-item {
+  width: calc(33.333% - 16px);
+  height: 148px;
+  margin: 8px;
+  border-radius: 14px;
+}
+
+#article-container .anzhiyu-flink-list .flink-list-item .cf-friends-link {
+  padding: 0 14px;
+}
+
+#article-container .anzhiyu-flink-list .flink-list-item .cf-friends-link img {
+  width: 78px;
+  height: 78px;
+  min-width: 78px;
+  min-height: 78px;
+  margin: 35px 22px 35px 6px;
+}
+
+#article-container .anzhiyu-flink-list .flink-list-item .flink-item-info {
+  width: calc(100% - 118px);
+}
+
+#article-container .anzhiyu-flink-list .flink-list-item .flink-item-name {
+  font-size: 1.18rem;
+  line-height: 1.4;
+}
+
+#article-container .anzhiyu-flink-list .flink-list-item .flink-item-info .flink-item-desc {
+  height: 64px;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  padding: 6px 10px 8px 0;
+}
+
+@media (max-width: 1200px) {
+  #article-container .anzhiyu-flink-list .flink-list-item {
+    width: calc(50% - 16px) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  #article-container .anzhiyu-flink-list .flink-list-item {
+    width: calc(100% - 16px) !important;
+    height: 134px;
+  }
+
+  #article-container .anzhiyu-flink-list .flink-list-item .cf-friends-link {
+    padding: 0 12px;
+  }
+
+  #article-container .anzhiyu-flink-list .flink-list-item .cf-friends-link img {
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+    min-height: 70px;
+    margin: 32px 18px 32px 4px;
+  }
+
+  #article-container .anzhiyu-flink-list .flink-list-item .flink-item-info {
+    width: calc(100% - 100px);
+  }
+}
