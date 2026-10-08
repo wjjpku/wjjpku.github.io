@@ -32,3 +32,41 @@
 
 /* Keep the title and its marginal portrait aligned with the full post list. */
 .collection-heading.has-margin-reader{max-width:none}
+
+/* Editorial reading scale: generous type, short lines, quiet paper. */
+.reading-layout{grid-template-columns:190px minmax(0,700px);gap:64px;max-width:1040px;margin:64px auto 96px;padding-inline:28px}
+.reading-layout>article{min-width:0}
+.reading-rail{font-size:14px;top:130px}
+.reading-rail .back-link{font-size:14px}
+.reading-rail .eyebrow{font-size:11px;letter-spacing:1px}
+.reading-rail nav{gap:16px}
+.reading-rail nav a{color:#586052;line-height:1.5;padding-block:3px}
+.reading-rail nav a[aria-current]{color:#28372b;font-weight:600;border-left-width:2px}
+.article-heading{padding-bottom:36px;margin-bottom:40px}
+.article-heading h1{font-size:clamp(36px,4.2vw,54px);line-height:1.12;letter-spacing:-1px;color:#252c26}
+.article-deck{font-size:20px;line-height:1.6;color:#4c5549;max-width:38em}
+.article-meta,.article-tags,.article-tags span{font-size:13px}
+.prose{font-family:Georgia,'Songti SC',STSong,serif;font-size:21px;line-height:1.72;color:#292f29}
+.prose p{margin-bottom:1.25em}
+.prose h1,.prose h2,.prose h3{font-family:var(--sans);font-weight:600;line-height:1.3;letter-spacing:-.4px;color:#252c26;scroll-margin-top:140px}
+.prose h1{font-size:36px}.prose h2{font-size:30px;margin:2em 0 .8em}.prose h3{font-size:24px;margin:1.7em 0 .7em}
+.prose blockquote{padding:20px 26px;margin:32px 0;color:#354333;background:#e9ecdf80;border-left:3px solid #8b9d7b}
+.prose a{color:#405c36;border-bottom-color:#91a383}
+.prose code,.prose pre{font-size:15px;line-height:1.65}
+.prose table{font-size:16px;line-height:1.6}
+.article-ending,.reading-footer,.reading-footer>span{font-size:14px}
+.adjacent-notes small{font-size:12px}.adjacent-notes span{font-size:21px}
+.collection-heading>p:not(.eyebrow){font-size:18px;color:#4c5549}
+.note-entry h2{font-size:30px}.note-entry p{font-size:16px;line-height:1.7;color:#50594c}.note-entry time{font-size:13px}.note-category{font-size:12px}
+html[lang="zh-CN"] .prose{font-size:20px;line-height:1.9}
+@media(max-width:1000px){.reading-layout{grid-template-columns:165px minmax(0,700px);gap:36px}}
+@media(max-width:760px){
+ .reading-layout{display:block;margin-top:32px;padding-inline:24px}
+ .reading-rail{margin-bottom:32px}.reading-rail nav{gap:20px}.reading-rail nav a{font-size:13px;min-height:36px}
+ .article-heading h1{font-size:36px;letter-spacing:-.5px}.article-deck{font-size:18px;line-height:1.6}
+ .prose{font-size:18px;line-height:1.75}.prose h1{font-size:30px}.prose h2{font-size:26px}.prose h3{font-size:22px}
+ .prose blockquote{padding:16px 20px}.prose code,.prose pre{font-size:14px}
+ html[lang="zh-CN"] .prose{font-size:18px;line-height:1.85}
+ .note-entry h2{font-size:25px}.note-entry p{font-size:15px}
+}
+@media(max-width:480px){.prose h1,.prose h2,.prose h3{scroll-margin-top:220px}}
