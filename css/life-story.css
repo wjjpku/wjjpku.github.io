@@ -299,3 +299,8 @@ html[lang="en"] #cover-title{max-width:490px;letter-spacing:-2px;text-wrap:balan
 html[lang="en"] .chapter-kicker{font-size:9px;letter-spacing:1px}
 
 html[lang="en"] .cover-extra,html[lang="en"] .signature>span{display:none}
+
+/* Keep every face visible in the seminar group photograph. */
+#dahe .chapter-photo img{aspect-ratio:auto;height:auto;object-fit:contain}
+#dahe .secondary-photo{position:relative;width:54%;right:auto;bottom:auto;margin:24px 0 0 auto;transform:rotate(5deg)}
+#dahe .secondary-photo .photo img{aspect-ratio:4/3;object-fit:contain}

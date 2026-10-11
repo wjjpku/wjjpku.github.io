@@ -761,3 +761,27 @@ Object.assign(window.siteTranslations, {
   "Built with React, TypeScript, Vite, and Tailwind CSS. Content is separated from page components: maintainers update configuration files to add resources, activities, or new problems. Shared components keep the navigation and presentation consistent across pages.": "以 React、TypeScript、Vite 和 Tailwind CSS 构建。内容与页面组件分离，新增资料、活动与题目时，维护者更新配置文件即可。",
   "A campus software project for the SMS Student Union Academic Department. The linked repository documents the implementation and contribution workflow; no usage or impact figures are claimed here.": "数院学生会学术组的校园项目。实现与协作方式见代码仓库。"
 });
+
+Object.assign(window.siteTranslations, {
+  "2026 · Spring": "2026 · 春",
+  "SPRING 2026 / THE DAHE SEMINAR": "2026 春 / 大荷讨论班",
+  "A table,": "小荷之外，",
+  "another kind of seminar.": "又开一席。",
+  "That spring, I organised the Dahe Seminar. A playful parallel to Xiaohé, the probability reading group at PKU, ours took probability and game theory to the poker table.": "那年春天，我办起了大荷讨论班。小荷读论文，大荷摆一副牌。概率与博弈，便有了另一种谈法。",
+  "A group photograph in a classroom from the Dahe Seminar": "大荷讨论班合影",
+  "DAHE SEMINAR / SPRING 2026": "大荷讨论班 / 二〇二六年春",
+  "Cards and chips on a Texas Hold’em table": "牌桌上的一局德州",
+  "Probability, with cards on the table": "纸牌落桌",
+  "Another hand, another question.": "且待下一张。",
+  "The Dahe Seminar": "大荷讨论班",
+  "Xiaohé is a probability reading group in PKU’s School of Mathematical Sciences, where students discuss current research papers. I organised Dahe as its playful parallel in spring 2026.": "数院有小荷讨论班，大家围坐，读概率论的前沿论文。二〇二六年春，我借来这个名字，办了个「大荷」。",
+  "Our subject was Texas Hold’em — a way to explore probability and game theory through play. The name was a joke; the questions were familiar. What can we infer from incomplete information? How should that change a decision?": "我们讨论德州扑克。几张明牌，几张暗牌，轮到自己，仍须作一个决定。名字是玩笑，概率与博弈倒都在席间。",
+  "2026 / MY FIRST RESEARCH PAPER": "2026 / 第一篇研究",
+  "Beyond the problem sheet,": "题目之外，",
+  "a question of my own.": "始有一问。",
+  "My first research paper began with a question about looped Transformers. If the weights stay the same, what makes each loop do something different?": "第一篇研究，从 looped Transformer 的一个问题起笔：权重未变，每一轮计算，何以不同？",
+  "Learning what it takes to answer.": "问起，才知路长。",
+  "Into research": "初入科研",
+  "My first paper, Shared Weights, Selected Computations, studies how a changing hidden state can select different computations in a looped Transformer with fixed weights.": "第一篇论文，题为 Shared Weights, Selected Computations。我们研究固定权重的 looped Transformer：hidden state 的变化，如何使同一模型执行不同的计算。",
+  "It marks a change from solving a given problem to deciding what to ask — and what evidence would count as an answer. This is where I began to find my way into research.": "从前题目印在纸上，后来，连题目也要自己找。问什么，凭什么作答，都要重新学过。科研，于我便从这里开始。"
+});
