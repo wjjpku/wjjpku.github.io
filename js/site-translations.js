@@ -704,7 +704,7 @@ Object.assign(window.siteTranslations,{"404 / PAGE NOT FOUND":"404 / 页面未�
 
 // English editorial copy uses the same source keys as the Chinese edition.
 window.siteEnglishCopy = {
-  "Academic": "Research",
+  "Academic": "Work",
   "Blog": "Writing",
   "← Blog": "← Writing",
   "Back to Blog ↗": "Back to Writing ↗",
@@ -785,3 +785,5 @@ Object.assign(window.siteTranslations, {
   "My first paper, Shared Weights, Selected Computations, studies how a changing hidden state can select different computations in a looped Transformer with fixed weights.": "第一篇论文，题为 Shared Weights, Selected Computations。我们研究固定权重的 looped Transformer：hidden state 的变化，如何使同一模型执行不同的计算。",
   "It marks a change from solving a given problem to deciding what to ask — and what evidence would count as an answer. This is where I began to find my way into research.": "从前题目印在纸上，后来，连题目也要自己找。问什么，凭什么作答，都要重新学过。科研，于我便从这里开始。"
 });
+
+Object.assign(window.siteTranslations, {"Work":"求索", "← Work":"← 求索", "Back to Work ↗":"返回求索 ↗", "Jiaju Wu · Work":"Jiaju Wu · 求索"});
