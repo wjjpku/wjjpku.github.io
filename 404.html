@@ -1,7 +1,10 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#f4f1e9"><title>404 · Page not found · Jiaju Wu</title><link rel="canonical" href="https://wjjpku.github.io/404.html"><link rel="icon" type="image/x-icon" href="/img/identity/jiaju-icon.ico"><link rel="apple-touch-icon" href="/img/identity/apple-touch-icon.png"><link rel="stylesheet" href="/css/reading-room.css?v=16c728d9f9"><link rel="stylesheet" href="/css/personal-navigation.css?v=f403ec87df"><meta name="generator" content="Hexo 7.3.0"></head><body><style>#site-entry{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;background:#f4f1e9;color:#303c32;transition:opacity .28s ease;animation:entry-safety 0s 2s forwards}
 #site-entry[hidden]{display:none}
 #site-entry.leaving{opacity:0;pointer-events:none}
+#site-entry[data-mode=section]{top:var(--entry-header-bottom,98px);z-index:14}
+#site-entry[data-mode=section] .entry-name{font-style:normal;font-size:30px;letter-spacing:0}
 .entry-mark{text-align:center}
+@media(max-width:480px){#site-entry[data-mode=section]{top:var(--entry-header-bottom,192px)}}
 .entry-name{font:italic 48px/1.2 Baskerville,Georgia,serif;letter-spacing:-1.5px;margin:0 0 26px}
 .entry-vine{width:150px;height:42px;color:#829271}
 .entry-vine path{stroke-dasharray:220;stroke-dashoffset:220;animation:entry-grow 1.3s ease-out forwards}
@@ -13,20 +16,27 @@
 @media(max-width:600px){.entry-name{font-size:40px}.entry-skip{bottom:22px;right:22px}}</style><div id="site-entry" hidden data-original-content><div class="entry-mark" role="status" aria-label="Loading page"><p class="entry-name">Jiaju Wu</p><svg class="entry-vine" viewBox="0 0 160 44" fill="none" aria-hidden="true"><path d="M3 33C42 34 72 22 99 24S133 22 157 8M60 29C49 25 48 16 48 16C61 16 67 21 60 29M105 24C103 12 112 7 120 8C120 18 113 24 105 24" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"></path></svg></div><button class="entry-skip" type="button">Enter ↗</button></div><script>(() => {
   const el=document.getElementById('site-entry');
   const key='site-entry-seen-v1', pending='site-entry-navigation';
-  let show=true;
-  try { show=!sessionStorage.getItem(key)||sessionStorage.getItem(pending)===location.pathname; sessionStorage.setItem(key,'1');sessionStorage.removeItem(pending); } catch (_) {}
+  let show=true, switching=false;
+  try { switching=sessionStorage.getItem(pending)===location.pathname;show=!sessionStorage.getItem(key)||switching; sessionStorage.setItem(key,'1');sessionStorage.removeItem(pending); } catch (_) {}
   const button=el.querySelector('button');
   try { if(localStorage.getItem('site-language')==='zh-CN'){button.textContent='进入 ↗';el.querySelector('[role=status]').setAttribute('aria-label','页面加载中');} } catch (_) {}
-  let timer, fadeTimer;
+  let timer, fadeTimer, generation=0;
+  const labels={'/':'Home','/life/':'Life','/academic/':'Study'};
+  const chinese={'/':'舒卷','/life/':'行吟','/academic/':'求索'};
+  const measure=()=>{const header=document.querySelector('body > header');if(header)el.style.setProperty('--entry-header-bottom',Math.max(0,header.getBoundingClientRect().bottom)+'px');};
   const dismiss=()=>{clearTimeout(timer);el.classList.add('leaving');clearTimeout(fadeTimer);fadeTimer=setTimeout(()=>{el.hidden=true;},300);};
-  const reveal=()=>{clearTimeout(fadeTimer);clearTimeout(timer);el.hidden=false;el.classList.remove('leaving');el.style.animation='none';void el.offsetWidth;el.style.animation='';timer=setTimeout(dismiss,1500);};
+  const reveal=(mode='full',path=location.pathname)=>{generation++;el.dataset.mode=mode;measure();el.querySelector('.entry-name').textContent=mode==='full'?'Jiaju Wu':(((document.documentElement.lang==='zh-CN'||button.textContent.startsWith('进入'))?chinese:labels)[path]||'Jiaju Wu');clearTimeout(fadeTimer);clearTimeout(timer);el.hidden=false;el.classList.remove('leaving');el.style.animation='none';void el.offsetWidth;el.style.animation='';timer=setTimeout(dismiss,1500);};
   button.addEventListener('click',dismiss);
   document.addEventListener('keydown',e=>{if(!el.hidden&&(e.key==='Escape'||e.key==='Tab'))dismiss();});
-  if(show)reveal();
+  if(show)reveal(!switching&&location.pathname==='/'?'full':'section');
   const ready=()=>{
+    measure();
+    const header=document.querySelector('body > header');
+    if(header&&window.ResizeObserver)new ResizeObserver(measure).observe(header);
     if(!show)return;
+    const current=generation;
     const images=[...document.images].filter(i=>i.loading!=='lazy'&&i.getBoundingClientRect().top<innerHeight).slice(0,4);
-    Promise.all(images.map(i=>i.complete?Promise.resolve():new Promise(resolve=>{i.addEventListener('load',resolve,{once:true});i.addEventListener('error',resolve,{once:true});}))).then(()=>requestAnimationFrame(()=>requestAnimationFrame(dismiss)));
+    Promise.all(images.map(i=>{const loaded=i.complete?Promise.resolve():new Promise(resolve=>{i.addEventListener('load',resolve,{once:true});i.addEventListener('error',resolve,{once:true});});return loaded.then(()=>i.decode?i.decode().catch(()=>{}):undefined);})).then(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{if(generation===current)dismiss();})));
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();
   document.addEventListener('click',e=>{
@@ -36,7 +46,7 @@
     if(url.origin!==location.origin||url.pathname===location.pathname||!['/','/life/','/academic/'].includes(url.pathname)||url.hash)return;
     if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
     try{sessionStorage.setItem(pending,url.pathname);}catch(_){}
-    reveal();
+    reveal('section',url.pathname);
   });
   addEventListener('pageshow',e=>{if(e.persisted){clearTimeout(timer);clearTimeout(fadeTimer);el.hidden=true;}});
 })();</script><div class="language-switch" role="group" aria-label="Language / 语言"><button type="button" data-language="en" aria-pressed="true" lang="en">EN</button><button type="button" data-language="zh-CN" aria-pressed="false" lang="zh-CN">中文</button></div><a class="skip-link" href="#reading-main">Skip to content</a><header class="academic-header"><a class="signature" href="/">Jiaju Wu</a><nav class="page-switch" aria-label="Personal and academic pages"><a href="/">Home</a><a href="/life/">Life</a><a href="/academic/">Study</a></nav></header><main id="reading-main"><nav class="section-breadcrumb" aria-label="Breadcrumb" hidden><a href="/" data-section-return>Home</a><span>/</span><span></span></nav><section class="not-found" aria-labelledby="not-found-title"><div class="not-found-copy"><p class="eyebrow">404 / PAGE NOT FOUND</p><h1 id="not-found-title">This page has wandered off.</h1><p class="not-found-note">The link may be old, or the address may be mistyped.</p><a class="not-found-home" href="/">Back home ↗</a></div><img class="not-found-illustration" src="/img/identity/jiaju-404-margin.webp" alt="Jiaju looking for the way on a map at his desk" width="640" height="548" decoding="async"></section></main><footer class="reading-footer"><span>Jiaju Wu</span><a href="/" data-section-return>← Home</a></footer><dialog id="image-viewer" aria-label="Photograph"><button class="viewer-close" type="button" aria-label="Close photograph">Close ×</button><img alt=""><p class="viewer-caption"></p></dialog><script src="/js/site-translations.js?v=1ea5f5c07d" defer></script><script src="/js/site-language.js?v=5cc6d435f9" defer></script><script src="/js/reading-room.js?v=d62869bf75" defer></script><script src="/js/section-flow.js?v=668db73b9f" defer></script></body></html>

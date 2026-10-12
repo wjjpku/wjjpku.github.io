@@ -28,3 +28,5 @@ html[lang="en"] .gateway-footer>span{display:none}
 html[lang="en"] .gateway-footer{justify-content:flex-end}
 
 .home-paper{display:flex;align-items:baseline;justify-content:center;gap:12px;max-width:880px;margin:0 auto 22px;font:12px/1.6 var(--sans);color:var(--green);text-align:center}.home-paper>span:first-child,.home-paper>.zh-only{font-size:9px;letter-spacing:.8px;color:var(--muted)}.home-paper:hover{color:var(--ink)}@media(max-width:600px){.home-paper{flex-wrap:wrap;gap:4px 10px;font-size:11px;margin-bottom:20px}.home-paper>span[data-original-content]{max-width:245px}}
+
+.gateway-footer-links{display:flex;align-items:center;gap:22px}.gateway-footer-links a{padding-block:8px}.gateway-footer{align-items:center}
