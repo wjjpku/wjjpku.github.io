@@ -37,16 +37,12 @@
   const visible = img => {const r=img.getBoundingClientRect();return r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight;};
   function pump() {
     scheduled = false;
-    const candidates = [...queued].filter(img => {
-      const r=img.getBoundingClientRect();
-      return img.isConnected&&r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight+320;
-    }).sort((a,b) => {
-      const av=visible(a),bv=visible(b);
-      if(av!==bv)return av?-1:1;
-      return a.getBoundingClientRect().top-b.getBoundingClientRect().top;
-    });
-    for(const img of candidates) {
-      const inView=visible(img);
+    // Measure once before changing sources or styles; sorting must not force layouts.
+    const candidates=[...queued].map(img=>({img,rect:img.getBoundingClientRect()}))
+      .filter(({img,rect:r})=>img.isConnected&&r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight+320)
+      .map(item=>({...item,inView:item.rect.top<innerHeight}))
+      .sort((a,b)=>Number(b.inView)-Number(a.inView)||a.rect.top-b.rect.top);
+    for(const {img,inView} of candidates) {
       // Reserve a third slot for newly visible images when the reader jumps ahead.
       if(active >= (inView?3:2)) break;
       if(!inView&&primaryPending>0)continue;
@@ -89,6 +85,6 @@
   new MutationObserver(records=>records.forEach(record=>record.addedNodes.forEach(node=>{
     if(node.nodeType===1)watch(node);
   }))).observe(document.body,{childList:true,subtree:true});
-  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('scroll',()=>{if(queued.size)schedule();},{passive:true});
   addEventListener('resize',schedule,{passive:true});
 })();

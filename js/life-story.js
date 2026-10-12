@@ -27,6 +27,7 @@
       const dot = chapter.querySelector('.pin-dot').getBoundingClientRect();
       return { x: dot.left - bounds.left + dot.width / 2, y: dot.top - bounds.top + dot.height / 2 };
     });
+    const copyBounds = chapters.map(chapter => chapter.querySelector('.chapter-copy')?.getBoundingClientRect());
     svg.setAttribute('viewBox', `0 0 ${bounds.width} ${world.offsetHeight}`);
     let d = `M ${points[0].x} 0`;
     let previous = { x: points[0].x, y: 0 };
@@ -44,7 +45,7 @@
         if (!mobile) pathIn(leafLayer, 'M0 0C16 -3 25 -14 24 -25C9 -23 -1 -12 0 0Z', `translate(${x} ${y + 66}) scale(${-direction} 1)`);
       }
       if (index < chapters.length - 1) {
-        const copy = chapters[index].querySelector('.chapter-copy').getBoundingClientRect();
+        const copy = copyBounds[index];
         const left = copy.left - bounds.left;
         const right = copy.right - bounds.left;
         const toX = mobile ? left - 8 : (right < point.x ? right + 5 : left - 5);
@@ -86,6 +87,18 @@
   addEventListener('scroll', () => {
     if (!framePending) { framePending = true; requestAnimationFrame(updateScroll); }
   }, { passive: true });
+  navLinks.forEach(link => link.addEventListener('click', event => {
+    if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+    const target=document.getElementById(link.hash.slice(1));
+    if(!target)return;
+    event.preventDefault();
+    const headerBottom=document.querySelector('body > header').getBoundingClientRect().bottom;
+    const top=Math.max(0,target.getBoundingClientRect().top+scrollY-headerBottom-20);
+    const distant=Math.abs(top-scrollY)>innerHeight*2;
+    if(location.hash!==link.hash)history.pushState(null,'',link.hash);
+    // Avoid a long scroll through unrelated chapters and their image requests.
+    window.scrollTo({top,behavior:reducedMotion.matches||distant?'instant':'smooth'});
+  }));
   let drawPending = false;
   function scheduleDraw() {
     if (drawPending) return;
@@ -128,7 +141,17 @@
       pagination.hidden = true;
       heading.textContent = button.dataset.caption || 'A memory';
       const image = document.createElement('img');
-      image.src = button.dataset.photo;
+      const thumbnail=button.querySelector('img');
+      const cached=thumbnail?.currentSrc;
+      image.src=cached&&!cached.startsWith('data:')?cached:(thumbnail?.dataset.preview||button.dataset.photo);
+      if(thumbnail?.width){image.width=Number(thumbnail.getAttribute('width'))||thumbnail.naturalWidth;image.height=Number(thumbnail.getAttribute('height'))||thumbnail.naturalHeight;}
+      // Keep the already-visible image while a suitably sized enlargement decodes.
+      const variants=(thumbnail?.srcset||thumbnail?.dataset.deferredSrcset||'').split(',').map(part=>{const [src,width]=part.trim().split(/\s+/);return {src,width:parseInt(width,10)};}).filter(v=>v.src&&v.width).sort((a,b)=>a.width-b.width);
+      const desired=Math.min(780,innerWidth-76)*Math.min(devicePixelRatio||1,2);
+      const source=(variants.find(v=>v.width>=desired)||variants.at(-1))?.src||button.dataset.photo;
+      const full=new Image();
+      full.src=source;
+      full.decode().then(()=>{if(image.isConnected&&dialog.open)image.src=source;}).catch(()=>{});
       image.alt = button.querySelector('img')?.alt || button.getAttribute('aria-label').replace('Enlarge photo: ', '');
       dialogBody.replaceChildren(image);
       openDialog(button);
