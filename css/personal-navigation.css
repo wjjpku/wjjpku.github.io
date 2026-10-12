@@ -31,14 +31,14 @@ html[lang=zh-CN] .chapter h2{line-height:1.55}
  .blog-categories button{min-height:44px}
  .year-nav a{min-height:36px;display:flex;align-items:center}
 }
-/* Shared header geometry prevents movement between the four sections. */
+/* Shared header geometry prevents movement between the three sections. */
 html{scrollbar-gutter:stable}
 body>.academic-header,body>.masthead{box-sizing:border-box;width:100%;max-width:1180px;margin:0 auto;padding:27px 36px;min-height:98px;display:flex;align-items:center;gap:20px;border-bottom:1px solid #d8dacd}
 body>.academic-header .signature,body>.masthead .signature{flex-shrink:0;font-size:28px;line-height:1.2}
-body>.academic-header .page-switch,body>.masthead .story-page-switch{box-sizing:border-box;margin:0 0 0 auto;display:grid;grid-template-columns:repeat(4,66px);gap:4px;padding:4px;border:1px solid #d8dacd;border-radius:30px;font:11px/1.4 'Avenir Next',-apple-system,sans-serif;flex-shrink:0}
+body>.academic-header .page-switch,body>.masthead .story-page-switch{box-sizing:border-box;margin:0 0 0 auto;display:grid;grid-template-columns:repeat(3,66px);gap:4px;padding:4px;border:1px solid #d8dacd;border-radius:30px;font:11px/1.4 'Avenir Next',-apple-system,sans-serif;flex-shrink:0}
 body>.academic-header .page-switch a,body>.masthead .story-page-switch a{box-sizing:border-box;display:flex!important;align-items:center;justify-content:center;padding:6px 0!important;margin:0;min-width:0;min-height:32px;height:32px;white-space:nowrap;border-radius:24px}
-@media(max-width:760px){body>.academic-header,body>.masthead{padding:16px 20px;min-height:86px;gap:12px}body>.academic-header .signature,body>.masthead .signature{font-size:24px}body>.academic-header .page-switch,body>.masthead .story-page-switch{grid-template-columns:repeat(4,58px)}body>.academic-header .page-switch a,body>.masthead .story-page-switch a{height:44px;min-height:44px}}
-@media(max-width:480px){body>.academic-header,body>.masthead{display:grid;grid-template-columns:1fr;gap:12px;padding:14px 20px}body>.academic-header .page-switch,body>.masthead .story-page-switch{width:100%;grid-template-columns:repeat(4,minmax(0,1fr));margin:0}body>.masthead .signature span{display:none}}
+@media(max-width:760px){body>.academic-header,body>.masthead{padding:16px 20px;min-height:86px;gap:12px}body>.academic-header .signature,body>.masthead .signature{font-size:24px}body>.academic-header .page-switch,body>.masthead .story-page-switch{grid-template-columns:repeat(3,58px)}body>.academic-header .page-switch a,body>.masthead .story-page-switch a{height:44px;min-height:44px}}
+@media(max-width:480px){body>.academic-header,body>.masthead{display:grid;grid-template-columns:1fr;gap:12px;padding:14px 20px}body>.academic-header .page-switch,body>.masthead .story-page-switch{width:100%;grid-template-columns:repeat(3,minmax(0,1fr));margin:0}body>.masthead .signature span{display:none}}
 .page-switch a.active,.story-page-switch a.active{background:#303c32;color:#fffdf6}
 
 /* Keep the Latin signature consistent across pages and language settings. */
