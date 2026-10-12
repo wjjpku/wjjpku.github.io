@@ -304,3 +304,9 @@ html[lang="en"] .cover-extra,html[lang="en"] .signature>span{display:none}
 #dahe .chapter-photo img{aspect-ratio:auto;height:auto;object-fit:contain}
 #dahe .secondary-photo{position:relative;width:54%;right:auto;bottom:auto;margin:24px 0 0 auto;transform:rotate(5deg)}
 #dahe .secondary-photo .photo img{aspect-ratio:4/3;object-fit:contain}
+
+/* Chinese display titles: lighter Songti strokes, unchanged Latin faces. */
+html[lang=zh-CN] .cover-copy h1,
+html[lang=zh-CN] .chapter h2,
+html[lang=zh-CN] .timeline-intro h2,
+html[lang=zh-CN] .next-chapter h2{font-family:Baskerville,Georgia,'Times New Roman','Songti SC',STSong,'Noto Serif CJK SC',serif;font-weight:400}
