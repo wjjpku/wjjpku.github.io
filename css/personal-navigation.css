@@ -11,7 +11,8 @@
 .language-switch button{appearance:none;border:0;background:none;color:#66705f;font:11px/1.4 'Avenir Next',-apple-system,sans-serif;padding:8px 12px;border-radius:20px;cursor:pointer;min-height:32px}
 .language-switch button[aria-pressed=true]{background:#303c32;color:#fffdf6}
 .language-switch button:focus-visible{outline:2px solid #647857;outline-offset:2px}
-html[lang=zh-CN]{--serif:'Songti SC',STSong,'Noto Serif CJK SC',serif}
+/* Latin glyphs keep the English fonts; Chinese falls back to sans-serif. */
+html[lang=zh-CN]{--serif:Baskerville,Georgia,'Times New Roman','PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif;--sans:'Avenir Next',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif}
 html[lang=zh-CN] .welcome h1{font-family:var(--serif);font-size:56px;letter-spacing:0}
 html[lang=zh-CN] .welcome h1 em{font-style:normal}
 html[lang=zh-CN] .introduction{font-size:21px;line-height:1.7}
@@ -55,3 +56,6 @@ html[lang="zh-CN"] .zh-omit{display:none}
 html[lang="en"] .zh-only,html[lang="zh-CN"] .en-only{display:none}
 html[lang="en"] .zh-omit{display:none}
 html[lang="en"] .eyebrow,html[lang="en"] .overline{letter-spacing:1px}
+
+html[lang=zh-CN] .prose{font-family:Georgia,'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif}
+html[lang=zh-CN] .chapter h2 em{font-style:normal}
