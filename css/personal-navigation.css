@@ -57,3 +57,8 @@ html[lang="en"] .zh-only,html[lang="zh-CN"] .en-only{display:none}
 html[lang="en"] .zh-omit{display:none}
 html[lang="en"] .eyebrow,html[lang="en"] .overline{letter-spacing:1px}
 
+
+/* Tiny inline previews paint before full images; dimensions stay fixed. */
+img.image-preview{background-size:cover;background-position:center;color:transparent;filter:var(--image-base-filter, blur(0px)) blur(6px);transition:filter .32s ease}
+img.image-preview.image-ready{filter:var(--image-base-filter, blur(0px))}
+@media(prefers-reduced-motion:reduce){img.image-preview{transition:none}}

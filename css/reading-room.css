@@ -70,3 +70,6 @@ html[lang="zh-CN"] .prose{font-size:20px;line-height:1.9}
  .note-entry h2{font-size:25px}.note-entry p{font-size:15px}
 }
 @media(max-width:480px){.prose h1,.prose h2,.prose h3{scroll-margin-top:220px}}
+
+/* Remote friend portraits retain an initial if the image is unavailable. */
+.friend-portrait{position:relative;display:grid;place-items:center;width:64px;height:64px;flex-shrink:0;border-radius:50%;overflow:hidden;background:#e9ecdf}.friend-portrait .friend-initial{width:auto;text-align:center}.friend-avatar{position:absolute;inset:0;width:64px;height:64px;object-fit:cover}.friend-avatar[hidden]{display:none}
