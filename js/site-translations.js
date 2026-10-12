@@ -704,7 +704,7 @@ Object.assign(window.siteTranslations,{"404 / PAGE NOT FOUND":"404 / 页面未�
 
 // English editorial copy uses the same source keys as the Chinese edition.
 window.siteEnglishCopy = {
-  "Academic": "Work",
+  "Academic": "Study",
   "Blog": "Writing",
   "← Blog": "← Writing",
   "Back to Blog ↗": "Back to Writing ↗",
@@ -787,3 +787,5 @@ Object.assign(window.siteTranslations, {
 });
 
 Object.assign(window.siteTranslations, {"Work":"求索", "← Work":"← 求索", "Back to Work ↗":"返回求索 ↗", "Jiaju Wu · Work":"Jiaju Wu · 求索"});
+
+Object.assign(window.siteTranslations, {"Study":"求索", "← Study":"← 求索", "Back to Study ↗":"返回求索 ↗", "Jiaju Wu · Study":"Jiaju Wu · 求索"});
